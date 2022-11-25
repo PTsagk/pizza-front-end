@@ -5,8 +5,7 @@
 
 .App {
   /*top2*/
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("./assets/various-vegetables-black-table-with-space-message.jpg");
+  background: url("./assets/various-vegetables-black-table-with-space-message.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
