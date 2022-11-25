@@ -2,3 +2,12 @@
   margin: 0;
   padding: 0;
 }
+
+.App {
+  /*top2*/
+  background: url("./assets/various-vegetables-black-table-with-space-message.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+}
