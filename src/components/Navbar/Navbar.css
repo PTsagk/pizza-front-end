@@ -5,9 +5,6 @@
   padding: 2rem 8rem;
   background: linear-gradient(black, rgba(0, 0, 0, 0));
   color: white;
-  position: absolute;
-  left: 0;
-  right: 0;
   font-family: Outfit;
 }
 .nav-bar h1 {
