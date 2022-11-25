@@ -1,0 +1,51 @@
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 8rem;
+  background: linear-gradient(black, rgba(0, 0, 0, 0));
+  color: white;
+  font-family: Outfit;
+}
+.nav-bar h1 {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.nav-links {
+  margin-right: 40rem;
+}
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  margin: 0 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+.nav-links a:hover {
+  transition-duration: 0.3s;
+  background-color: #ec1a37;
+}
+
+.cart-and-profile {
+  display: flex;
+  font-size: 2rem;
+}
+
+.cart {
+  margin: 0 2rem;
+}
+
+.cart :hover {
+  transition-duration: 0.3s;
+  color: #ec1a37;
+}
+.profile-icon {
+  margin: 0 2rem;
+}
+
+.profile-icon :hover {
+  transition-duration: 0.3s;
+  color: #ec1a37;
+}
