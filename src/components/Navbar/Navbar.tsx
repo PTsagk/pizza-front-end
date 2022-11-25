@@ -15,12 +15,12 @@ function Navbar() {
         <Link to={"/dessertspage"}>Desserts</Link>
       </div>
       <div className="cart-and-profile">
-        <div className="cart">
+        <Link to={"/cart"} className="cart">
           <FaShoppingCart></FaShoppingCart>
-        </div>
-        <div className="profile-icon">
+        </Link>
+        <Link to={"/profile"} className="profile-icon">
           <RiAccountCircleFill></RiAccountCircleFill>
-        </div>
+        </Link>
       </div>
     </div>
   );

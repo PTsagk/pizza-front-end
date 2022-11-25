@@ -7,7 +7,7 @@ import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <div className="App">
-      {import.meta.env.VITE_API}
+      {/* {import.meta.env.VITE_API} */}
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home />}></Route>
