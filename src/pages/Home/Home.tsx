@@ -11,6 +11,7 @@ function Home() {
       w-[100%] h-[100%]"
         style={{
           objectFit: "cover",
+          zIndex: -1,
         }}
       />
     </div>

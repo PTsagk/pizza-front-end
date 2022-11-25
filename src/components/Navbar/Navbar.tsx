@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 function Navbar() {
   return (
-    <div className="nav-bar">
+    <nav className="nav-bar">
       <h1>LOGO</h1>
       <div className="nav-links">
         <Link to={"/homepage"}>Home</Link>
@@ -22,7 +22,7 @@ function Navbar() {
           <RiAccountCircleFill></RiAccountCircleFill>
         </Link>
       </div>
-    </div>
+    </nav>
   );
 }
 
