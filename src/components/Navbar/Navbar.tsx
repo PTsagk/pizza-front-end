@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="nav-bar absolute top-0 left-0">
+    <nav className="nav-bar">
       <h1>LOGO</h1>
       <div className="nav-links">
         <Link to={"/"}>Home</Link>
