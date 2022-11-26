@@ -3,7 +3,7 @@ import { Component } from "react";
 import BG from "../../assets/veggiesBG.jpg";
 function Home() {
   return (
-    <div className="w-[100%] h-[100%] relative">
+    <div className="w-[100%] h-[100%]">
       <img
         src={BG}
         alt=""
