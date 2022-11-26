@@ -12,7 +12,7 @@ function Footer() {
   return (
     <footer
       className="flex flex-col w-100 bg-black text-white
-    justify-center items-center py-7 px-5"
+    justify-center items-center py-7 px-5 opacity-[0.9]"
     >
       <div className="flex w-[420px] text-[60px] justify-evenly">
         <div>

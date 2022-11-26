@@ -7,15 +7,24 @@
   font-family: Outfit;
   width: 100%;
   z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .nav-bar h1 {
   font-weight: bold;
   font-size: 2rem;
+  width: 10%;
 }
 
 .nav-links {
-  margin: 0 10%;
-  font-weight: 2rem;
+  display: flex;
+  /* margin: 0 10%; */
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 500;
+  width: 100%;
+  padding: 0 8rem;
 }
 .nav-links a {
   text-decoration: none;
@@ -31,6 +40,7 @@
 
 .cart-and-profile {
   display: flex;
+  align-items: center;
   font-size: 2rem;
   margin-left: auto;
 }
@@ -47,3 +57,15 @@
   transition-duration: 0.3s;
   color: #ec1a37;
 }
+
+/* @media screen and (width <= 950px) {
+  .cart-and-profile {
+    width: max-content;
+  }
+  .nav-links {
+    width: 100%;
+  }
+  .nav-bar h1 {
+    width: max-content;
+  }
+} */

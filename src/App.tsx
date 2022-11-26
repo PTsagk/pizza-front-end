@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Footer from "./components/Footer/Footer";
 import Pizzas from "./pages/Pizzas/Pizzas";
+import MissingPage from "./pages/MissingPage/MissingPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/pizzas" element={<Pizzas />}></Route>
+        <Route path="/*" element={<MissingPage />}></Route>
       </Routes>
       <Footer></Footer>
     </div>
