@@ -7,7 +7,7 @@ import Pizzas from "./pages/Pizzas/Pizzas";
 
 function App() {
   return (
-    <div className="overflow-x-hidden w-[100vw] h-[100vh]">
+    <div className="overflow-x-hidden w-[100vw] h-[100vh] m-0 p-0">
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home />}></Route>

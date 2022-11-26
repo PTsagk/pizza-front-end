@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body,
+html {
+  margin: 0;
+  overflow-x: hidden;
+}
+
 :root {
   --black-gradient: linear-gradient(
     144.39deg,
