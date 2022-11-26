@@ -7,6 +7,9 @@
   font-family: Outfit;
   width: 100%;
   z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .nav-bar h1 {
   font-weight: bold;
@@ -15,8 +18,13 @@
 }
 
 .nav-links {
-  margin: 0 10%;
-  font-weight: 2rem;
+  display: flex;
+  /* margin: 0 10%; */
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 500;
+  width: 100%;
+  padding: 0 8rem;
 }
 .nav-links a {
   text-decoration: none;
@@ -50,7 +58,7 @@
   color: #ec1a37;
 }
 
-@media screen and (width <= 1280px) {
+/* @media screen and (width <= 950px) {
   .cart-and-profile {
     width: max-content;
   }
@@ -60,4 +68,4 @@
   .nav-bar h1 {
     width: max-content;
   }
-}
+} */
