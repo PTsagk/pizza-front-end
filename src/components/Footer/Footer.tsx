@@ -32,10 +32,10 @@ function Footer() {
       <div className="flex w-[100%] justify-evenly ">
         {footerLinks.map((linkGroup) => (
           <div className="flex flex-col justify-start">
-            <h4 className="font-bold text-[40px] my-8">{linkGroup.header}</h4>
+            <h4 className="font-bold text-[30px] my-8">{linkGroup.header}</h4>
             <div>
               {linkGroup.links.map((link) => (
-                <div className="text-[32px] font-normal">{link}</div>
+                <div className="text-[24px] font-normal">{link}</div>
               ))}
             </div>
           </div>

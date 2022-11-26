@@ -6,13 +6,13 @@ import "./Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="nav-bar">
+    <nav className="nav-bar absolute top-0 left-0">
       <h1>LOGO</h1>
       <div className="nav-links">
-        <Link to={"/homepage"}>Home</Link>
-        <Link to={"/pizzaspage"}>Pizza</Link>
-        <Link to={"/drinkspage"}>Drinks</Link>
-        <Link to={"/dessertspage"}>Desserts</Link>
+        <Link to={"/"}>Home</Link>
+        <Link to={"/pizzas"}>Pizzas</Link>
+        <Link to={"/drinks"}>Drinks</Link>
+        <Link to={"/desserts"}>Desserts</Link>
       </div>
       <div className="cart-and-profile">
         <Link to={"/cart"} className="cart">

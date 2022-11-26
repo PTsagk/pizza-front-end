@@ -6,6 +6,8 @@
   background: linear-gradient(black 15%, rgba(0, 0, 0, 0));
   color: white;
   font-family: Outfit;
+  width: 100%;
+  z-index: 100;
 }
 .nav-bar h1 {
   font-weight: bold;

@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Component } from "react";
-import BG from "../../assets/veggiesBG.jpg";
-function Home() {
+import MyVeggiesBG from "../../assets/MyVeggies.png";
+function Pizzas() {
   return (
     <div className="w-[100%] h-[100%] relative">
       <img
-        src={BG}
+        src={MyVeggiesBG}
         alt=""
-        className="absolute top-0 left-0"
+        className="absolute top-0 left-0 object-cover"
         style={{
           objectFit: "cover",
           zIndex: -1,
@@ -17,4 +17,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Pizzas;

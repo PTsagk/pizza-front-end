@@ -1,11 +1,11 @@
 export const footerLinks = [
   {
     header: "Contact",
-    links: ["Email", "Phone", "SMS"],
+    links: ["Email", "Phone", "Adress"],
   },
   {
     header: "Menu",
-    links: ["blabla", "blabla", "blabla"],
+    links: ["Pizzas", "Drinks", "Desserts"],
   },
   {
     header: "Payment",
