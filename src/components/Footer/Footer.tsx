@@ -8,11 +8,12 @@ import {
   AiFillInstagram,
 } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
+import "./footer.css";
 function Footer() {
   return (
     <footer
       className="flex flex-col w-100 bg-black text-white
-    justify-center items-center py-7 px-5 opacity-[0.9]"
+    justify-center items-center py-7 px-5 footer"
     >
       <div className="flex w-[420px] text-[60px] justify-evenly">
         <div>

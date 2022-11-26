@@ -1,0 +1,12 @@
+/* .missing-bg {
+  background-image: url("../../assets/notFound.png");
+  background-size: cover;
+  background-repeat: repeat-y;
+} */
+
+.missing-bg {
+  z-index: 0;
+}
+.back-btn {
+  z-index: 200;
+}
