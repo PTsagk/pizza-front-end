@@ -35,6 +35,24 @@ Mozzarella, tomato sauce,
          In thin dough, with a diameter of 41 cm and cut
          into 6 large pieces that you fold in half`,
       },
+      {
+        name: "Ham and Bacon",
+        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
+        description: `
+Mozzarella, tomato sauce,
+         pepperoni, spicy beef, fresh mushrooms.
+         In thin dough, with a diameter of 41 cm and cut
+         into 6 large pieces that you fold in half`,
+      },
+      {
+        name: "Ham and Bacon",
+        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
+        description: `
+Mozzarella, tomato sauce,
+         pepperoni, spicy beef, fresh mushrooms.
+         In thin dough, with a diameter of 41 cm and cut
+         into 6 large pieces that you fold in half`,
+      },
     ],
   },
   {
