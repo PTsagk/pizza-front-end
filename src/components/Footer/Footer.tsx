@@ -9,6 +9,7 @@ import {
 } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
 import "./footer.css";
+import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer
@@ -16,27 +17,32 @@ function Footer() {
     justify-center items-center py-7 px-5 footer"
     >
       <div className="flex w-[420px] text-[60px] justify-evenly">
-        <div>
+        <Link to={"/"} className="hover:text-primary">
           <AiFillFacebook />
-        </div>
-        <div>
+        </Link>
+        <Link to={"/"} className="hover:text-primary">
           <AiOutlineTwitter />
-        </div>
+        </Link>
 
-        <div>
+        <Link to={"/"} className="hover:text-primary">
           <AiFillInstagram />
-        </div>
-        <div>
+        </Link>
+        <Link to={"/"} className="hover:text-primary">
           <AiFillYoutube />
-        </div>
+        </Link>
       </div>
       <div className="flex w-[100%] justify-evenly ">
         {footerLinks.map((linkGroup) => (
           <div className="flex flex-col justify-start">
             <h4 className="font-bold text-[30px] my-8">{linkGroup.header}</h4>
-            <div>
+            <div className="flex flex-col">
               {linkGroup.links.map((link) => (
-                <div className="text-[24px] font-normal">{link}</div>
+                <Link
+                  to={"/"}
+                  className="text-[24px] font-normal hover:text-primary"
+                >
+                  {link}
+                </Link>
               ))}
             </div>
           </div>

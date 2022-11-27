@@ -22,7 +22,7 @@ function MissingPage() {
       bottom-10 text-center p-3 px-10 bg-white
       font-semibold rounded-[10px] font-outfit "
         >
-          Get me back to pizza
+          I still want pizza
         </Link>
       </div>
     </div>

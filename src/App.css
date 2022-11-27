@@ -2,3 +2,14 @@
   margin: 0;
   padding: 0;
 }
+
+.pizza-bg {
+  background-image: url("./assets/MyVeggies.png");
+  background-size: cover;
+  background-repeat: repeat-y;
+}
+.home-bg {
+  background-image: url("./assets/veggiesBG.jpg");
+  background-size: cover;
+  background-repeat: repeat-y;
+}
