@@ -1,19 +1,28 @@
 import "./home.css";
 import pizza from "../../assets/pizza3.png";
+import margarita from "../../assets/hampizza.png";
+import pepperoni from "../../assets/pepperoni.png";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { homeOffers } from "../../statics/texts";
 function Home() {
-  const [position, setPosition] = useState(0);
+  const [position, setPosition] = useState(-100);
   const [canClick, setCanClick] = useState(true);
+  const [debounce, setDebounce] = useState(false);
+  const [toStart, setToStart] = useState(false);
+  const [toEnd, setToEnd] = useState(false);
 
   function moveRight() {
     if (!canClick) return;
-    if (position > -200) {
+    if (position > -300) {
       let pos = position;
       pos -= 100;
       setPosition(pos);
       setCanClick(false);
+    } else {
+      setPosition(0);
+      setToStart(true);
+      setDebounce(true);
     }
   }
   function moveLeft() {
@@ -23,14 +32,27 @@ function Home() {
       pos += 100;
       setPosition(pos);
       setCanClick(false);
+    } else {
+      setPosition(-300);
+      setToEnd(true);
+      setDebounce(true);
     }
   }
+
+  useEffect(() => {
+    if (debounce) {
+      setDebounce(false);
+      setPosition(toStart ? -100 : -200);
+      setToEnd(false);
+      setToStart(false);
+    }
+  }, [debounce]);
 
   useEffect(() => {
     if (!canClick) {
       setTimeout(() => {
         setCanClick(true);
-      }, 1300);
+      }, 1400);
     }
   }, [canClick]);
 
@@ -52,15 +74,24 @@ function Home() {
         </div>
       </div>
 
-      <div className={"pizza-carousel"} style={{ left: position + "%" }}>
+      <div
+        className={`pizza-carousel ${!debounce && "carousel-transition"}`}
+        style={{ left: position + "%" }}
+      >
+        <div className="pizza-1-container w-[100vw] flex justify-center">
+          <img src={pepperoni} alt="pizza" className="w-[80%]" />
+        </div>
+        <div className="pizza-1-container w-[100vw] flex justify-center">
+          <img src={margarita} alt="pizza" className="w-[80%]" />
+        </div>
         <div className="pizza-1-container w-[100vw] flex justify-center">
           <img src={pizza} alt="pizza" className="w-[80%]" />
         </div>
         <div className="pizza-2-container w-[100vw] flex justify-center">
-          <img src={pizza} alt="pizza" className="w-[80%]" />
+          <img src={pepperoni} alt="pizza" className="w-[80%]" />
         </div>
         <div className="pizza-3-container w-[100vw] flex justify-center">
-          <img src={pizza} alt="pizza" className="w-[80%]" />
+          <img src={margarita} alt="pizza" className="w-[80%]" />
         </div>
       </div>
       <div className="body red-body relative">
