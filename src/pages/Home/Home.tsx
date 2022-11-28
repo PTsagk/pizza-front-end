@@ -18,12 +18,12 @@ function Home() {
       let pos = position;
       pos -= 100;
       setPosition(pos);
-      setCanClick(false);
     } else {
       setPosition(0);
       setToStart(true);
       setDebounce(true);
     }
+    setCanClick(false);
   }
   function moveLeft() {
     if (!canClick) return;
@@ -31,12 +31,12 @@ function Home() {
       let pos = position;
       pos += 100;
       setPosition(pos);
-      setCanClick(false);
     } else {
       setPosition(-300);
       setToEnd(true);
       setDebounce(true);
     }
+    setCanClick(false);
   }
 
   useEffect(() => {
