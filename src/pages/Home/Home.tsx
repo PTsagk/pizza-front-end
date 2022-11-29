@@ -11,7 +11,6 @@ function Home() {
   const [canClick, setCanClick] = useState(true);
   const [debounce, setDebounce] = useState(false);
   const [toStart, setToStart] = useState(false);
-  const [toEnd, setToEnd] = useState(false);
 
   function moveRight() {
     if (!canClick) return;
@@ -41,7 +40,6 @@ function Home() {
       setCanClick(false);
     } else {
       setPosition(-300);
-      setToEnd(true);
       setDebounce(true);
     }
   }
@@ -50,7 +48,6 @@ function Home() {
     if (debounce) {
       setDebounce(false);
       setPosition(toStart ? -100 : -200);
-      setToEnd(false);
       setToStart(false);
     }
   }, [debounce]);
