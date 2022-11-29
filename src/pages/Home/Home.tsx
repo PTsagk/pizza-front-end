@@ -6,8 +6,8 @@ import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { homeOffers, pizzaOffers } from "../../statics/texts";
 function Home() {
-  const [position, setPosition] = useState(-20);
-  const [infoPosition, setInfoPosition] = useState(40);
+  const [position, setPosition] = useState(20);
+  const [infoPosition, setInfoPosition] = useState(20);
   const [canClick, setCanClick] = useState(true);
   const [debounce, setDebounce] = useState(false);
   const [toStart, setToStart] = useState(false);
@@ -18,16 +18,17 @@ function Home() {
     if (position > -20) {
       let pos = position;
       let info = infoPosition;
-      info -= 40;
+      info -= 20;
       pos -= 20;
       setInfoPosition(info);
       setPosition(pos);
-      setCanClick(false);
     } else {
-      setPosition(40);
-      setToStart(true);
       setDebounce(true);
+      setPosition(40);
+      setInfoPosition(40);
+      setToStart(true);
     }
+    setCanClick(false);
   }
   function moveLeft() {
     if (!canClick) return;
@@ -35,20 +36,22 @@ function Home() {
       let pos = position;
       let info = infoPosition;
       pos += 20;
-      info += 40;
+      info += 20;
       setPosition(pos);
       setInfoPosition(info);
-      setCanClick(false);
     } else {
-      setPosition(-40);
       setDebounce(true);
+      setPosition(-40);
+      setInfoPosition(-40);
     }
+    setCanClick(false);
   }
 
   useEffect(() => {
     if (debounce) {
       setDebounce(false);
       setPosition(toStart ? 20 : -20);
+      setInfoPosition(toStart ? 20 : -20);
       setToStart(false);
     }
   }, [debounce]);
@@ -71,7 +74,7 @@ function Home() {
           <div className="info">
             <h2>Pizza Special</h2>
             <div
-              className="paras carousel-transition"
+              className={`paras ${!debounce && "carousel-transition"}`}
               style={{ transform: `translateX(${infoPosition}%)` }}
             >
               <p>

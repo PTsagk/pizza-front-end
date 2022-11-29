@@ -49,13 +49,12 @@
 
 .paras {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   width: 500%;
-  transition-duration: 1.2s;
 }
 
 .paras p {
-  width: 20%;
+  width: 100%;
 }
 .red-body {
   background: linear-gradient(#ec1a37, black);
