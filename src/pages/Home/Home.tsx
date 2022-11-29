@@ -1,58 +1,64 @@
 import "./home.css";
-import pizza from "../../assets/pizza3.png";
-import margarita from "../../assets/hampizza.png";
-import pepperoni from "../../assets/pepperoni.png";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { homeOffers, pizzaOffers } from "../../statics/texts";
+
 function Home() {
-  const [position, setPosition] = useState(20);
-  const [infoPosition, setInfoPosition] = useState(20);
+  const carouselStep = 100 / (pizzaOffers.length + 2);
+  const containerWidth = (pizzaOffers.length + 2) * 100;
+  const temp1 = (pizzaOffers.length - 1) / 2;
+  const start =
+    (pizzaOffers.length + 2) % 2 === 0
+      ? temp1 * carouselStep
+      : temp1 * carouselStep;
+
+  const [position, setPosition] = useState(start);
+  const [infoPosition, setInfoPosition] = useState(start);
   const [canClick, setCanClick] = useState(true);
   const [debounce, setDebounce] = useState(false);
   const [toStart, setToStart] = useState(false);
 
   function moveRight() {
     if (!canClick) return;
-    console.log(position);
-    if (position > -20) {
+    if (position > -start) {
       let pos = position;
       let info = infoPosition;
-      info -= 20;
-      pos -= 20;
+      info -= carouselStep;
+      pos -= carouselStep;
       setInfoPosition(info);
       setPosition(pos);
     } else {
-      setDebounce(true);
-      setPosition(40);
-      setInfoPosition(40);
+      setPosition(start);
+      setInfoPosition(start);
       setToStart(true);
+      setDebounce(true);
     }
     setCanClick(false);
   }
   function moveLeft() {
     if (!canClick) return;
-    if (position < 20) {
+    if (position < start) {
       let pos = position;
       let info = infoPosition;
-      pos += 20;
-      info += 20;
+      pos += carouselStep;
+      info += carouselStep;
       setPosition(pos);
       setInfoPosition(info);
     } else {
+      setPosition(-start);
+      setInfoPosition(-start);
       setDebounce(true);
-      setPosition(-40);
-      setInfoPosition(-40);
     }
     setCanClick(false);
   }
 
   useEffect(() => {
+    console.log(debounce);
     if (debounce) {
-      setDebounce(false);
-      setPosition(toStart ? 20 : -20);
-      setInfoPosition(toStart ? 20 : -20);
+      setPosition(toStart ? start : -start);
+      setInfoPosition(toStart ? start : -start);
       setToStart(false);
+      setDebounce(false);
     }
   }, [debounce]);
 
@@ -75,23 +81,17 @@ function Home() {
             <h2>Pizza Special</h2>
             <div
               className={`paras ${!debounce && "carousel-transition"}`}
-              style={{ transform: `translateX(${infoPosition}%)` }}
+              style={{
+                transform: `translateX(${infoPosition}%)`,
+                width: containerWidth + "%",
+              }}
             >
-              <p>
-                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
-              </p>
-              <p>
-                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
-              </p>
-              <p>
-                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
-              </p>
-              <p>
-                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
-              </p>
-              <p>
-                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
-              </p>
+              <p>{pizzaOffers[pizzaOffers.length - 1].desc}</p>
+              {/* all descriptions */}
+              {pizzaOffers.map((offer) => {
+                return <p>{offer.desc}</p>;
+              })}
+              <p>{pizzaOffers[0].desc}</p>;
             </div>
             <button className="add-to-cart">Add to cart</button>
           </div>
@@ -103,22 +103,38 @@ function Home() {
 
       <div
         className={`pizza-carousel ${!debounce && "carousel-transition"}`}
-        style={{ transform: `translateX(${position}%)` }}
+        style={{
+          transform: `translateX(${position}%)`,
+          width: containerWidth + "%",
+        }}
       >
+        {/* last image from array */}
         <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={pepperoni} alt="pizza" className="w-[80%]" />
+          <img
+            src={"../../../images/" + pizzaOffers[pizzaOffers.length - 1].img}
+            alt="pizza"
+            className="w-[80%]"
+          />
         </div>
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={margarita} alt="pizza" className="w-[80%]" />
-        </div>
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={pizza} alt="pizza" className="w-[80%]" />
-        </div>
-        <div className="pizza-2-container w-[100vw] flex justify-center">
-          <img src={pepperoni} alt="pizza" className="w-[80%]" />
-        </div>
+        {/* all images */}
+        {pizzaOffers.map((offer) => {
+          return (
+            <div className="pizza-1-container w-[100vw] flex justify-center">
+              <img
+                src={"../../../images/" + offer.img}
+                alt="pizza"
+                className="w-[80%]"
+              />
+            </div>
+          );
+        })}
+        {/* first image from array */}
         <div className="pizza-3-container w-[100vw] flex justify-center">
-          <img src={margarita} alt="pizza" className="w-[80%]" />
+          <img
+            src={"../../../images/" + pizzaOffers[0].img}
+            alt="pizza"
+            className="w-[80%]"
+          />
         </div>
       </div>
       <div className="body red-body relative">

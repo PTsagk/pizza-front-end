@@ -48,18 +48,15 @@ export const homeOffers = [
 
 export const pizzaOffers = [
   {
-    title: "Pizza Special",
     desc: "Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms",
-    img: "pizza3",
+    img: "pizza3.png",
   },
   {
-    title: "Ham Pizza",
     desc: "Tomato sauce, Gouda",
-    img: "hampizza",
+    img: "hampizza.png",
   },
   {
-    title: "Pizza Pepperoni",
     desc: "Peperoni, Bacon, Green pepper, Mushrooms",
-    img: "pepperoni",
+    img: "pepperoni.png",
   },
 ];

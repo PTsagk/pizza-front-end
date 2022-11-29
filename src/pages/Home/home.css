@@ -50,7 +50,6 @@
 .paras {
   display: flex;
   /* justify-content: center; */
-  width: 500%;
 }
 
 .paras p {
@@ -63,7 +62,6 @@
 .pizza-carousel {
   position: absolute;
   display: flex;
-  width: 500%;
   z-index: 10;
   background-color: transparent;
 }
