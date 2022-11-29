@@ -62,7 +62,7 @@
 }
 
 .pizza-carousel {
-  /* position: absolute; */
+  position: absolute;
   display: flex;
   width: 500%;
   z-index: 10;
