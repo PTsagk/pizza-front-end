@@ -4,9 +4,10 @@ import margarita from "../../assets/hampizza.png";
 import pepperoni from "../../assets/pepperoni.png";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useEffect, useState } from "react";
-import { homeOffers } from "../../statics/texts";
+import { homeOffers, pizzaOffers } from "../../statics/texts";
 function Home() {
   const [position, setPosition] = useState(-100);
+  const [infoPosition, setInfoPosition] = useState(40);
   const [canClick, setCanClick] = useState(true);
   const [debounce, setDebounce] = useState(false);
   const [toStart, setToStart] = useState(false);
@@ -15,26 +16,32 @@ function Home() {
     if (!canClick) return;
     if (position > -300) {
       let pos = position;
+      let info = infoPosition;
+      info -= 40;
       pos -= 100;
+      setInfoPosition(info);
       setPosition(pos);
+      setCanClick(false);
     } else {
       setPosition(0);
       setToStart(true);
       setDebounce(true);
     }
-    setCanClick(false);
   }
   function moveLeft() {
     if (!canClick) return;
     if (position < 0) {
       let pos = position;
+      let info = infoPosition;
       pos += 100;
+      info += 40;
       setPosition(pos);
+      setInfoPosition(info);
+      setCanClick(false);
     } else {
       setPosition(-300);
       setDebounce(true);
     }
-    setCanClick(false);
   }
 
   useEffect(() => {
@@ -60,9 +67,28 @@ function Home() {
           <button className="arrow left-arrow" onClick={() => moveLeft()}>
             <MdArrowBackIosNew></MdArrowBackIosNew>
           </button>
-          <div className="flex flex-col items-center">
+          <div className="info">
             <h2>Pizza Special</h2>
-            <p>Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms</p>
+            <div
+              className="paras carousel-transition"
+              style={{ transform: `translateX(${infoPosition}%)` }}
+            >
+              <p>
+                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
+              </p>
+              <p>
+                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
+              </p>
+              <p>
+                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
+              </p>
+              <p>
+                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
+              </p>
+              <p>
+                Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms
+              </p>
+            </div>
             <button className="add-to-cart">Add to cart</button>
           </div>
           <button className="arrow right-arrow" onClick={() => moveRight()}>

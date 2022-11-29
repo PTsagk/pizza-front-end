@@ -38,6 +38,25 @@
 .pizza-info p {
   width: 30rem;
 }
+
+.info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 30%;
+  overflow: hidden;
+}
+
+.paras {
+  display: flex;
+  justify-content: center;
+  width: 500%;
+  transition-duration: 1.2s;
+}
+
+.paras p {
+  width: 20%;
+}
 .red-body {
   background: linear-gradient(#ec1a37, black);
 }
@@ -56,6 +75,7 @@
 .arrow {
   font-size: 4rem;
   width: 1rem 0.5rem;
+  z-index: 100;
 }
 .right-arrow :hover {
   transition: 1s;

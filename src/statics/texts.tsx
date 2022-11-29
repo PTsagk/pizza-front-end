@@ -45,3 +45,21 @@ export const homeOffers = [
       "Enjoy playfull meals with healthy options for kids and toys included!",
   },
 ];
+
+export const pizzaOffers = [
+  {
+    title: "Pizza Special",
+    desc: "Tomato sauce, Gouda, Peperoni, Bacon, Green pepper, Mushrooms",
+    img: "pizza3",
+  },
+  {
+    title: "Ham Pizza",
+    desc: "Tomato sauce, Gouda",
+    img: "hampizza",
+  },
+  {
+    title: "Pizza Pepperoni",
+    desc: "Peperoni, Bacon, Green pepper, Mushrooms",
+    img: "pepperoni",
+  },
+];
