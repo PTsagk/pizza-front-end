@@ -31,7 +31,7 @@ function ProductCard({ name, img, desc }: IProductCard) {
         className="button text-white bg-primary
       w-[100%] p-3 text-[26px] font-bold"
       >
-        Add to Card
+        Add to Cart
       </button>
     </li>
   );

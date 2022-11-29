@@ -1,0 +1,9 @@
+.order-items-list {
+  overflow-y: auto;
+}
+.order-items-list::-webkit-scrollbar-track {
+  background: #000;
+}
+.order-items-list::-webkit-scrollbar-thumb {
+  background-color: red;
+}
