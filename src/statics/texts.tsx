@@ -59,4 +59,12 @@ export const pizzaOffers = [
     desc: "Peperoni, Bacon, Green pepper, Mushrooms",
     img: "pepperoni.png",
   },
+  {
+    desc: "Cheese, Cum, Tomato, Cherry tomato",
+    img: "cumpizza.png",
+  },
+  {
+    desc: "Cheese, Brocolli, Mushroom,Cherry tomato",
+    img: "brocolliPizza.png",
+  },
 ];

@@ -1,9 +1,12 @@
 .order-items-list {
   overflow-y: auto;
 }
+.order-items-list::-webkit-scrollbar {
+  width: 1em;
+}
 .order-items-list::-webkit-scrollbar-track {
-  background: #000;
+  background: #fff;
 }
 .order-items-list::-webkit-scrollbar-thumb {
-  background-color: red;
+  background-color: var(--primary);
 }

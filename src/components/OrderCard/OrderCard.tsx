@@ -27,8 +27,13 @@ interface IOrder {
   comments: "";
   createdAt: "";
 }
-function OrderCard() {
+function OrderCard({ status }) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const statusColor = {
+    completed: "success",
+    active: "warning",
+    pending: "primary",
+  };
   return (
     <li
       className="flex flex-col"
@@ -36,7 +41,9 @@ function OrderCard() {
         borderBottom: "1px solid black",
       }}
     >
-      <div className="flex justify-evenly items-center w-[100%] h-[116px] bg-success">
+      <div
+        className={`flex justify-evenly items-center w-[100%] h-[116px] bg-${statusColor[status]}`}
+      >
         <button
           className="text-[22px] text-white button"
           onClick={() => setIsOpen((prev) => !prev)}
