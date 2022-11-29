@@ -62,10 +62,11 @@
 }
 
 .pizza-carousel {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
-  width: 300%;
+  width: 500%;
   z-index: 10;
+  background-color: transparent;
 }
 .carousel-transition {
   transition-duration: 1.2s;
