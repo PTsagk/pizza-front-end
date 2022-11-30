@@ -7,6 +7,8 @@ import {
   MdOutlineAccountCircle,
   MdOutlineAttachMoney,
   MdOutlineDateRange,
+  MdOutlineUpdate,
+  MdOutlineNewReleases,
 } from "react-icons/md";
 import { SlArrowRight, SlArrowDown } from "react-icons/sl";
 import { CiLocationOn } from "react-icons/ci";
@@ -30,9 +32,14 @@ interface IOrder {
 function OrderCard({ status }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const statusColor = {
-    completed: "success",
-    active: "warning",
-    pending: "primary",
+    completed: "bg-success",
+    active: "bg-warning",
+    pending: "bg-primary",
+  };
+  const statusIcon = {
+    completed: <AiOutlineCheck className="ml-2 text-[22px]" />,
+    active: <MdOutlineUpdate className="ml-2 text-[22px]" />,
+    pending: <MdOutlineNewReleases className="ml-2 text-[22px]" />,
   };
   return (
     <li
@@ -42,7 +49,7 @@ function OrderCard({ status }) {
       }}
     >
       <div
-        className={`flex justify-evenly items-center w-[100%] h-[116px] bg-${statusColor[status]}`}
+        className={`flex justify-evenly items-center w-[100%] h-[116px] ${statusColor[status]}`}
       >
         <button
           className="text-[22px] text-white button"
@@ -77,9 +84,11 @@ function OrderCard({ status }) {
           <TbCreditCard className="ml-2 text-[22px]" />
           <TbCashBanknote className="ml-2 text-[22px]" />
         </div>
-        <div className="flex items-center font-outfit text-[18px] text-white font-semibold">
-          <p>Completed</p>
-          <AiOutlineCheck className="ml-2 text-[22px]" />
+        <div className="flex items-center w-[130px] font-outfit text-[18px] text-white font-semibold ">
+          {/* <p>Completed</p> */}
+          {/* <AiOutlineCheck className="ml-2 text-[22px]" /> */}
+          <p>{status}</p>
+          {statusIcon[status.toLowerCase()]}
         </div>
       </div>
       <div

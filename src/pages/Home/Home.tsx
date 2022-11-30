@@ -12,10 +12,7 @@ function Home() {
   const carouselStep = 100 / (pizzaOffers.length + 2);
   const containerWidth = (pizzaOffers.length + 2) * 100;
   const temp1 = (pizzaOffers.length - 1) / 2;
-  const start =
-    (pizzaOffers.length + 2) % 2 === 0
-      ? temp1 * carouselStep
-      : temp1 * carouselStep;
+  const start = temp1 * carouselStep;
 
   const [position, setPosition] = useState(start);
   const [infoPosition, setInfoPosition] = useState(start);
@@ -58,7 +55,6 @@ function Home() {
   }
 
   useEffect(() => {
-    console.log(debounce);
     if (debounce) {
       setPosition(toStart ? start : -start);
       setInfoPosition(toStart ? start : -start);
