@@ -4,18 +4,70 @@ import MyDropdown from "../Dropdown/MyDropdown";
 import MyDropdownOption from "../Dropdown/MyDropdownOption";
 import "./AdminForm.css";
 import { styles } from "../../statics/styles";
+import axios from "axios";
+import { useProductContext } from "../../Context/productsContext";
 
 function AdminForm() {
+  const { ingredients } = useProductContext();
+
   const [categoryValue, setCategoryValue] = React.useState("Other");
   const [categoryDisplay, setCategoryDisplay] = React.useState("Other");
+  const [title, setTitle] = React.useState("");
+  const [price, setPrice] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const imageRef = React.useRef(null);
+  const [errors, setErrors] = React.useState({
+    title: "",
+    price: "",
+    description: "",
+    ingredients: "",
+    image: null,
+    show: false,
+  });
 
   function changeCategory(object: { value: string; display: string }) {
     setCategoryValue(object.value);
     setCategoryDisplay(object.display);
   }
 
+  function submitForm(e: React.FormEvent) {
+    e.preventDefault();
+    console.log(categoryValue);
+    console.log(title);
+    console.log(price);
+    console.log(description);
+    console.log(imageRef.current);
+    if (!title) {
+    }
+    // axios
+    //   .post(`${import.meta.env.VITE_API}/pizza`, {
+    //     title,
+    //     price,
+    //     description,
+    //     image: imageRef,
+    //     category: categoryValue,
+    //   })
+    //   .then((res) => console.log(res))
+    //   .catch((e) => console.log(e));
+  }
+
+  function handleTitleChange(str: string) {
+    const regexTest = /[^a-zA-Z0-9\s]/;
+    if (!regexTest.test(str)) setTitle(str);
+  }
+  function handlePriceChange(str: string) {
+    const regexTest = /[^0-9\.\,]/;
+    if (!regexTest.test(str)) setPrice(str);
+  }
+  function handleDescriptionChange(str: string) {
+    setDescription(str);
+  }
+  function handleFileInput(e) {
+    imageRef.current = e.target.files[0];
+  }
+
   return (
-    <form action="" className="bg-white p-5 font-outfit font-bold">
+    <form className="bg-white p-5 font-outfit font-bold">
       <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
         <label
           htmlFor="product-name"
@@ -27,7 +79,9 @@ function AdminForm() {
         <input
           type="text"
           id="product-name"
-          className="text-black font-normal px-3 outline-none"
+          value={title}
+          onChange={(e) => handleTitleChange(e.target.value)}
+          className="text-black w-[100%] font-normal px-3 outline-none"
         />
       </div>
       <div className="flex form-shadow rounded-[2px] mb-7">
@@ -67,7 +121,9 @@ function AdminForm() {
         <input
           type="text"
           id="product-price"
-          className="text-black font-normal px-3 outline-none"
+          value={price}
+          onChange={(e) => handlePriceChange(e.target.value)}
+          className="text-black w-[100%] font-normal px-3 outline-none"
         />
       </div>
       <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
@@ -81,6 +137,8 @@ function AdminForm() {
         <textarea
           name="product-description"
           id="product-description"
+          value={description}
+          onChange={(e) => handleDescriptionChange(e.target.value)}
           className="form-area"
           cols={60}
           rows={5}
@@ -94,15 +152,28 @@ function AdminForm() {
         >
           Ingredients
         </label>
-        <ul
-          className={`overflow-y-auto h-[100px] 
-          ${styles.flexCol} w-[100%]`}
-        >
-          <li className={`${styles.flexRow} w[100%]`}>
-            <input type="checkbox" id="mozzarella" />
-            <label htmlFor="mozzarella">Mozzarella</label>
-          </li>
-        </ul>
+        <div className="flex w-[100%] justify-center">
+          <ul
+            className={`overflow-y-auto h-[100px] 
+          ingredient-list`}
+          >
+            {ingredients?.map((ingredient) => (
+              <li key={ingredient.id} className={`${styles.flexRow} w[100%]`}>
+                <input
+                  type="checkbox"
+                  id={ingredient.ingredient.replace(" ", "-")}
+                  name="ingredient"
+                />
+                <label
+                  className="ml-1"
+                  htmlFor={ingredient.ingredient.replace(" ", "-")}
+                >
+                  {ingredient.ingredient}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
         <label
@@ -113,13 +184,18 @@ function AdminForm() {
           Image
         </label>
         <input
+          onChange={handleFileInput}
           type="file"
           id="product-price"
           className="text-black font-normal px-3 outline-none"
         />
       </div>
       <div className={`${styles.flexRow} w[100%]`}>
-        <button className="bg-black text-white text-[20px] w-[195px] h-[55px] form-submit-button">
+        <button
+          type="submit"
+          onClick={(e) => submitForm(e)}
+          className="bg-black text-white text-[20px] w-[195px] h-[55px] form-submit-button"
+        >
           Save
         </button>
       </div>
