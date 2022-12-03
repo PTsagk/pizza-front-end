@@ -47,3 +47,55 @@ html {
     transform: rotateZ(360deg);
   }
 }
+
+.form-shadow {
+  box-shadow: 5px 5px 7px 1px rgba(0, 0, 0, 0.267);
+}
+.form-area {
+  resize: none;
+  outline: none;
+  padding: 5px;
+  font-weight: normal;
+}
+@keyframes dropdown-list {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.dropdown-list {
+  animation-name: dropdown-list;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden;
+}
+.dropbox-option {
+  border-bottom: 1px solid rgba(21, 21, 21, 0.188);
+  width: 100%;
+  padding: 5px;
+  background-color: #ec1a37;
+  color: #fff;
+  transition: all 0.1s ease;
+}
+.dropbox-option:hover {
+  background-color: #fff;
+  color: black;
+}
+.form-submit-button {
+  transition: all 0.2s ease;
+}
+.form-submit-button:hover {
+  background-color: var(--primary);
+}
+.ellipsis-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

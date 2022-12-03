@@ -7,7 +7,6 @@ import Pizzas from "./pages/Pizzas/Pizzas";
 import MissingPage from "./pages/MissingPage/MissingPage";
 import Admin from "./pages/Admin/Admin";
 import Cart from "./pages/CartPage/Cart";
-
 function App() {
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
