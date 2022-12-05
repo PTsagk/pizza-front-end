@@ -15,13 +15,8 @@ function App() {
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
       <ProductProvider>
         <Navbar></Navbar>
-<<<<<<< HEAD
         <div
-          className="absolute  h-[100%] w-[100%] 
-=======
-        {/* <div
           className="absolute z-50 h-[100%] w-[100%] 
->>>>>>> 168d0b363236b0f708a27cfee974a9648a7540df
         flex justify-center items-center"
         >
           <RegisterForm />
