@@ -15,7 +15,7 @@ function App() {
       <ProductProvider>
         <Navbar></Navbar>
         <div
-          className="absolute z-50 h-[100%] w-[100%] 
+          className="absolute  h-[100%] w-[100%] 
         flex justify-center items-center"
         >
           <RegisterForm />

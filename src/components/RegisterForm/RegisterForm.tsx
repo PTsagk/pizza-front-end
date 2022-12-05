@@ -12,10 +12,7 @@ function RegisterForm() {
   const [postalCode, setPostalCode] = React.useState("");
 
   return (
-    <div
-      className="w-[100%] flex justify-center auth-form-c
-    "
-    >
+    <div className="auth-form-c">
       <form className="bg-white w-[750px] p-5">
         <h2 className="text-center my-5 text-[32px] font-semibold">Register</h2>
         <AuthInput
