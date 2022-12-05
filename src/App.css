@@ -13,3 +13,6 @@
   background-size: cover;
   background-repeat: repeat-y;
 }
+.auth-bg {
+  background-color: rgba(0, 0, 0, 0.363);
+}
