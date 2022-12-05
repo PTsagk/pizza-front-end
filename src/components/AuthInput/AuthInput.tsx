@@ -17,11 +17,11 @@ function AuthInput({ labelDisplay, type, onChangeInput }: IAuthInput) {
   }
 
   return (
-    <div className="w-[100%] relative h-[30px] mb-5 font-bold font-outfit">
+    <div className="w-[100%] relative h-[30px] mb-5 font-bold font-outfit flex items-center inputs">
       <label
         htmlFor=""
         className={`
-         w-[100%] absolute auth-label`}
+         w-[100%]  auth-label`}
         style={{
           transform: selected || _input ? "translateX(0)" : "translateX(45%)",
         }}
@@ -34,7 +34,7 @@ function AuthInput({ labelDisplay, type, onChangeInput }: IAuthInput) {
         onChange={(e) => handleChange(e.target.value)}
         onSelect={() => setSelected(true)}
         onBlur={(e) => setSelected(false)}
-        className="w-[100%] auth-input text-black absolute left-0 px-[80px]"
+        className="auth-input"
       />
     </div>
   );
