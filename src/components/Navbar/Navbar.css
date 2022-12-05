@@ -48,6 +48,7 @@
 .cart :hover {
   transition-duration: 0.3s;
   color: #ec1a37;
+  cursor: pointer;
 }
 .profile-icon {
   margin-left: 2rem;
@@ -56,6 +57,7 @@
 .profile-icon :hover {
   transition-duration: 0.3s;
   color: #ec1a37;
+  cursor: pointer;
 }
 
 /* @media screen and (width <= 950px) {
