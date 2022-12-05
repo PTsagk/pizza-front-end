@@ -25,7 +25,7 @@ function App() {
         flex justify-center items-center"
         >
           <RegisterForm />
-        </div> */}
+        </div>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/pizzas" element={<Pizzas />}></Route>
