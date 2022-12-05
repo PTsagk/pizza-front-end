@@ -8,11 +8,18 @@ import MissingPage from "./pages/MissingPage/MissingPage";
 import Admin from "./pages/Admin/Admin";
 import Cart from "./pages/CartPage/Cart";
 import ProductProvider from "./Context/productsContext";
+import RegisterForm from "./components/RegisterForm/RegisterForm";
 function App() {
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
       <ProductProvider>
         <Navbar></Navbar>
+        <div
+          className="absolute z-50 h-[100%] w-[100%] 
+        flex justify-center items-center"
+        >
+          <RegisterForm />
+        </div>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/pizzas" element={<Pizzas />}></Route>

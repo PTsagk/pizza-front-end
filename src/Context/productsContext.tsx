@@ -38,8 +38,6 @@ function ProductProvider({ children }: IProductProvider) {
       })
       .catch((e) => console.log(e));
   }, []);
-
-  console.log(ingredients);
   return (
     <ProductsContext.Provider value={{ ingredients }}>
       {children}

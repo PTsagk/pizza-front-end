@@ -99,3 +99,22 @@ html {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.dark-scrollbar::-webkit-scrollbar {
+  width: 1em;
+}
+.dark-scrollbar::-webkit-scrollbar-track {
+  width: 1em;
+}
+.dark-scrollbar::-webkit-scrollbar-thumb {
+  width: 1em;
+}
+
+.auth-label {
+  transition: all 0.5s ease;
+}
+
+.auth-input {
+  background-color: transparent;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  outline: none;
+}

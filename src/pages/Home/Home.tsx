@@ -7,6 +7,7 @@ import cumpizza from "../../assets/cumpizza.png";
 import hampizza from "../../assets/hampizza.png";
 import pizza3 from "../../assets/pizza3.png";
 import pepperoni from "../../assets/pepperoni.png";
+import RegisterForm from "../../components/RegisterForm/RegisterForm";
 
 function Home() {
   const carouselStep = 100 / (pizzaOffers.length + 2);
