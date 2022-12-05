@@ -3,6 +3,14 @@ import { Component } from "react";
 import AuthInput from "../AuthInput/AuthInput";
 import "./RegisterForm.css";
 function RegisterForm() {
+  const [fullname, setFullname] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [addressNumber, setAddressNumber] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [postalCode, setPostalCode] = React.useState("");
+
   return (
     <div
       className="w-[100%] flex justify-center auth-form-c
@@ -13,39 +21,39 @@ function RegisterForm() {
         <AuthInput
           labelDisplay="Full Name"
           type="text"
-          onChangeInput={(str) => console.log(str)}
+          onChangeInput={(str) => setFullname(str)}
         />
         <AuthInput
           labelDisplay="Email"
           type="email"
-          onChangeInput={(str) => console.log(str)}
+          onChangeInput={(str) => setEmail(str)}
         />
         <AuthInput
           labelDisplay="Password"
           type="password"
-          onChangeInput={(str) => console.log(str)}
+          onChangeInput={(str) => setPassword(str)}
         />
         <div className="flex">
           <AuthInput
             labelDisplay="Address"
             type="text"
-            onChangeInput={(str) => console.log(str)}
+            onChangeInput={(str) => setAddress(str)}
           />
           <AuthInput
             labelDisplay="Number"
             type="text"
-            onChangeInput={(str) => console.log(str)}
+            onChangeInput={(str) => setAddressNumber(str)}
           />
         </div>
         <AuthInput
           labelDisplay="City"
           type="text"
-          onChangeInput={(str) => console.log(str)}
+          onChangeInput={(str) => setCity(str)}
         />
         <AuthInput
           labelDisplay="Postal Code"
           type="text"
-          onChangeInput={(str) => console.log(str)}
+          onChangeInput={(str) => setPostalCode(str)}
         />
       </form>
     </div>
