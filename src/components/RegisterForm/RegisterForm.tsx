@@ -3,7 +3,8 @@ import { Component } from "react";
 import AuthInput from "../AuthInput/AuthInput";
 import "./RegisterForm.css";
 import { Link } from "react-router-dom";
-function RegisterForm() {
+import { AiOutlineClose } from "react-icons/ai";
+function RegisterForm({ closeForm }) {
   const [fullname, setFullname] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -14,8 +15,16 @@ function RegisterForm() {
 
   return (
     <div className="register-form">
-      <form className="register-info">
+      <form className="register-info relative">
         <h2 className="text-center my-5 text-[32px] font-semibold">Register</h2>
+        <button
+          type="button"
+          className="absolute right-[2%] top-[3%] text-[32px] spin-button"
+          onClick={closeForm}
+        >
+          <AiOutlineClose />
+        </button>
+
         <AuthInput
           labelDisplay="Full Name"
           type="text"
@@ -53,7 +62,9 @@ function RegisterForm() {
           type="text"
           onChangeInput={(str) => setPostalCode(str)}
         />
-        <button type="submit">Register</button>
+        <button className="auth-form-button bg-primary" type="submit">
+          Register
+        </button>
         <p>
           Already have an account? <Link to={"/login"}>Login</Link>
         </p>
