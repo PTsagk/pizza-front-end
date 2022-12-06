@@ -4,6 +4,7 @@ import AuthInput from "../AuthInput/AuthInput";
 import "./RegisterForm.css";
 import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
+import axios from "axios";
 function RegisterForm({ closeForm }) {
   const [fullname, setFullname] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -12,6 +13,18 @@ function RegisterForm({ closeForm }) {
   const [addressNumber, setAddressNumber] = React.useState("");
   const [city, setCity] = React.useState("");
   const [postalCode, setPostalCode] = React.useState("");
+
+  function register() {
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    const created = today.toISOString(); // "2020-06-13T18:30:00.000Z"
+    axios.post("http://localhost:5000/users", {
+      username: fullname,
+      password: password,
+      email: email,
+      created: created,
+    });
+  }
 
   return (
     <div className="register-form">
@@ -62,7 +75,11 @@ function RegisterForm({ closeForm }) {
           type="text"
           onChangeInput={(str) => setPostalCode(str)}
         />
-        <button className="auth-form-button bg-primary" type="submit">
+        <button
+          className="auth-form-button bg-primary"
+          type="submit"
+          onClick={() => register()}
+        >
           Register
         </button>
         <p>
