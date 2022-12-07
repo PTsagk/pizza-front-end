@@ -5,25 +5,32 @@ import "./RegisterForm.css";
 import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
-function RegisterForm({ closeForm }) {
-  const [fullname, setFullname] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [address, setAddress] = React.useState("");
-  const [addressNumber, setAddressNumber] = React.useState("");
-  const [city, setCity] = React.useState("");
-  const [postalCode, setPostalCode] = React.useState("");
+import { useState } from "react";
+function RegisterForm({ closeForm, setLogin, setRegister }) {
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressNumber, setAddressNumber] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
 
-  function register() {
+  async function register(e) {
+    e.preventDefault();
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     const created = today.toISOString(); // "2020-06-13T18:30:00.000Z"
-    axios.post("http://localhost:5000/users", {
-      username: fullname,
-      password: password,
-      email: email,
-      created: created,
-    });
+    const response = await axios.post(
+      "http://localhost:5000/users",
+      {
+        username: fullname,
+        password: password,
+        email: email,
+        created: created,
+      },
+      { withCredentials: true }
+    );
+    console.log(response);
   }
 
   return (
@@ -78,12 +85,22 @@ function RegisterForm({ closeForm }) {
         <button
           className="auth-form-button bg-primary"
           type="submit"
-          onClick={() => register()}
+          onClick={(e) => register(e)}
         >
           Register
         </button>
         <p>
-          Already have an account? <Link to={"/login"}>Login</Link>
+          Already have an account?{" "}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setLogin(false);
+              setRegister(true);
+            }}
+            className="login-button"
+          >
+            Login
+          </button>
         </p>
       </form>
     </div>
@@ -92,48 +109,113 @@ function RegisterForm({ closeForm }) {
 
 export default RegisterForm;
 
-//<div
-//   className="w-[100%] flex justify-center auth-form-c
-// "
-// >
-//   <form className="bg-white w-[750px] p-5">
-//     <h2 className="text-center my-5 text-[32px] font-semibold">Register</h2>
-//     <AuthInput
-//       labelDisplay="Full Name"
-//       type="text"
-//       onChangeInput={(str) => setFullname(str)}
-//     />
-//     <AuthInput
-//       labelDisplay="Email"
-//       type="email"
-//       onChangeInput={(str) => setEmail(str)}
-//     />
-//     <AuthInput
-//       labelDisplay="Password"
-//       type="password"
-//       onChangeInput={(str) => setPassword(str)}
-//     />
-//     <div className="flex">
-//       <AuthInput
-//         labelDisplay="Address"
-//         type="text"
-//         onChangeInput={(str) => setAddress(str)}
-//       />
-//       <AuthInput
-//         labelDisplay="Number"
-//         type="text"
-//         onChangeInput={(str) => setAddressNumber(str)}
-//       />
+// import * as React from "react";
+// import { Component } from "react";
+// import AuthInput from "../AuthInput/AuthInput";
+// import "./RegisterForm.css";
+// import { Link } from "react-router-dom";
+// import { AiOutlineClose } from "react-icons/ai";
+// import axios from "axios";
+// import { useState } from "react";
+// function RegisterForm({ closeForm, setLogin, setRegister }) {
+//   const [fullname, setFullname] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [address, setAddress] = useState("");
+//   const [addressNumber, setAddressNumber] = useState("");
+//   const [city, setCity] = useState("");
+//   const [postalCode, setPostalCode] = useState("");
+
+//   async function register(e) {
+//     e.preventDefault();
+//     const timeElapsed = Date.now();
+//     const today = new Date(timeElapsed);
+//     const created = today.toISOString(); // "2020-06-13T18:30:00.000Z"
+//     const response = await axios.post(
+//       "http://localhost:5000/users",
+//       {
+//         username: fullname,
+//         password: password,
+//         email: email,
+//         created: created,
+//       },
+//       { withCredentials: true }
+//     );
+//     console.log(response);
+//   }
+
+//   return (
+//     <div className="register-form">
+//       <form className="register-info relative">
+//         <h2 className="text-center my-5 text-[32px] font-semibold">Register</h2>
+//         <button
+//           type="button"
+//           className="absolute right-[2%] top-[3%] text-[32px] spin-button"
+//           onClick={closeForm}
+//         >
+//           <AiOutlineClose />
+//         </button>
+
+//         <AuthInput
+//           labelDisplay="Full Name"
+//           type="text"
+//           onChangeInput={(str) => setFullname(str)}
+//         />
+//         <AuthInput
+//           labelDisplay="Email"
+//           type="email"
+//           onChangeInput={(str) => setEmail(str)}
+//         />
+//         <AuthInput
+//           labelDisplay="Password"
+//           type="password"
+//           onChangeInput={(str) => setPassword(str)}
+//         />
+//         <div className="location">
+//           <AuthInput
+//             labelDisplay="Address"
+//             type="text"
+//             onChangeInput={(str) => setAddress(str)}
+//           />
+//           <AuthInput
+//             labelDisplay="Number"
+//             type="text"
+//             onChangeInput={(str) => setAddressNumber(str)}
+//           />
+//         </div>
+//         <AuthInput
+//           labelDisplay="City"
+//           type="text"
+//           onChangeInput={(str) => setCity(str)}
+//         />
+//         <AuthInput
+//           labelDisplay="Postal Code"
+//           type="text"
+//           onChangeInput={(str) => setPostalCode(str)}
+//         />
+//         <button
+//           className="auth-form-button bg-primary"
+//           type="submit"
+//           onClick={(e) => register(e)}
+//         >
+//           Register
+//         </button>
+//         <p>
+//           Already have an account?{" "}
+//           <button
+//             onClick={(e) => {
+//               e.preventDefault();
+//               setLogin(false);
+//               setRegister(true);
+//             }}
+//             className="login-button"
+//           >
+//             Login
+//           </button>
+//         </p>
+//       </form>
 //     </div>
-//     <AuthInput
-//       labelDisplay="City"
-//       type="text"
-//       onChangeInput={(str) => setCity(str)}
-//     />
-//     <AuthInput
-//       labelDisplay="Postal Code"
-//       type="text"
-//       onChangeInput={(str) => setPostalCode(str)}
-//     />
-//   </form>
-// </div>
+//   );
+// }
+
+// export default RegisterForm;

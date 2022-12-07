@@ -9,28 +9,17 @@ import Admin from "./pages/Admin/Admin";
 import Cart from "./pages/CartPage/Cart";
 import ProductProvider from "./Context/productsContext";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
-import Register from "./pages/Register/Register";
 import { useState } from "react";
 function App() {
-  const [authHidden, setAuthHidden] = useState(false);
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
       <ProductProvider>
         <Navbar></Navbar>
-        <div
-          className={`fixed z-40 h-[100%] w-[100%] 
-          flex justify-center items-center auth-bg ${
-            authHidden ? "hidden" : ""
-          }`}
-        >
-          <RegisterForm closeForm={() => setAuthHidden(true)} />
-        </div>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/pizzas" element={<Pizzas />}></Route>
           <Route path="/admin/*" element={<Admin />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/register" element={<Register />}></Route>
           <Route path="/*" element={<MissingPage />}></Route>
         </Routes>
         <Footer></Footer>
@@ -40,30 +29,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-//   return (
-//     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
-//       <ProductProvider>
-//         <Navbar></Navbar>
-//         {/* <div
-//           className="absolute z-50 h-[100%] w-[100%]
-//         flex justify-center items-center"
-//         >
-//           <RegisterForm />
-//         </div> */}
-//         <Routes>
-//           <Route path="/" element={<Home />}></Route>
-//           <Route path="/pizzas" element={<Pizzas />}></Route>
-//           <Route path="/admin/*" element={<Admin />}></Route>
-//           <Route path="/cart" element={<Cart />}></Route>
-//           <Route path="/register" element={<Register />}></Route>
-//           <Route path="/*" element={<MissingPage />}></Route>
-//         </Routes>
-//         <Footer></Footer>
-//       </ProductProvider>
-//     </div>
-//   );
-// }
-
-// export default App;
