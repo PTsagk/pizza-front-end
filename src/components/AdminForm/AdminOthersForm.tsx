@@ -7,7 +7,7 @@ import { styles } from "../../statics/styles";
 import axios from "axios";
 import { useProductContext } from "../../Context/productsContext";
 
-function AdminForm() {
+function AdminOthersForm() {
   const { ingredients } = useProductContext();
 
   const [categoryValue, setCategoryValue] = React.useState("Other");
@@ -203,4 +203,4 @@ function AdminForm() {
   );
 }
 
-export default AdminForm;
+export default AdminOthersForm;

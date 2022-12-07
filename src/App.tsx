@@ -10,6 +10,8 @@ import Cart from "./pages/CartPage/Cart";
 import ProductProvider from "./Context/productsContext";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
 import { useState } from "react";
+import UserProvider from "./Context/userContext";
+import UxProvider, { useUxContext } from "./Context/uxContext";
 function App() {
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
