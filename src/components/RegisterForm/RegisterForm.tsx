@@ -5,7 +5,10 @@ import "./RegisterForm.css";
 import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
+import { useUserContext } from "../../Context/userContext";
 function RegisterForm({ closeForm }) {
+  const { login } = useUserContext();
+
   const [fullname, setFullname] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -14,16 +17,22 @@ function RegisterForm({ closeForm }) {
   const [city, setCity] = React.useState("");
   const [postalCode, setPostalCode] = React.useState("");
 
-  function register() {
+  function register(event: React.FormEvent) {
+    event.preventDefault();
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     const created = today.toISOString(); // "2020-06-13T18:30:00.000Z"
-    axios.post("http://localhost:5000/users", {
-      username: fullname,
-      password: password,
-      email: email,
-      created: created,
-    });
+    axios
+      .post(`${import.meta.env.VITE_API}/users`, {
+        username: fullname,
+        password: password,
+        email: email,
+        created: created,
+      })
+      .then((res) => {
+        login(res.data);
+      })
+      .catch((e) => console.log(e));
   }
 
   return (
@@ -53,7 +62,7 @@ function RegisterForm({ closeForm }) {
           type="password"
           onChangeInput={(str) => setPassword(str)}
         />
-        <div className="location">
+        {/* <div className="location">
           <AuthInput
             labelDisplay="Address"
             type="text"
@@ -74,11 +83,11 @@ function RegisterForm({ closeForm }) {
           labelDisplay="Postal Code"
           type="text"
           onChangeInput={(str) => setPostalCode(str)}
-        />
+        /> */}
         <button
           className="auth-form-button bg-primary"
           type="submit"
-          onClick={() => register()}
+          onClick={(e) => register(e)}
         >
           Register
         </button>
@@ -91,49 +100,3 @@ function RegisterForm({ closeForm }) {
 }
 
 export default RegisterForm;
-
-//<div
-//   className="w-[100%] flex justify-center auth-form-c
-// "
-// >
-//   <form className="bg-white w-[750px] p-5">
-//     <h2 className="text-center my-5 text-[32px] font-semibold">Register</h2>
-//     <AuthInput
-//       labelDisplay="Full Name"
-//       type="text"
-//       onChangeInput={(str) => setFullname(str)}
-//     />
-//     <AuthInput
-//       labelDisplay="Email"
-//       type="email"
-//       onChangeInput={(str) => setEmail(str)}
-//     />
-//     <AuthInput
-//       labelDisplay="Password"
-//       type="password"
-//       onChangeInput={(str) => setPassword(str)}
-//     />
-//     <div className="flex">
-//       <AuthInput
-//         labelDisplay="Address"
-//         type="text"
-//         onChangeInput={(str) => setAddress(str)}
-//       />
-//       <AuthInput
-//         labelDisplay="Number"
-//         type="text"
-//         onChangeInput={(str) => setAddressNumber(str)}
-//       />
-//     </div>
-//     <AuthInput
-//       labelDisplay="City"
-//       type="text"
-//       onChangeInput={(str) => setCity(str)}
-//     />
-//     <AuthInput
-//       labelDisplay="Postal Code"
-//       type="text"
-//       onChangeInput={(str) => setPostalCode(str)}
-//     />
-//   </form>
-// </div>

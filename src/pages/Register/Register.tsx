@@ -4,9 +4,7 @@ import "./Register.css";
 
 function Register() {
   return (
-    <div className="register-page">
-      <RegisterForm></RegisterForm>
-    </div>
+    <div className="register-page">{/* <RegisterForm></RegisterForm> */}</div>
   );
 }
 
