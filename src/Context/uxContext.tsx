@@ -27,6 +27,7 @@ function UxProvider({ children }: IUxProvider) {
     setIsActiveRegister(false);
   }
   function showRegisterForm(show: boolean) {
+    console.log(show);
     setIsActiveLogin(false);
     setIsActiveRegister(show);
   }

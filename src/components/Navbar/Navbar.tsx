@@ -30,7 +30,9 @@ function Navbar() {
         ) : (
           <button
             className="bg-primary rounded-[10px] profile-icon px-3"
-            onClick={() => showRegisterForm(true)}
+            onClick={() => {
+              if (!user) showRegisterForm(true);
+            }}
           >
             Register
           </button>

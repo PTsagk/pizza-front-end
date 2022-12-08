@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import { useUserContext } from "../../Context/userContext";
+import { useUxContext } from "../../Context/uxContext";
 function RegisterForm({ closeForm }) {
   const { login } = useUserContext();
+
+  const { showRegisterForm } = useUxContext();
 
   const [fullname, setFullname] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -31,6 +34,7 @@ function RegisterForm({ closeForm }) {
       })
       .then((res) => {
         login(res.data);
+        showRegisterForm(false);
       })
       .catch((e) => console.log(e));
   }
