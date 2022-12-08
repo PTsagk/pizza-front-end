@@ -7,7 +7,7 @@ import { styles } from "../../statics/styles";
 import axios from "axios";
 import { useProductContext } from "../../Context/productsContext";
 
-function AdminForm() {
+function AdminForm({ closeForm }) {
   const { ingredients } = useProductContext();
 
   const [categoryValue, setCategoryValue] = React.useState("Other");
@@ -63,6 +63,7 @@ function AdminForm() {
     setDescription(str);
   }
   function handleFileInput(e) {
+    console.log(e.target.files[0].type);
     imageRef.current = e.target.files[0];
   }
 
@@ -184,7 +185,7 @@ function AdminForm() {
           Image
         </label>
         <input
-          onChange={handleFileInput}
+          onChange={(e) => handleFileInput(e)}
           type="file"
           id="product-price"
           className="text-black font-normal px-3 outline-none"
@@ -193,10 +194,17 @@ function AdminForm() {
       <div className={`${styles.flexRow} w[100%]`}>
         <button
           type="submit"
-          onClick={(e) => submitForm(e)}
+          onClick={submitForm}
           className="bg-black text-white text-[20px] w-[195px] h-[55px] form-submit-button"
         >
           Save
+        </button>
+        <button
+          type="button"
+          onClick={() => closeForm()}
+          className="bg-black text-white text-[20px] w-[195px] h-[55px] form-submit-button ml-3"
+        >
+          cancel
         </button>
       </div>
     </form>

@@ -3,9 +3,10 @@ import { Component } from "react";
 import AdminForm from "../../components/AdminForm/AdminForm";
 import { Link } from "react-router-dom";
 import AdminPizzaList from "../../components/AdminPizzaList/AdminPizzaList";
+import AdminOthersForm from "../../components/AdminForm/AdminOthersForm";
 
 function AdminProducts() {
-  const [formActive, setFormActive] = React.useState(false);
+  const [formActive, setFormActive] = React.useState("");
   return (
     <div
       className="w-[100%] min-h-[100vh] relative
@@ -26,10 +27,15 @@ function AdminProducts() {
         </Link>
       </div>
       <ul className="flex flex-col bg-black p-10">
-        <AdminPizzaList activateForm={() => setFormActive(true)} />
+        <AdminPizzaList activateForm={() => setFormActive("pizza")} />
       </ul>
       <div className={`absolute ${!formActive && "hidden"}`}>
-        <AdminForm />
+        {formActive == "pizza" && (
+          <AdminForm closeForm={() => setFormActive("")} />
+        )}
+        {formActive == "other" && (
+          <AdminOthersForm closeForm={() => setFormActive("")} />
+        )}
       </div>
     </div>
   );

@@ -53,6 +53,7 @@ function UserProvider({ children }: IUserProvider) {
         withCredentials: true,
       })
       .then((res) => {
+        console.log(res.data);
         setUser(res.data);
       })
       .catch((e) => console.log(e))

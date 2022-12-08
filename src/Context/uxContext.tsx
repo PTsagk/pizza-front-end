@@ -6,7 +6,7 @@ interface IUxProvider {
 }
 
 interface IUxContext {
-  isActiveRegister: boolean;
+  isActiveRegisterForm: boolean;
   isActiveLogin: boolean;
   showLoginForm: (show: boolean) => void;
   showRegisterForm: (show: boolean) => void;
@@ -20,23 +20,20 @@ export function useUxContext() {
 
 function UxProvider({ children }: IUxProvider) {
   const [isActiveLogin, setIsActiveLogin] = useState(false);
-  const [isActiveRegister, setIsActiveRegister] = useState(false);
+  const [isActiveRegisterForm, setIsActiveRegisterForm] = useState(false);
 
   function showLoginForm(show: boolean) {
     setIsActiveLogin(show);
-    setIsActiveRegister(false);
   }
   function showRegisterForm(show: boolean) {
-    console.log(show);
-    setIsActiveLogin(false);
-    setIsActiveRegister(show);
+    setIsActiveRegisterForm(show);
   }
 
   return (
     <UxContext.Provider
       value={{
         isActiveLogin,
-        isActiveRegister,
+        isActiveRegisterForm,
         showLoginForm,
         showRegisterForm,
       }}

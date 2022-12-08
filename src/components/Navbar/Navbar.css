@@ -60,6 +60,15 @@
   cursor: pointer;
 }
 
+.nav-login-button {
+  background-color: var(--primary);
+  transition: all 0.3s ease;
+}
+.nav-login-button:hover {
+  background-color: #fff;
+  color: var(--primary);
+}
+
 /* @media screen and (width <= 950px) {
   .cart-and-profile {
     width: max-content;

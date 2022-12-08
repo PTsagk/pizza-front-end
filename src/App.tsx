@@ -13,8 +13,6 @@ import { useState } from "react";
 import UserProvider, { useUserContext } from "./Context/userContext";
 import UxProvider, { useUxContext } from "./Context/uxContext";
 function App() {
-  const { isActiveRegister, showRegisterForm } = useUxContext();
-  const { user } = useUserContext();
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
       <ProductProvider>

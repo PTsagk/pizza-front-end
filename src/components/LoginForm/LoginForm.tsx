@@ -4,21 +4,28 @@ import { AiOutlineClose } from "react-icons/ai";
 import AuthInput from "../AuthInput/AuthInput";
 import { useState } from "react";
 import "./LoginForm.css";
+import { useUserContext } from "../../Context/userContext";
+import { useUxContext } from "../../Context/uxContext";
 
-function LoginForm({ closeForm, setLogin, setRegister }) {
+function LoginForm() {
+  const { user, login } = useUserContext();
+  const { showLoginForm, showRegisterForm } = useUxContext();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  async function login(e) {
+
+  function handleLogin(e) {
     e.preventDefault();
     axios.defaults.withCredentials = true;
-    const response = await axios.get("http://localhost:5000/users", {
-      params: {
-        email: email,
-        password: password,
-      },
-    });
-    // const token = await axios.get("http://localhost:5000/users/token");
-    console.log(response);
+    axios
+      .get(`${import.meta.env.VITE_API}/users`, {
+        params: {
+          email: email,
+          password: password,
+        },
+      })
+      .then((res) => login(res.data))
+      .catch((e) => console.log(e));
   }
 
   return (
@@ -28,7 +35,7 @@ function LoginForm({ closeForm, setLogin, setRegister }) {
         <button
           type="button"
           className="absolute right-[2%] top-[3%] text-[32px] spin-button"
-          onClick={closeForm}
+          onClick={() => showLoginForm(false)}
         >
           <AiOutlineClose />
         </button>
@@ -49,19 +56,19 @@ function LoginForm({ closeForm, setLogin, setRegister }) {
         <button
           className="auth-form-button bg-primary"
           type="submit"
-          onClick={(e) => login(e)}
+          onClick={(e) => handleLogin(e)}
         >
           Login
         </button>
         <p>
           Don't have an account?{" "}
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              setLogin(true);
-              setRegister(false);
+            onClick={() => {
+              showLoginForm(false);
+              showRegisterForm(true);
             }}
             className="register-button"
+            type="button"
           >
             Register
           </button>

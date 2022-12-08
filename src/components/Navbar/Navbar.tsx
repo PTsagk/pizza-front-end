@@ -7,36 +7,34 @@ import RegisterForm from "../RegisterForm/RegisterForm";
 import LoginForm from "../LoginForm/LoginForm";
 import axios from "axios";
 import { useUserContext } from "../../Context/userContext";
+import Untitled from "../../assets/Untitled.svg";
+import { useUxContext } from "../../Context/uxContext";
 
 function Navbar() {
   axios.defaults.withCredentials = true;
-  const [register, setRegister] = React.useState(true);
-  const [login, setLogin] = React.useState(true);
+
   const [profile, setProfile] = React.useState(true);
   const { user } = useUserContext();
+  const { isActiveLogin, isActiveRegisterForm, showLoginForm } = useUxContext();
   //if current user enable profile
   //else show login
   return (
     <>
       <div
         className={`fixed z-40 h-[100%] w-[100%]
-      flex justify-center items-center auth-bg ${register ? "hidden" : ""}`}
+      flex justify-center items-center auth-bg ${
+        !user && isActiveRegisterForm ? "" : "hidden"
+      }`}
       >
-        <RegisterForm
-          closeForm={() => setRegister(true)}
-          setLogin={setLogin}
-          setRegister={setRegister}
-        />
+        <RegisterForm />
       </div>
       <div
         className={`fixed z-40 h-[100%] w-[100%]
-      flex justify-center items-center auth-bg ${login ? "hidden" : ""}`}
+      flex justify-center items-center auth-bg ${
+        !user && isActiveLogin ? "" : "hidden"
+      }`}
       >
-        <LoginForm
-          closeForm={() => setLogin(true)}
-          setLogin={setLogin}
-          setRegister={setRegister}
-        />
+        <LoginForm />
       </div>
       <nav className="nav-bar z-50">
         <h1>LOGO</h1>
@@ -47,21 +45,25 @@ function Navbar() {
           <Link to={"/desserts"}>Desserts</Link>
         </div>
         <div className="cart-and-profile">
-          <button
-            onClick={async () => {
-              const token = await axios.get(
-                "http://localhost:5000/users/token"
-              );
-
-              console.log(token);
-            }}
-            className="cart"
-          >
+          <button className="cart">
             <FaShoppingCart></FaShoppingCart>
           </button>
-          <button onClick={() => setLogin(!login)} className="profile-icon">
-            <RiAccountCircleFill></RiAccountCircleFill>
-          </button>
+          {user && (
+            <button
+              onClick={() => showLoginForm(true)}
+              className="profile-icon"
+            >
+              <RiAccountCircleFill></RiAccountCircleFill>
+            </button>
+          )}
+          {!user && (
+            <button
+              onClick={() => showLoginForm(true)}
+              className="profile-icon nav-login-button rounded-[5px] px-4 font-regular"
+            >
+              login
+            </button>
+          )}
         </div>
       </nav>
     </>

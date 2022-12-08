@@ -7,7 +7,7 @@ import { styles } from "../../statics/styles";
 import axios from "axios";
 import { useProductContext } from "../../Context/productsContext";
 
-function AdminOthersForm() {
+function AdminOthersForm({ closeForm }) {
   const { ingredients } = useProductContext();
 
   const [categoryValue, setCategoryValue] = React.useState("Other");

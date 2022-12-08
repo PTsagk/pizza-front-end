@@ -74,7 +74,7 @@
 .arrow {
   font-size: 4rem;
   width: 1rem 0.5rem;
-  z-index: 100;
+  z-index: -100;
 }
 .right-arrow :hover {
   transition: 1s;

@@ -7,8 +7,12 @@ import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import { useState } from "react";
 import { useUserContext } from "../../Context/userContext";
-function RegisterForm({ closeForm, setLogin, setRegister }) {
+import { useUxContext } from "../../Context/uxContext";
+
+function RegisterForm() {
   const { login } = useUserContext();
+  const { showLoginForm, showRegisterForm } = useUxContext();
+
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +30,7 @@ function RegisterForm({ closeForm, setLogin, setRegister }) {
       .post(
         `${import.meta.env.VITE_API}/users`,
         {
-          username: fullname,
+          fullname,
           password: password,
           email: email,
           created: created,
@@ -46,7 +50,7 @@ function RegisterForm({ closeForm, setLogin, setRegister }) {
         <button
           type="button"
           className="absolute right-[2%] top-[3%] text-[32px] spin-button"
-          onClick={closeForm}
+          onClick={() => showRegisterForm(false)}
         >
           <AiOutlineClose />
         </button>
@@ -76,12 +80,12 @@ function RegisterForm({ closeForm, setLogin, setRegister }) {
         <p>
           Already have an account?{" "}
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              setLogin(false);
-              setRegister(true);
+            onClick={() => {
+              showRegisterForm(false);
+              showLoginForm(true);
             }}
             className="login-button"
+            type="button"
           >
             Login
           </button>
