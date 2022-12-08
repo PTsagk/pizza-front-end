@@ -1,9 +1,12 @@
 import React from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import "./ProfileCard.css";
-function Profile() {
+function Profile({ close }) {
   return (
     <div className="profile-card">
+      <button onClick={close} className="bg-primary text-white p-2">
+        Close
+      </button>
       <div className="circle">
         <span>P</span>
       </div>
