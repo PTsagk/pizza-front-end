@@ -5,38 +5,32 @@ import "./RegisterForm.css";
 import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
-import { useUserContext } from "../../Context/userContext";
-import { useUxContext } from "../../Context/uxContext";
-function RegisterForm({ closeForm }) {
-  const { login } = useUserContext();
+import { useState } from "react";
+function RegisterForm({ closeForm, setLogin, setRegister }) {
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressNumber, setAddressNumber] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
 
-  const { showRegisterForm } = useUxContext();
-
-  const [fullname, setFullname] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [address, setAddress] = React.useState("");
-  const [addressNumber, setAddressNumber] = React.useState("");
-  const [city, setCity] = React.useState("");
-  const [postalCode, setPostalCode] = React.useState("");
-
-  function register(event: React.FormEvent) {
-    event.preventDefault();
+  async function register(e) {
+    e.preventDefault();
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     const created = today.toISOString(); // "2020-06-13T18:30:00.000Z"
-    axios
-      .post(`${import.meta.env.VITE_API}/users`, {
+    const response = await axios.post(
+      "http://localhost:5000/users",
+      {
         username: fullname,
         password: password,
         email: email,
         created: created,
-      })
-      .then((res) => {
-        login(res.data);
-        showRegisterForm(false);
-      })
-      .catch((e) => console.log(e));
+      },
+      { withCredentials: true }
+    );
+    console.log(response);
   }
 
   return (
@@ -66,28 +60,6 @@ function RegisterForm({ closeForm }) {
           type="password"
           onChangeInput={(str) => setPassword(str)}
         />
-        {/* <div className="location">
-          <AuthInput
-            labelDisplay="Address"
-            type="text"
-            onChangeInput={(str) => setAddress(str)}
-          />
-          <AuthInput
-            labelDisplay="Number"
-            type="text"
-            onChangeInput={(str) => setAddressNumber(str)}
-          />
-        </div>
-        <AuthInput
-          labelDisplay="City"
-          type="text"
-          onChangeInput={(str) => setCity(str)}
-        />
-        <AuthInput
-          labelDisplay="Postal Code"
-          type="text"
-          onChangeInput={(str) => setPostalCode(str)}
-        /> */}
         <button
           className="auth-form-button bg-primary"
           type="submit"
@@ -96,7 +68,17 @@ function RegisterForm({ closeForm }) {
           Register
         </button>
         <p>
-          Already have an account? <Link to={"/login"}>Login</Link>
+          Already have an account?{" "}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setLogin(false);
+              setRegister(true);
+            }}
+            className="login-button"
+          >
+            Login
+          </button>
         </p>
       </form>
     </div>
