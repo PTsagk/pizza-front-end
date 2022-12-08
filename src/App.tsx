@@ -12,19 +12,18 @@ import RegisterForm from "./components/RegisterForm/RegisterForm";
 import { useState } from "react";
 import UserProvider, { useUserContext } from "./Context/userContext";
 import UxProvider, { useUxContext } from "./Context/uxContext";
+import ProfileCard from "./components/ProfileCard/ProfileCard";
 function App() {
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
       <ProductProvider>
         <Navbar></Navbar>
-        {/* <div
+        <div
           className={`fixed z-40 h-[100%] w-[100%] 
-          flex justify-center items-center auth-bg ${
-            isActiveRegister && !user ? "" : "hidden"
-          }`}
+          flex justify-center items-center auth-bg ${true ? "" : "hidden"}`}
         >
-          <RegisterForm closeForm={() => showRegisterForm(false)} />
-        </div> */}
+          <ProfileCard></ProfileCard>
+        </div>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/pizzas" element={<Pizzas />}></Route>
