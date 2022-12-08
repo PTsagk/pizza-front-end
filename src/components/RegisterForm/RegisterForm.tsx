@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import { useState } from "react";
+import { useUserContext } from "../../Context/userContext";
 function RegisterForm({ closeForm, setLogin, setRegister }) {
+  const { login } = useUserContext();
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,22 +17,26 @@ function RegisterForm({ closeForm, setLogin, setRegister }) {
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
 
-  async function register(e) {
+  function register(e) {
     e.preventDefault();
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     const created = today.toISOString(); // "2020-06-13T18:30:00.000Z"
-    const response = await axios.post(
-      "http://localhost:5000/users",
-      {
-        username: fullname,
-        password: password,
-        email: email,
-        created: created,
-      },
-      { withCredentials: true }
-    );
-    console.log(response);
+    axios
+      .post(
+        `${import.meta.env.VITE_API}/users`,
+        {
+          username: fullname,
+          password: password,
+          email: email,
+          created: created,
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        login(res.data);
+      })
+      .catch((e) => console.log(e));
   }
 
   return (

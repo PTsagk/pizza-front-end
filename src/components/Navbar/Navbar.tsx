@@ -6,13 +6,14 @@ import "./Navbar.css";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import LoginForm from "../LoginForm/LoginForm";
 import axios from "axios";
+import { useUserContext } from "../../Context/userContext";
 
 function Navbar() {
   axios.defaults.withCredentials = true;
   const [register, setRegister] = React.useState(true);
   const [login, setLogin] = React.useState(true);
   const [profile, setProfile] = React.useState(true);
-  const currentUser = axios.get("http://localhost:5000");
+  const { user } = useUserContext();
   //if current user enable profile
   //else show login
   return (

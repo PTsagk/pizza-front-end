@@ -1,12 +1,13 @@
+import axios from "axios";
 import * as React from "react";
-import { Component } from "react";
+import { Component, useEffect } from "react";
 
 interface IUserProvider {
   children: React.ReactNode;
 }
 
 interface IUser {
-  username: string;
+  fullname: string;
   email: string;
   created: string;
 }
@@ -32,7 +33,7 @@ export function useUserContext() {
 
 function UserProvider({ children }: IUserProvider) {
   const [user, setUser] = React.useState<IUser | null>(null);
-  const [isFetching, setIsFetching] = React.useState(false);
+  const [isFetching, setIsFetching] = React.useState(true);
 
   const [addressArray, setAddressArray] = React.useState<IAddress[]>([]);
   const [currentAddress, setCurrentAddress] = React.useState<IAddress | null>(
@@ -42,9 +43,21 @@ function UserProvider({ children }: IUserProvider) {
     setUser(userObj);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log(user);
   }, [user]);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API}/users/token`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((e) => console.log(e))
+      .finally(() => setIsFetching(false));
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, isFetching, currentAddress, login }}>
