@@ -46,12 +46,10 @@ function UserProvider({ children }: IUserProvider) {
   useEffect(() => {
     console.log(user);
   }, [user]);
-
+  axios.defaults.withCredentials = true;
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API}/users/token`, {
-        withCredentials: true,
-      })
+      .get(`${import.meta.env.VITE_API}/users/token`)
       .then((res) => {
         setUser(res.data);
       })
