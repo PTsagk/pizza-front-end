@@ -43,16 +43,18 @@ function AdminForm({ closeForm }) {
     // console.log(imageRef.current);
     if (!name) {
     }
-    console.log(imageRef.current);
+    let formData = new FormData();
+    if (!imageRef.current) return;
+    formData.append("file", imageRef.current);
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("category", categoryValue);
+    formData.append("description", description);
+    for (const ingredient of Array.from(ingredientsMap.keys())) {
+      formData.append("ingredients", ingredient);
+    }
     axios
-      .post(`${import.meta.env.VITE_API}/pizza`, {
-        name,
-        price,
-        description,
-        image: imageRef.current,
-        category: categoryValue,
-        ingredients: Array.from(ingredientsMap.keys()),
-      })
+      .post(`${import.meta.env.VITE_API}/pizza`, formData)
       .then((res) => console.log(res.data))
       .catch((e) => console.log(e));
   }
@@ -205,6 +207,7 @@ function AdminForm({ closeForm }) {
           onChange={(e) => handleFileInput(e)}
           type="file"
           id="product-price"
+          accept="image/*"
           className="text-black font-normal px-3 outline-none"
         />
       </div>
