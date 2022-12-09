@@ -12,12 +12,15 @@ function AdminForm({ closeForm }) {
 
   const [categoryValue, setCategoryValue] = React.useState("Other");
   const [categoryDisplay, setCategoryDisplay] = React.useState("Other");
-  const [title, setTitle] = React.useState("");
+  const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [description, setDescription] = React.useState("");
   const imageRef = React.useRef(null);
+  const [ingredientsMap, setIngredientsMap] = React.useState<
+    Map<string, boolean>
+  >(new Map());
   const [errors, setErrors] = React.useState({
-    title: "",
+    name: "",
     price: "",
     description: "",
     ingredients: "",
@@ -32,28 +35,41 @@ function AdminForm({ closeForm }) {
 
   function submitForm(e: React.FormEvent) {
     e.preventDefault();
-    console.log(categoryValue);
-    console.log(title);
-    console.log(price);
-    console.log(description);
-    console.log(imageRef.current);
-    if (!title) {
+    // console.log(name);
+    // console.log(categoryValue);
+    // console.log(price);
+    // console.log(description);
+    // console.log(ingredientsMap);
+    // console.log(imageRef.current);
+    if (!name) {
     }
-    // axios
-    //   .post(`${import.meta.env.VITE_API}/pizza`, {
-    //     title,
-    //     price,
-    //     description,
-    //     image: imageRef,
-    //     category: categoryValue,
-    //   })
-    //   .then((res) => console.log(res))
-    //   .catch((e) => console.log(e));
+    console.log(imageRef.current);
+    axios
+      .post(`${import.meta.env.VITE_API}/pizza`, {
+        name,
+        price,
+        description,
+        image: imageRef.current,
+        category: categoryValue,
+        ingredients: Array.from(ingredientsMap.keys()),
+      })
+      .then((res) => console.log(res.data))
+      .catch((e) => console.log(e));
   }
 
-  function handleTitleChange(str: string) {
+  function handleCheckboxClick(id: string) {
+    const tmpMap = new Map(ingredientsMap);
+    if (tmpMap.has(id)) {
+      tmpMap.delete(id);
+    } else {
+      tmpMap.set(id, true);
+    }
+    setIngredientsMap(tmpMap);
+  }
+
+  function handleNameChange(str: string) {
     const regexTest = /[^a-zA-Z0-9\s]/;
-    if (!regexTest.test(str)) setTitle(str);
+    if (!regexTest.test(str)) setName(str);
   }
   function handlePriceChange(str: string) {
     const regexTest = /[^0-9\.\,]/;
@@ -63,7 +79,7 @@ function AdminForm({ closeForm }) {
     setDescription(str);
   }
   function handleFileInput(e) {
-    console.log(e.target.files[0].type);
+    // console.log(e.target.files[0].type);
     imageRef.current = e.target.files[0];
   }
 
@@ -75,13 +91,13 @@ function AdminForm({ closeForm }) {
           className="text-white bg-primary px-5
         py-2"
         >
-          Title
+          Name
         </label>
         <input
           type="text"
           id="product-name"
-          value={title}
-          onChange={(e) => handleTitleChange(e.target.value)}
+          value={name}
+          onChange={(e) => handleNameChange(e.target.value)}
           className="text-black w-[100%] font-normal px-3 outline-none"
         />
       </div>
@@ -164,6 +180,7 @@ function AdminForm({ closeForm }) {
                   type="checkbox"
                   id={ingredient.ingredient.replace(" ", "-")}
                   name="ingredient"
+                  onClick={() => handleCheckboxClick(ingredient.id)}
                 />
                 <label
                   className="ml-1"
