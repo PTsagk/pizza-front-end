@@ -2,15 +2,16 @@ import * as React from "react";
 import { Component } from "react";
 import AdminForm from "../../components/AdminForm/AdminForm";
 import { Link } from "react-router-dom";
-import AdminPizzaList from "../../components/AdminPizzaList/AdminPizzaList";
-import AdminOthersForm from "../../components/AdminForm/AdminOthersForm";
+import AdminPizzaList from "../../components/AdminLists/AdminPizzaList/AdminPizzaList";
+import AdminProductsForm from "../../components/AdminForm/AdminProductsForm";
+import AdminDrinksList from "../../components/AdminLists/AdminDrinksList/AdminDrinksList";
 
 function AdminProducts() {
   const [formActive, setFormActive] = React.useState("");
   return (
     <div
       className="w-[100%] min-h-[100vh] relative
-    flex flex-col justify-center items-center pizza-bg"
+    flex flex-col justify-center items-center pizza-bg p-5"
     >
       <div className="mt-[10%] bg-white rounded-[5px] overflow-hidden">
         <Link
@@ -26,15 +27,18 @@ function AdminProducts() {
           Orders
         </Link>
       </div>
-      <ul className="flex flex-col bg-black p-10">
+      <div className="flex flex-col bg-black p-10">
         <AdminPizzaList activateForm={() => setFormActive("pizza")} />
-      </ul>
+      </div>
+      <div className="flex flex-col bg-black p-10">
+        <AdminDrinksList activateForm={() => setFormActive("other")} />
+      </div>
       <div className={`absolute ${!formActive && "hidden"}`}>
         {formActive == "pizza" && (
           <AdminForm closeForm={() => setFormActive("")} />
         )}
         {formActive == "other" && (
-          <AdminOthersForm closeForm={() => setFormActive("")} />
+          <AdminProductsForm closeForm={() => setFormActive("")} />
         )}
       </div>
     </div>

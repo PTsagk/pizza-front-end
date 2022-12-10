@@ -7,53 +7,50 @@ import { styles } from "../../statics/styles";
 import axios from "axios";
 import { useProductContext } from "../../Context/productsContext";
 
-function AdminOthersForm({ closeForm }) {
-  const { ingredients } = useProductContext();
-
-  const [categoryValue, setCategoryValue] = React.useState("Other");
-  const [categoryDisplay, setCategoryDisplay] = React.useState("Other");
-  const [title, setTitle] = React.useState("");
+function AdminProductsForm({ closeForm }) {
+  const [typeValue, setTypeValue] = React.useState("Drink");
+  const [typeDisplay, setTypeDisplay] = React.useState("Drink");
+  const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [description, setDescription] = React.useState("");
   const imageRef = React.useRef(null);
   const [errors, setErrors] = React.useState({
-    title: "",
+    name: "",
     price: "",
     description: "",
-    ingredients: "",
     image: null,
     show: false,
   });
 
-  function changeCategory(object: { value: string; display: string }) {
-    setCategoryValue(object.value);
-    setCategoryDisplay(object.display);
+  function changeType(object: { value: string; display: string }) {
+    setTypeValue(object.value);
+    setTypeDisplay(object.display);
   }
 
   function submitForm(e: React.FormEvent) {
     e.preventDefault();
-    console.log(categoryValue);
-    console.log(title);
-    console.log(price);
-    console.log(description);
-    console.log(imageRef.current);
-    if (!title) {
-    }
-    // axios
-    //   .post(`${import.meta.env.VITE_API}/pizza`, {
-    //     title,
-    //     price,
-    //     description,
-    //     image: imageRef,
-    //     category: categoryValue,
-    //   })
-    //   .then((res) => console.log(res))
-    //   .catch((e) => console.log(e));
+    // console.log(categoryValue);
+    // console.log(name);
+    // console.log(price);
+    // console.log(description);
+    // console.log(imageRef.current);
+    if (!imageRef.current) return;
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("description", description);
+    formData.append("type", typeValue);
+    formData.append("file", imageRef.current);
+    console.log(formData);
+    axios
+      .post(`${import.meta.env.VITE_API}/product`, formData)
+      .then((res) => console.log(res.data))
+      .catch((e) => console.log(e));
   }
 
-  function handleTitleChange(str: string) {
+  function handleNameChange(str: string) {
     const regexTest = /[^a-zA-Z0-9\s]/;
-    if (!regexTest.test(str)) setTitle(str);
+    if (!regexTest.test(str)) setName(str);
   }
   function handlePriceChange(str: string) {
     const regexTest = /[^0-9\.\,]/;
@@ -74,13 +71,13 @@ function AdminOthersForm({ closeForm }) {
           className="text-white bg-primary px-5
         py-2"
         >
-          Title
+          Name
         </label>
         <input
           type="text"
           id="product-name"
-          value={title}
-          onChange={(e) => handleTitleChange(e.target.value)}
+          value={name}
+          onChange={(e) => handleNameChange(e.target.value)}
           className="text-black w-[100%] font-normal px-3 outline-none"
         />
       </div>
@@ -90,23 +87,23 @@ function AdminOthersForm({ closeForm }) {
           className="text-white bg-primary px-5
         py-2"
         >
-          Category
+          Product
         </label>
-        <MyDropdown display={categoryDisplay}>
+        <MyDropdown display={typeDisplay}>
           <MyDropdownOption
-            value={"vegan"}
-            display={"Vegan"}
-            setDropbox={(obj) => changeCategory(obj)}
+            value={"Drink"}
+            display={"Drink"}
+            setDropbox={(obj) => changeType(obj)}
           ></MyDropdownOption>
           <MyDropdownOption
-            value={"meat"}
-            display={"Meat Lover's"}
-            setDropbox={(obj) => changeCategory(obj)}
+            value={"Dessert"}
+            display={"Dessert"}
+            setDropbox={(obj) => changeType(obj)}
           ></MyDropdownOption>
           <MyDropdownOption
-            value={"other"}
-            display={"Other"}
-            setDropbox={(obj) => changeCategory(obj)}
+            value={"Appetizer"}
+            display={"Appetizer"}
+            setDropbox={(obj) => changeType(obj)}
           ></MyDropdownOption>
         </MyDropdown>
       </div>
@@ -144,37 +141,7 @@ function AdminOthersForm({ closeForm }) {
           rows={5}
         ></textarea>
       </div>
-      <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-price"
-          className="text-white bg-primary px-5
-        py-2"
-        >
-          Ingredients
-        </label>
-        <div className="flex w-[100%] justify-center">
-          <ul
-            className={`overflow-y-auto h-[100px] 
-          ingredient-list`}
-          >
-            {ingredients?.map((ingredient) => (
-              <li key={ingredient.id} className={`${styles.flexRow} w[100%]`}>
-                <input
-                  type="checkbox"
-                  id={ingredient.ingredient.replace(" ", "-")}
-                  name="ingredient"
-                />
-                <label
-                  className="ml-1"
-                  htmlFor={ingredient.ingredient.replace(" ", "-")}
-                >
-                  {ingredient.ingredient}
-                </label>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+
       <div className="flex items-center form-shadow overflow-hidden rounded-[2px] mb-7">
         <label
           htmlFor="product-price"
@@ -198,9 +165,17 @@ function AdminOthersForm({ closeForm }) {
         >
           Save
         </button>
+        <button
+          type="button"
+          onClick={() => closeForm()}
+          className="bg-black text-white text-[20px] 
+          w-[195px] h-[55px] form-submit-button ml-3"
+        >
+          Cancel
+        </button>
       </div>
     </form>
   );
 }
 
-export default AdminOthersForm;
+export default AdminProductsForm;

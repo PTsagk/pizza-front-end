@@ -1,8 +1,8 @@
 import axios from "axios";
 import * as React from "react";
 import { Component } from "react";
-import { useProductContext } from "../../Context/productsContext";
-import { styles } from "../../statics/styles";
+import { useProductContext } from "../../../Context/productsContext";
+import { styles } from "../../../statics/styles";
 
 function AdminPizzaList({ activateForm }) {
   const { pizzas } = useProductContext();
@@ -45,7 +45,7 @@ function AdminPizzaList({ activateForm }) {
               crossOrigin="anonymous"
               src={`${import.meta.env.VITE_API}/image/${pizza.image}`}
               alt={pizza.name}
-              className="h-[100%] object-fit bg-white"
+              className="h-[100%] object-fit bg-primary"
             />
             <div className="flex flex-col justify-evenly h-[100%] ml-3">
               <div className="text-[18px] font-semibold">{pizza.name}</div>
