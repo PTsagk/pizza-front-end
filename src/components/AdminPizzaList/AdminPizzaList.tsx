@@ -1,17 +1,23 @@
+import axios from "axios";
 import * as React from "react";
 import { Component } from "react";
+import { useProductContext } from "../../Context/productsContext";
 import { styles } from "../../statics/styles";
 
-const pizzaData = [
-  {
-    name: "Pizza Margarita",
-    image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-    description: "100% Mozzarella, tomato sauce, pepperoni, bbq sauce, chicken",
-    price: "14.45",
-    category: "Vegan",
-  },
-];
 function AdminPizzaList({ activateForm }) {
+  const { pizzas } = useProductContext();
+
+  function handleDelete(id: string, image: string) {
+    axios
+      .delete(`${import.meta.env.VITE_API}/pizza`, {
+        data: {
+          id,
+          image,
+        },
+      })
+      .then((res) => console.log(res.data))
+      .catch((e) => console.log(e));
+  }
   return (
     <div className={`${styles.flexCol}`}>
       <div
@@ -30,13 +36,14 @@ function AdminPizzaList({ activateForm }) {
         </button>
       </div>
       <ul className="flex flex-col py-3 ">
-        {pizzaData.map((pizza) => (
+        {pizzas?.map((pizza) => (
           <li
             className="flex items-center justify-start 
-            w-[1000px] h-[123px] bg-primary text-white"
+            w-[1000px] h-[123px] bg-primary text-white my-2"
           >
             <img
-              src={pizza.image}
+              crossOrigin="anonymous"
+              src={`${import.meta.env.VITE_API}/image/${pizza.image}`}
               alt={pizza.name}
               className="h-[100%] object-fit bg-white"
             />
@@ -57,6 +64,7 @@ function AdminPizzaList({ activateForm }) {
             <button
               className="text-primary bg-white font-bold
               px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"
+              onClick={() => handleDelete(pizza.id, pizza.image)}
             >
               Delete
             </button>
