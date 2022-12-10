@@ -68,3 +68,5 @@ export const pizzaOffers = [
     img: "brocolliPizza.png",
   },
 ];
+
+export const pizzaTypes = ["New", "Classic", "Premium", "Vegan"];

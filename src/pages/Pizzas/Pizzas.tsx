@@ -2,94 +2,12 @@ import * as React from "react";
 import { Component } from "react";
 import MyVeggiesBG from "../../assets/MyVeggies.png";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { useProductContext } from "../../Context/productsContext";
+import { pizzaTypes } from "../../statics/texts";
 import "./pizzas.css";
 
-const DATA = [
-  {
-    category: "Vegeterian",
-    pizzas: [
-      {
-        name: "Veggie",
-        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-        description: `
-Mozzarella, tomato sauce,
-         pepperoni, spicy beef, fresh mushrooms.
-         In thin dough, with a diameter of 41 cm and cut
-         into 6 large pieces that you fold in half`,
-      },
-      {
-        name: "Margarita",
-        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-        description: `
-Mozzarella, tomato sauce,
-         pepperoni, spicy beef, fresh mushrooms.
-         In thin dough, with a diameter of 41 cm and cut
-         into 6 large pieces that you fold in half`,
-      },
-      {
-        name: "Ham and Bacon",
-        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-        description: `
-Mozzarella, tomato sauce,
-         pepperoni, spicy beef, fresh mushrooms.
-         In thin dough, with a diameter of 41 cm and cut
-         into 6 large pieces that you fold in half`,
-      },
-      {
-        name: "Ham and Bacon",
-        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-        description: `
-Mozzarella, tomato sauce,
-         pepperoni, spicy beef, fresh mushrooms.
-         In thin dough, with a diameter of 41 cm and cut
-         into 6 large pieces that you fold in half`,
-      },
-      {
-        name: "Ham and Bacon",
-        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-        description: `
-Mozzarella, tomato sauce,
-         pepperoni, spicy beef, fresh mushrooms.
-         In thin dough, with a diameter of 41 cm and cut
-         into 6 large pieces that you fold in half`,
-      },
-    ],
-  },
-  {
-    category: "Meat Lover's",
-    pizzas: [
-      {
-        name: "Veggie",
-        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-        description: `
-Mozzarella, tomato sauce,
-         pepperoni, spicy beef, fresh mushrooms.
-         In thin dough, with a diameter of 41 cm and cut
-         into 6 large pieces that you fold in half`,
-      },
-      {
-        name: "Ham",
-        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-        description: `
-Mozzarella, tomato sauce,
-         pepperoni, spicy beef, fresh mushrooms.
-         In thin dough, with a diameter of 41 cm and cut
-         into 6 large pieces that you fold in half`,
-      },
-      {
-        name: "Pepperoni",
-        image: "https://www.dominos.gr/gallery/fmobile/1532medium.png",
-        description: `
-Mozzarella, tomato sauce,
-         pepperoni, spicy beef, fresh mushrooms.
-         In thin dough, with a diameter of 41 cm and cut
-         into 6 large pieces that you fold in half`,
-      },
-    ],
-  },
-  {},
-];
 function Pizzas() {
+  const { pizzas } = useProductContext();
   return (
     <div
       className="w-[100%] min-h-[100vh]  relative pizza-bg"
@@ -110,7 +28,7 @@ function Pizzas() {
         }}
       /> */}
       <ul className="pt-[300px] flex flex-col items-center">
-        {DATA.map((pizzaCategory) => (
+        {pizzaTypes.map((pizzaType) => (
           <li
             className="flex flex-col items-start
           w-[75%] mb-[100px]"
@@ -119,17 +37,20 @@ function Pizzas() {
               className="bg-primary text-white text-[42px]
             font-bold rounded-[10px] px-5 underline"
             >
-              {pizzaCategory.category}
+              {pizzaType}
             </h2>
             <ul className="flex">
-              {pizzaCategory.pizzas?.map((pizza, index) => (
-                <ProductCard
-                  key={index}
-                  name={pizza.name}
-                  img={pizza.image}
-                  desc={pizza.description}
-                />
-              ))}
+              {pizzas
+                ?.filter((pizza) => pizza.category == pizzaType)
+                .map((pizza, index) => (
+                  <ProductCard
+                    key={pizza.id}
+                    name={pizza.name}
+                    // img={`${import.meta.env.VITE_API}/image/${pizza.image}`}
+                    img={pizza.image}
+                    desc={pizza.description}
+                  />
+                ))}
             </ul>
           </li>
         ))}

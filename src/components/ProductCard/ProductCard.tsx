@@ -12,18 +12,23 @@ function ProductCard({ name, img, desc }: IProductCard) {
     <li
       className="w-[275px] h-[450px] flex flex-col
     items-center bg-white rounded-[10px] m-5
-    overflow-hidden"
+    overflow-hidden product-card"
     >
       <div
         className="text-[32px] font-semibold font-outfit 
-      border-bottom w-[100%] text-center"
+      border-bottom w-[100%] text-center text-primary"
       >
         {name}
       </div>
-      <img src={img} alt={name} className="my-4" />
+      <img
+        crossOrigin="anonymous"
+        src={`${import.meta.env.VITE_API}/image/${img}`}
+        alt={name}
+        className="my-4 card-image"
+      />
       <p
-        className="h-[100%] w-[100%] text-center font-outfit
-      text-[16px] font-medium overflow-y-auto p-2"
+        className="h-[100%] w-[100%] text-start font-outfit
+      text-[16px] font-light overflow-y-auto p-2 px-5"
       >
         {desc}
       </p>

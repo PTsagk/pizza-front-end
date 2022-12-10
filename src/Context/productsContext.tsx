@@ -16,8 +16,18 @@ interface IIngredients {
   ingredient: string;
 }
 
+interface IPizza {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+  category: string;
+}
+
 interface IProductContext {
   ingredients: IIngredients[];
+  pizzas: IPizza[];
 }
 
 const ProductsContext = createContext({} as IProductContext);
@@ -28,6 +38,7 @@ export function useProductContext() {
 
 function ProductProvider({ children }: IProductProvider) {
   const [ingredients, setIngredients] = useState<IIngredients[]>([]);
+  const [pizzas, setPizzas] = useState<IPizza[]>([]);
 
   useEffect(() => {
     axios
@@ -38,8 +49,15 @@ function ProductProvider({ children }: IProductProvider) {
       })
       .catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API}/pizza`)
+      .then((res) => setPizzas(res.data))
+      .catch((e) => console.log(e));
+  }, []);
   return (
-    <ProductsContext.Provider value={{ ingredients }}>
+    <ProductsContext.Provider value={{ ingredients, pizzas }}>
       {children}
     </ProductsContext.Provider>
   );

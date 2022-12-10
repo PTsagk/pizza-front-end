@@ -6,12 +6,13 @@ import "./AdminForm.css";
 import { styles } from "../../statics/styles";
 import axios from "axios";
 import { useProductContext } from "../../Context/productsContext";
+import { pizzaTypes } from "../../statics/texts";
 
 function AdminForm({ closeForm }) {
   const { ingredients } = useProductContext();
 
-  const [categoryValue, setCategoryValue] = React.useState("Other");
-  const [categoryDisplay, setCategoryDisplay] = React.useState("Other");
+  const [categoryValue, setCategoryValue] = React.useState("Classic");
+  const [categoryDisplay, setCategoryDisplay] = React.useState("Classic");
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -35,12 +36,6 @@ function AdminForm({ closeForm }) {
 
   function submitForm(e: React.FormEvent) {
     e.preventDefault();
-    // console.log(name);
-    // console.log(categoryValue);
-    // console.log(price);
-    // console.log(description);
-    // console.log(ingredientsMap);
-    // console.log(imageRef.current);
     if (!name) {
     }
     let formData = new FormData();
@@ -53,6 +48,7 @@ function AdminForm({ closeForm }) {
     for (const ingredient of Array.from(ingredientsMap.keys())) {
       formData.append("ingredients", ingredient);
     }
+
     axios
       .post(`${import.meta.env.VITE_API}/pizza`, formData)
       .then((res) => console.log(res.data))
@@ -112,21 +108,13 @@ function AdminForm({ closeForm }) {
           Category
         </label>
         <MyDropdown display={categoryDisplay}>
-          <MyDropdownOption
-            value={"vegan"}
-            display={"Vegan"}
-            setDropbox={(obj) => changeCategory(obj)}
-          ></MyDropdownOption>
-          <MyDropdownOption
-            value={"meat"}
-            display={"Meat Lover's"}
-            setDropbox={(obj) => changeCategory(obj)}
-          ></MyDropdownOption>
-          <MyDropdownOption
-            value={"other"}
-            display={"Other"}
-            setDropbox={(obj) => changeCategory(obj)}
-          ></MyDropdownOption>
+          {pizzaTypes.map((t) => (
+            <MyDropdownOption
+              value={t}
+              display={t}
+              setDropbox={(obj) => changeCategory(obj)}
+            ></MyDropdownOption>
+          ))}
         </MyDropdown>
       </div>
       <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">

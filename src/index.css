@@ -124,3 +124,8 @@ html {
   animation-timing-function: ease;
   animation-fill-mode: both;
 }
+
+.product-card:hover {
+  transition: all 0.1s ease;
+  transform: scale(1.02);
+}
