@@ -83,7 +83,7 @@ function AdminPizzaForm({ closeForm }) {
 
   return (
     <form className="bg-white p-5 font-outfit font-bold">
-      <div className="form-input-c form-shadow">
+      <div className="admin-form-inputs-c form-shadow">
         <label htmlFor="product-name" className="admin-form-label">
           Name
         </label>
@@ -109,7 +109,7 @@ function AdminPizzaForm({ closeForm }) {
           ))}
         </MyDropdown>
       </div>
-      <div className="form-input-c form-shadow">
+      <div className="admin-form-inputs-c form-shadow">
         <label htmlFor="product-price" className="admin-form-label">
           Price
         </label>
@@ -121,7 +121,7 @@ function AdminPizzaForm({ closeForm }) {
           className="admin-form-inputs"
         />
       </div>
-      <div className="form-input-c form-shadow">
+      <div className="admin-form-inputs-c form-shadow">
         <label htmlFor="product-description" className="admin-form-label">
           Description
         </label>
@@ -135,7 +135,7 @@ function AdminPizzaForm({ closeForm }) {
           rows={5}
         ></textarea>
       </div>
-      <div className="form-input-c form-shadow">
+      <div className="admin-form-inputs-c form-shadow">
         <label htmlFor="product-price" className="admin-form-label">
           Ingredients
         </label>

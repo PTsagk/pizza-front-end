@@ -65,12 +65,8 @@ function AdminProductsForm({ closeForm }) {
 
   return (
     <form className="bg-white p-5 font-outfit font-bold">
-      <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-name"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+      <div className="admin-form-inputs-c form-shadow">
+        <label htmlFor="product-name" className="admin-form-label">
           Name
         </label>
         <input
@@ -78,15 +74,11 @@ function AdminProductsForm({ closeForm }) {
           id="product-name"
           value={name}
           onChange={(e) => handleNameChange(e.target.value)}
-          className="text-black w-[100%] font-normal px-3 outline-none"
+          className="admin-form-inputs"
         />
       </div>
       <div className="flex form-shadow rounded-[2px] mb-7">
-        <label
-          htmlFor="product-category"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+        <label htmlFor="product-category" className="admin-form-label">
           Product
         </label>
         <MyDropdown display={typeDisplay}>
@@ -107,12 +99,8 @@ function AdminProductsForm({ closeForm }) {
           ></MyDropdownOption>
         </MyDropdown>
       </div>
-      <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-price"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+      <div className="admin-form-inputs-c form-shadow">
+        <label htmlFor="product-price" className="admin-form-label">
           Price
         </label>
         <input
@@ -120,15 +108,11 @@ function AdminProductsForm({ closeForm }) {
           id="product-price"
           value={price}
           onChange={(e) => handlePriceChange(e.target.value)}
-          className="text-black w-[100%] font-normal px-3 outline-none"
+          className="admin-form-inputs"
         />
       </div>
-      <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-description"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+      <div className="admin-form-inputs-c form-shadow">
+        <label htmlFor="product-description" className="admin-form-label">
           Description
         </label>
         <textarea
@@ -143,11 +127,7 @@ function AdminProductsForm({ closeForm }) {
       </div>
 
       <div className="flex items-center form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-price"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+        <label htmlFor="product-price" className="admin-form-label">
           Image
         </label>
         <input
