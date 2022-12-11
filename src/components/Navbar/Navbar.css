@@ -41,10 +41,13 @@
 .cart-and-profile {
   display: flex;
   align-items: center;
-  font-size: 2rem;
+
   margin-left: auto;
 }
 
+.cart {
+  font-size: 2rem;
+}
 .cart :hover {
   transition-duration: 0.3s;
   color: #ec1a37;
@@ -63,6 +66,7 @@
 .nav-login-button {
   background-color: var(--primary);
   transition: all 0.3s ease;
+  font-size: 1.5rem;
 }
 .nav-login-button:hover {
   background-color: #fff;

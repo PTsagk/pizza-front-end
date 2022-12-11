@@ -45,16 +45,13 @@ function Navbar() {
           <Link to={"/desserts"}>Desserts</Link>
         </div>
         <div className="cart-and-profile">
-          <button className="cart">
+          <Link to={"/cart"} className="cart">
             <FaShoppingCart></FaShoppingCart>
-          </button>
+          </Link>
           {user && (
-            <button
-              onClick={() => showLoginForm(true)}
-              className="profile-icon"
-            >
+            <Link to={"/profile"} className="profile-icon">
               <RiAccountCircleFill></RiAccountCircleFill>
-            </button>
+            </Link>
           )}
           {!user && (
             <button

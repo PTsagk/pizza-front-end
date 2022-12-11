@@ -13,25 +13,27 @@ import { useState } from "react";
 import UserProvider, { useUserContext } from "./Context/userContext";
 import UxProvider, { useUxContext } from "./Context/uxContext";
 import ProfileCard from "./components/ProfileCard/ProfileCard";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 function App() {
-  const [closeShit, setCloseShit] = useState(false);
+  // const [closeShit, setCloseShit] = useState(false);
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
       <ProductProvider>
         <Navbar></Navbar>
-        <div
+        {/* <div
           className={`fixed z-40 h-[100%] w-[100%] 
           flex justify-center items-center auth-bg ${
             !closeShit ? "" : "hidden"
           }`}
         >
           <ProfileCard close={() => setCloseShit(true)}></ProfileCard>
-        </div>
+        </div> */}
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/pizzas" element={<Pizzas />}></Route>
           <Route path="/admin/*" element={<Admin />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/profile" element={<ProfilePage />}></Route>
           {/* <Route path="/register" element={<Register />}></Route> */}
           <Route path="/*" element={<MissingPage />}></Route>
         </Routes>

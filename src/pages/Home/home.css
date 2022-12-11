@@ -74,7 +74,11 @@
 .arrow {
   font-size: 4rem;
   width: 1rem 0.5rem;
+<<<<<<< HEAD
   z-index: 30;
+=======
+  z-index: 0;
+>>>>>>> e6a73bd0aa8bce559a81f67e49837c2d8713ef2b
 }
 .right-arrow :hover {
   transition: 1s;

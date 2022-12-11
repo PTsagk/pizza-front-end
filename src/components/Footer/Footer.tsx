@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Component } from "react";
 import { footerLinks } from "../../statics/texts";
-import {
-  AiOutlineTwitter,
-  AiFillFacebook,
-  AiFillYoutube,
-  AiFillInstagram,
-} from "react-icons/ai";
+// import {
+//   AiOutlineTwitter,
+//   AiFillFacebook,
+//   AiFillYoutube,
+//   AiFillInstagram,
+// } from "react-icons/ai";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import { GrFacebookOption } from "react-icons/gr";
 import "./footer.css";
 import { Link } from "react-router-dom";
@@ -16,19 +17,19 @@ function Footer() {
       className="flex flex-col w-100 bg-black text-white
     justify-center items-center py-7 px-5 footer"
     >
-      <div className="flex w-[420px] text-[60px] justify-evenly">
-        <Link to={"/"} className="hover:text-primary">
-          <AiFillFacebook />
+      <div className="flex w-[420px] text-[60px] justify-evenly social-icons">
+        <Link to={"/"} className="facebook-icon">
+          <FaFacebookF className="i"></FaFacebookF>
         </Link>
-        <Link to={"/"} className="hover:text-primary">
-          <AiOutlineTwitter />
+        <Link to={"/"} className="twitter-icon">
+          <FaTwitter></FaTwitter>
         </Link>
 
-        <Link to={"/"} className="hover:text-primary">
-          <AiFillInstagram />
+        <Link to={"/"} className="instagram-icon">
+          <FaInstagram></FaInstagram>
         </Link>
-        <Link to={"/"} className="hover:text-primary">
-          <AiFillYoutube />
+        <Link to={"/"} className="youtube-icon">
+          <FaYoutube></FaYoutube>
         </Link>
       </div>
       <div className="flex w-[100%] justify-evenly ">
