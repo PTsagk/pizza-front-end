@@ -19,17 +19,17 @@ function Footer() {
     >
       <div className="flex w-[420px] text-[60px] justify-evenly social-icons">
         <Link to={"/"} className="facebook-icon">
-          <FaFacebookF className="i"></FaFacebookF>
+          <FaFacebookF className="social-icon"></FaFacebookF>
         </Link>
         <Link to={"/"} className="twitter-icon">
-          <FaTwitter></FaTwitter>
+          <FaTwitter className="social-icon"></FaTwitter>
         </Link>
 
         <Link to={"/"} className="instagram-icon">
-          <FaInstagram></FaInstagram>
+          <FaInstagram className="social-icon"></FaInstagram>
         </Link>
         <Link to={"/"} className="youtube-icon">
-          <FaYoutube></FaYoutube>
+          <FaYoutube className="social-icon"></FaYoutube>
         </Link>
       </div>
       <div className="flex w-[100%] justify-evenly ">
