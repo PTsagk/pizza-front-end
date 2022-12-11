@@ -13,19 +13,36 @@
   width: 50%;
   background-color: white;
   margin: 2rem 0;
-  border-radius: 1rem;
+  border-radius: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-nav-bar .animation {
+  position: absolute;
+  height: 100%;
+  width: 25%;
+  top: 0;
+  left: 0;
+  background-color: #ec1a37;
+  border-radius: 1.5rem;
+  z-index: -1;
+  transition: all 0.5s ease 0s;
 }
 
 .profile-nav-bar button {
   width: 25%;
   padding: 1rem;
-  color: #ec1a37;
   font-family: Outfit;
   font-weight: 600;
+  border-radius: 2rem;
 }
-
-.settings-container {
+.profile-body {
   width: 70%;
-  height: 70%;
+  min-width: 400px;
+  min-height: 60%;
+  max-height: 100%;
   background-color: white;
+  border-radius: 3rem;
+  padding: 2rem;
 }

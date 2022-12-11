@@ -96,7 +96,7 @@ function AdminForm({ closeForm }) {
           id="product-name"
           value={name}
           onChange={(e) => handleNameChange(e.target.value)}
-          className="text-black w-[100%] font-normal px-3 outline-none"
+          className="text-black w-[100%] font-normal px-3 outline-none bg-white"
         />
       </div>
       <div className="flex form-shadow rounded-[2px] mb-7">
