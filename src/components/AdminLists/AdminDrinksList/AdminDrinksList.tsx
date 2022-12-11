@@ -3,6 +3,7 @@ import * as React from "react";
 import { Component } from "react";
 import { useProductContext } from "../../../Context/productsContext";
 import { styles } from "../../../statics/styles";
+import { FormatMoney } from "../../../utilities/Formatters";
 function AdminDrinksList({ activateForm }) {
   const { drinks } = useProductContext();
 
@@ -37,7 +38,7 @@ function AdminDrinksList({ activateForm }) {
       <ul className="flex flex-col py-3 ">
         {drinks?.map((drink) => (
           <li
-            className="flex items-center justify-start 
+            className="flex items-center justify-evenly 
               w-[1000px] h-[123px] bg-primary text-white my-2"
           >
             <img
@@ -50,15 +51,9 @@ function AdminDrinksList({ activateForm }) {
               <div className="text-[18px] font-semibold">{drink.name}</div>
               <div className="w-[350px] ellipsis-text">{drink.description}</div>
             </div>
-            <div className="flex flex-col justify-evenly h-[100%] ml-3">
-              <div>{drink.price}</div>
+            <div className="flex flex-col justify-center h-[100%] ml-3">
+              <div>{FormatMoney(drink.price.toString())}</div>
             </div>
-            <button
-              className="text-primary bg-white font-bold
-                px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"
-            >
-              Update
-            </button>
             <button
               className="text-primary bg-white font-bold
                 px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"

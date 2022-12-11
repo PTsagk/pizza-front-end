@@ -3,6 +3,7 @@ import * as React from "react";
 import { Component } from "react";
 import { useProductContext } from "../../../Context/productsContext";
 import { styles } from "../../../statics/styles";
+import { FormatMoney } from "../../../utilities/Formatters";
 
 function AdminPizzaList({ activateForm }) {
   const { pizzas } = useProductContext();
@@ -38,7 +39,7 @@ function AdminPizzaList({ activateForm }) {
       <ul className="flex flex-col py-3 ">
         {pizzas?.map((pizza) => (
           <li
-            className="flex items-center justify-start 
+            className="flex items-center justify-evenly 
             w-[1000px] h-[123px] bg-primary text-white my-2"
           >
             <img
@@ -53,14 +54,14 @@ function AdminPizzaList({ activateForm }) {
             </div>
             <div className="flex flex-col justify-evenly h-[100%] ml-3">
               <div>{pizza.category}</div>
-              <div>{pizza.price}</div>
+              <div>{FormatMoney(pizza.price.toString())}</div>
             </div>
-            <button
+            {/* <button
               className="text-primary bg-white font-bold
               px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"
             >
               Update
-            </button>
+            </button> */}
             <button
               className="text-primary bg-white font-bold
               px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"

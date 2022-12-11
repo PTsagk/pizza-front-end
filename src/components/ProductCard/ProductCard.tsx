@@ -14,12 +14,12 @@ function ProductCard({ name, img, desc }: IProductCard) {
     items-center bg-white rounded-[10px] m-5
     overflow-hidden product-card"
     >
-      <div
+      <span
         className="text-[32px] font-semibold font-outfit 
-      border-bottom w-[100%] text-center text-primary"
+      border-bottom w-[100%] text-center text-primary pizza-card-header"
       >
         {name}
-      </div>
+      </span>
       <img
         crossOrigin="anonymous"
         src={`${import.meta.env.VITE_API}/image/${img}`}

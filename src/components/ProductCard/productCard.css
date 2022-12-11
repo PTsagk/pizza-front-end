@@ -6,3 +6,25 @@
   object-fit: cover;
   height: 45%;
 }
+.pizza-card-header {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@keyframes infinite-slide {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-120%);
+  }
+}
+
+.pizza-card-header:hover {
+  animation-name: infinite-slide;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
