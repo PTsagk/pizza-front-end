@@ -8,7 +8,7 @@ import axios from "axios";
 import { useProductContext } from "../../Context/productsContext";
 import { pizzaTypes } from "../../statics/texts";
 
-function AdminForm({ closeForm }) {
+function AdminPizzaForm({ closeForm }) {
   const { ingredients } = useProductContext();
 
   const [categoryValue, setCategoryValue] = React.useState("Classic");
@@ -83,12 +83,8 @@ function AdminForm({ closeForm }) {
 
   return (
     <form className="bg-white p-5 font-outfit font-bold">
-      <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-name"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+      <div className="form-input-c form-shadow">
+        <label htmlFor="product-name" className="admin-form-label">
           Name
         </label>
         <input
@@ -96,15 +92,11 @@ function AdminForm({ closeForm }) {
           id="product-name"
           value={name}
           onChange={(e) => handleNameChange(e.target.value)}
-          className="text-black w-[100%] font-normal px-3 outline-none"
+          className="admin-form-inputs"
         />
       </div>
       <div className="flex form-shadow rounded-[2px] mb-7">
-        <label
-          htmlFor="product-category"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+        <label htmlFor="product-category" className="admin-form-label">
           Category
         </label>
         <MyDropdown display={categoryDisplay}>
@@ -117,12 +109,8 @@ function AdminForm({ closeForm }) {
           ))}
         </MyDropdown>
       </div>
-      <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-price"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+      <div className="form-input-c form-shadow">
+        <label htmlFor="product-price" className="admin-form-label">
           Price
         </label>
         <input
@@ -130,15 +118,11 @@ function AdminForm({ closeForm }) {
           id="product-price"
           value={price}
           onChange={(e) => handlePriceChange(e.target.value)}
-          className="text-black w-[100%] font-normal px-3 outline-none"
+          className="admin-form-inputs"
         />
       </div>
-      <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-description"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+      <div className="form-input-c form-shadow">
+        <label htmlFor="product-description" className="admin-form-label">
           Description
         </label>
         <textarea
@@ -151,12 +135,8 @@ function AdminForm({ closeForm }) {
           rows={5}
         ></textarea>
       </div>
-      <div className="flex form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-price"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+      <div className="form-input-c form-shadow">
+        <label htmlFor="product-price" className="admin-form-label">
           Ingredients
         </label>
         <div className="flex w-[100%] justify-center">
@@ -184,11 +164,7 @@ function AdminForm({ closeForm }) {
         </div>
       </div>
       <div className="flex items-center form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label
-          htmlFor="product-price"
-          className="text-white bg-primary px-5
-        py-2"
-        >
+        <label htmlFor="product-price" className="admin-form-label">
           Image
         </label>
         <input
@@ -219,4 +195,4 @@ function AdminForm({ closeForm }) {
   );
 }
 
-export default AdminForm;
+export default AdminPizzaForm;

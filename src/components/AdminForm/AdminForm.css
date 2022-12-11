@@ -4,3 +4,22 @@
   justify-content: flex-start;
   align-items: center;
 }
+.admin-form-inputs {
+  color: black;
+  width: 100%;
+  font-weight: normal;
+  padding: 0 6px;
+  outline: none;
+  background-color: #fff;
+}
+.admin-form-label {
+  color: #fff;
+  background-color: var(--primary);
+  padding: 8px 12px;
+}
+.admin-form-inputs-c {
+  display: flex;
+  overflow: hidden;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
