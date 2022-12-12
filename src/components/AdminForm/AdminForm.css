@@ -23,3 +23,9 @@
   border-radius: 2px;
   margin-bottom: 20px;
 }
+.admin-form-file-input {
+  color: black;
+  font-weight: normal;
+  padding: 0 12px;
+  outline: none;
+}

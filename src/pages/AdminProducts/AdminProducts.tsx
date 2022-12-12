@@ -27,11 +27,13 @@ function AdminProducts() {
           Orders
         </Link>
       </div>
-      <div className="flex flex-col bg-black p-10">
-        <AdminPizzaList activateForm={() => setFormActive("pizza")} />
-      </div>
-      <div className="flex flex-col bg-black p-10">
-        <AdminDrinksList activateForm={() => setFormActive("other")} />
+      <div className="flex flex-col">
+        <div className="flex flex-col bg-black p-10">
+          <AdminPizzaList activateForm={() => setFormActive("pizza")} />
+        </div>
+        <div className="flex flex-col bg-black p-10">
+          <AdminDrinksList activateForm={() => setFormActive("other")} />
+        </div>
       </div>
       <div className={`absolute ${!formActive && "hidden"}`}>
         {formActive == "pizza" && (

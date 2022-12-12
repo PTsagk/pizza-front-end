@@ -1,15 +1,17 @@
-.border-bottom {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.695);
-  width: 90%;
-}
 .card-image {
   width: 100%;
   object-fit: cover;
   height: 45%;
 }
+/* text-[24px] font-semibold font-outfit 
+        w-[90%] text-center text-primary */
 .pizza-card-header {
   display: inline-block;
   white-space: nowrap;
+  font-size: 24px;
+  font-weight: 600;
+  width: 90%;
+  color: var(--primary);
 }
 
 .product-card {
@@ -33,17 +35,35 @@
     transform: translateX(0%);
   }
   50% {
-    transform: translateX(-90%);
+    transform: translateX(-80%);
   }
   100% {
     transform: translateX(0%);
   }
 }
 
-.product-card:hover .pizza-card-header {
+.product-card:hover .product-card-header-animation {
   animation-name: infinite-slide;
-  animation-duration: 30s;
+  animation-duration: 20s;
   animation-timing-function: linear;
   animation-fill-mode: both;
   animation-iteration-count: infinite;
+}
+.border-bottom {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  width: 90%;
+}
+/* button text-white bg-primary
+      w-[100%] p-2 text-[20px] font-semibold */
+.product-card button {
+  color: #fff;
+  background-color: var(--primary);
+  width: 100%;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.product-card button:hover {
+  background-color: var(--primary-light);
 }

@@ -1,0 +1,16 @@
+.admin-products-list {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+}
+.admin-products-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 1000px;
+  height: 123px;
+  background-color: var(--primary);
+  color: #fff;
+  margin: 8px 0;
+}

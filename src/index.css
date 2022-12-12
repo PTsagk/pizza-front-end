@@ -11,6 +11,7 @@ html {
 
 :root {
   --primary: #ec1a37;
+  --primary-light: #ff223f;
   --success: #73b948;
   --warning: #e99b27;
   --black-gradient: linear-gradient(

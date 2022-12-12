@@ -11,8 +11,8 @@ function ProductCard({ name, img, desc }: IProductCard) {
   return (
     <li className="product-card">
       <span
-        className="text-[24px] font-semibold font-outfit 
-        w-[100%] text-center text-primary pizza-card-header"
+        className={`pizza-card-header text-center font-outfit 
+      ${name.length >= 18 && "product-card-header-animation"}`}
       >
         {name}
       </span>
@@ -29,12 +29,7 @@ function ProductCard({ name, img, desc }: IProductCard) {
       >
         {desc}
       </p>
-      <button
-        className="button text-white bg-primary
-      w-[100%] p-2 text-[20px] font-semibold"
-      >
-        Add to Cart
-      </button>
+      <button className="button">Add to Cart</button>
     </li>
   );
 }

@@ -172,7 +172,7 @@ function AdminPizzaForm({ closeForm }) {
           type="file"
           id="product-price"
           accept="image/*"
-          className="text-black font-normal px-3 outline-none"
+          className="admin-form-file-input"
         />
       </div>
       <div className={`${styles.flexRow} w[100%]`}>

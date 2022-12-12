@@ -4,6 +4,7 @@ import { Component } from "react";
 import { useProductContext } from "../../../Context/productsContext";
 import { styles } from "../../../statics/styles";
 import { FormatMoney } from "../../../utilities/Formatters";
+import "../AdminLists.css";
 
 function AdminPizzaList({ activateForm }) {
   const { pizzas } = useProductContext();
@@ -36,12 +37,9 @@ function AdminPizzaList({ activateForm }) {
           Add+
         </button>
       </div>
-      <ul className="flex flex-col py-3 ">
+      <ul className="admin-products-list">
         {pizzas?.map((pizza) => (
-          <li
-            className="flex items-center justify-evenly 
-            w-[1000px] h-[123px] bg-primary text-white my-2"
-          >
+          <li>
             <img
               crossOrigin="anonymous"
               src={`${import.meta.env.VITE_API}/image/${pizza.image}`}
@@ -56,12 +54,6 @@ function AdminPizzaList({ activateForm }) {
               <div>{pizza.category}</div>
               <div>{FormatMoney(pizza.price.toString())}</div>
             </div>
-            {/* <button
-              className="text-primary bg-white font-bold
-              px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"
-            >
-              Update
-            </button> */}
             <button
               className="text-primary bg-white font-bold
               px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"

@@ -14,7 +14,7 @@ function Navbar() {
   axios.defaults.withCredentials = true;
 
   const [profile, setProfile] = React.useState(true);
-  const { user } = useUserContext();
+  const { user, isAdmin } = useUserContext();
   const { isActiveLogin, isActiveRegisterForm, showLoginForm } = useUxContext();
   //if current user enable profile
   //else show login
@@ -43,6 +43,7 @@ function Navbar() {
           <Link to={"/pizzas"}>Pizzas</Link>
           <Link to={"/drinks"}>Drinks</Link>
           <Link to={"/desserts"}>Desserts</Link>
+          {isAdmin && <Link to={"/admin/products"}>Admin</Link>}
         </div>
         <div className="cart-and-profile">
           <Link to={"/cart"} className="cart">
@@ -56,7 +57,7 @@ function Navbar() {
           {!user && (
             <button
               onClick={() => showLoginForm(true)}
-              className="nav-login-button rounded-[5px] px-4 font-regular"
+              className="nav-login-button rounded-[5px] px-4 ml-[2rem] font-regular"
             >
               login
             </button>
