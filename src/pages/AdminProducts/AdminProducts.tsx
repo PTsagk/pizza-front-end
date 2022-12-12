@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Component } from "react";
-import AdminPizzaForm from "../../components/AdminForm/AdminPizzaForm";
+import AdminProductsForm from "../../components/AdminForm/AdminProductsForm";
 import { Link } from "react-router-dom";
 import AdminPizzaList from "../../components/AdminLists/AdminPizzaList/AdminPizzaList";
-import AdminProductsForm from "../../components/AdminForm/AdminProductsForm";
 import AdminDrinksList from "../../components/AdminLists/AdminDrinksList/AdminDrinksList";
 
 function AdminProducts() {
@@ -36,11 +35,11 @@ function AdminProducts() {
         </div>
       </div>
       <div className={`absolute ${!formActive && "hidden"}`}>
-        {formActive == "pizza" && (
-          <AdminPizzaForm closeForm={() => setFormActive("")} />
-        )}
-        {formActive == "other" && (
-          <AdminProductsForm closeForm={() => setFormActive("")} />
+        {formActive && (
+          <AdminProductsForm
+            closeForm={() => setFormActive("")}
+            formType={formActive}
+          />
         )}
       </div>
     </div>

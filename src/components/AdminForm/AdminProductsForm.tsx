@@ -6,46 +6,72 @@ import "./AdminForm.css";
 import { styles } from "../../statics/styles";
 import axios from "axios";
 import { useProductContext } from "../../Context/productsContext";
+import { pizzaTypes } from "../../statics/texts";
+import { MdAttachFile, MdOutlineFileDownloadDone } from "react-icons/md";
 
-function AdminProductsForm({ closeForm }) {
+function AdminProductsForm({ closeForm, formType }) {
+  const { ingredients } = useProductContext();
+
   const [typeValue, setTypeValue] = React.useState("Drink");
   const [typeDisplay, setTypeDisplay] = React.useState("Drink");
+  const [categoryValue, setCategoryValue] = React.useState("Classic");
+  const [categoryDisplay, setCategoryDisplay] = React.useState("Classic");
+
   const [name, setName] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const imageRef = React.useRef(null);
+  const [image, setImage] = React.useState(null);
+  const [imageServed, setImageServed] = React.useState(false);
+  const [ingredientsMap, setIngredientsMap] = React.useState<
+    Map<string, boolean>
+  >(new Map());
+
   const [errors, setErrors] = React.useState({
     name: "",
     price: "",
     description: "",
+    ingredients: "",
     image: null,
     show: false,
   });
 
-  function changeType(object: { value: string; display: string }) {
-    setTypeValue(object.value);
-    setTypeDisplay(object.display);
+  function changeCategory(object: { value: string; display: string }) {
+    setCategoryValue(object.value);
+    setCategoryDisplay(object.display);
   }
 
   function submitForm(e: React.FormEvent) {
     e.preventDefault();
-    // console.log(categoryValue);
-    // console.log(name);
-    // console.log(price);
-    // console.log(description);
-    // console.log(imageRef.current);
-    if (!imageRef.current) return;
-    const formData = new FormData();
+    if (!name) {
+      console.log(image);
+      console.log(formType);
+      return;
+    }
+    let formData = new FormData();
+    if (!image) return;
+    formData.append("file", image);
     formData.append("name", name);
     formData.append("price", price);
+    formData.append("category", categoryValue);
     formData.append("description", description);
-    formData.append("type", typeValue);
-    formData.append("file", imageRef.current);
-    console.log(formData);
+    for (const ingredient of Array.from(ingredientsMap.keys())) {
+      formData.append("ingredients", ingredient);
+    }
+
     axios
-      .post(`${import.meta.env.VITE_API}/product`, formData)
+      .post(`${import.meta.env.VITE_API}/pizza`, formData)
       .then((res) => console.log(res.data))
       .catch((e) => console.log(e));
+  }
+
+  function handleCheckboxClick(id: string) {
+    const tmpMap = new Map(ingredientsMap);
+    if (tmpMap.has(id)) {
+      tmpMap.delete(id);
+    } else {
+      tmpMap.set(id, true);
+    }
+    setIngredientsMap(tmpMap);
   }
 
   function handleNameChange(str: string) {
@@ -60,9 +86,15 @@ function AdminProductsForm({ closeForm }) {
     setDescription(str);
   }
   function handleFileInput(e) {
-    imageRef.current = e.target.files[0];
+    setImage(e.target.files[0]);
+    setImageServed(true);
   }
 
+  function changeType(object: { value: string; display: string }) {
+    setTypeValue(object.value);
+    setTypeDisplay(object.display);
+  }
+  console.log(imageServed, "imageServed");
   return (
     <form className="bg-white p-5 font-outfit font-bold">
       <div className="admin-form-inputs-c form-shadow">
@@ -77,28 +109,46 @@ function AdminProductsForm({ closeForm }) {
           className="admin-form-inputs"
         />
       </div>
-      <div className="flex form-shadow rounded-[2px] mb-7">
-        <label htmlFor="product-category" className="admin-form-label">
-          Product
-        </label>
-        <MyDropdown display={typeDisplay}>
-          <MyDropdownOption
-            value={"Drink"}
-            display={"Drink"}
-            setDropbox={(obj) => changeType(obj)}
-          ></MyDropdownOption>
-          <MyDropdownOption
-            value={"Dessert"}
-            display={"Dessert"}
-            setDropbox={(obj) => changeType(obj)}
-          ></MyDropdownOption>
-          <MyDropdownOption
-            value={"Appetizer"}
-            display={"Appetizer"}
-            setDropbox={(obj) => changeType(obj)}
-          ></MyDropdownOption>
-        </MyDropdown>
-      </div>
+      {formType == "pizza" && (
+        <div className="flex form-shadow rounded-[2px] mb-7">
+          <label htmlFor="product-category" className="admin-form-label">
+            Category
+          </label>
+          <MyDropdown display={categoryDisplay}>
+            {pizzaTypes.map((t) => (
+              <MyDropdownOption
+                value={t}
+                display={t}
+                setDropbox={(obj) => changeCategory(obj)}
+              ></MyDropdownOption>
+            ))}
+          </MyDropdown>
+        </div>
+      )}
+      {formType == "other" && (
+        <div className="flex form-shadow rounded-[2px] mb-7">
+          <label htmlFor="product-category" className="admin-form-label">
+            Product
+          </label>
+          <MyDropdown display={typeDisplay}>
+            <MyDropdownOption
+              value={"Drink"}
+              display={"Drink"}
+              setDropbox={(obj) => changeType(obj)}
+            ></MyDropdownOption>
+            <MyDropdownOption
+              value={"Dessert"}
+              display={"Dessert"}
+              setDropbox={(obj) => changeType(obj)}
+            ></MyDropdownOption>
+            <MyDropdownOption
+              value={"Appetizer"}
+              display={"Appetizer"}
+              setDropbox={(obj) => changeType(obj)}
+            ></MyDropdownOption>
+          </MyDropdown>
+        </div>
+      )}
       <div className="admin-form-inputs-c form-shadow">
         <label htmlFor="product-price" className="admin-form-label">
           Price
@@ -125,15 +175,52 @@ function AdminProductsForm({ closeForm }) {
           rows={5}
         ></textarea>
       </div>
-
-      <div className="flex items-center form-shadow overflow-hidden rounded-[2px] mb-7">
-        <label htmlFor="product-price" className="admin-form-label">
-          Image
+      {formType == "pizza" && (
+        <div className="admin-form-inputs-c form-shadow">
+          <label htmlFor="product-price" className="admin-form-label">
+            Ingredients
+          </label>
+          <div className="flex w-[100%] justify-center">
+            <ul
+              className={`overflow-y-auto h-[100px] 
+          ingredient-list`}
+            >
+              {ingredients?.map((ingredient) => (
+                <li key={ingredient.id} className={`${styles.flexRow} w[100%]`}>
+                  <input
+                    type="checkbox"
+                    id={ingredient.ingredient.replace(" ", "-")}
+                    name="ingredient"
+                    onClick={() => handleCheckboxClick(ingredient.id)}
+                  />
+                  <label
+                    className="ml-1"
+                    htmlFor={ingredient.ingredient.replace(" ", "-")}
+                  >
+                    {ingredient.ingredient}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+      <div className="form-shadow overflow-hidden w-[100%] mb-5 flex">
+        <label
+          htmlFor="product-image"
+          className="file-input-label flex items-center justify-center"
+        >
+          <div className={`${imageServed ? "noscale" : "fullscale"}`}>
+            <MdAttachFile />
+          </div>
+          <div className={`${imageServed ? "fullscale" : "noscale"}`}>
+            <MdOutlineFileDownloadDone />
+          </div>
         </label>
         <input
-          onChange={handleFileInput}
+          onChange={(e) => handleFileInput(e)}
           type="file"
-          id="product-price"
+          id="product-image"
           accept="image/*"
           className="admin-form-file-input"
         />
@@ -141,7 +228,7 @@ function AdminProductsForm({ closeForm }) {
       <div className={`${styles.flexRow} w[100%]`}>
         <button
           type="submit"
-          onClick={(e) => submitForm(e)}
+          onClick={submitForm}
           className="bg-black text-white text-[20px] w-[195px] h-[55px] form-submit-button"
         >
           Save
@@ -149,10 +236,9 @@ function AdminProductsForm({ closeForm }) {
         <button
           type="button"
           onClick={() => closeForm()}
-          className="bg-black text-white text-[20px] 
-          w-[195px] h-[55px] form-submit-button ml-3"
+          className="bg-black text-white text-[20px] w-[195px] h-[55px] form-submit-button ml-3"
         >
-          Cancel
+          cancel
         </button>
       </div>
     </form>
