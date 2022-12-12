@@ -1,12 +1,12 @@
 import axios from "axios";
 import * as React from "react";
 import { Component } from "react";
-import { useProductContext } from "../../../Context/productsContext";
-import { styles } from "../../../statics/styles";
-import { FormatMoney } from "../../../utilities/Formatters";
-import "../AdminLists.css";
+import { useProductContext } from "../../Context/productsContext";
+import { styles } from "../../statics/styles";
+import { FormatMoney } from "../../utilities/Formatters";
+import "./AdminLists.css";
 
-function AdminDrinksList({ activateForm }) {
+function AdminDessertsList({ activateForm }) {
   const { drinks } = useProductContext();
 
   function handleDelete(id: string, image: string) {
@@ -26,7 +26,7 @@ function AdminDrinksList({ activateForm }) {
         className="text-center text-[42px] text-white 
             bg-primary w-[100%] py-7 font-bold"
       >
-        <h3>Drinks</h3>
+        <h3>Desserts</h3>
       </div>
       <div className="w-[100%] flex justify-end items-center py-5">
         <button
@@ -67,4 +67,4 @@ function AdminDrinksList({ activateForm }) {
   );
 }
 
-export default AdminDrinksList;
+export default AdminDessertsList;

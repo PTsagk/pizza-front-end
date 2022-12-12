@@ -21,7 +21,6 @@ function AdminProductsForm({ closeForm, formType }) {
   const [price, setPrice] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [image, setImage] = React.useState(null);
-  const [imageServed, setImageServed] = React.useState(false);
   const [ingredientsMap, setIngredientsMap] = React.useState<
     Map<string, boolean>
   >(new Map());
@@ -42,9 +41,12 @@ function AdminProductsForm({ closeForm, formType }) {
 
   function submitForm(e: React.FormEvent) {
     e.preventDefault();
+    if (formType == "pizza") submitPizzaProduct();
+    else submitOthersProduct();
+  }
+
+  function submitPizzaProduct() {
     if (!name) {
-      console.log(image);
-      console.log(formType);
       return;
     }
     let formData = new FormData();
@@ -60,6 +62,24 @@ function AdminProductsForm({ closeForm, formType }) {
 
     axios
       .post(`${import.meta.env.VITE_API}/pizza`, formData)
+      .then((res) => console.log(res.data))
+      .catch((e) => console.log(e));
+  }
+
+  function submitOthersProduct() {
+    if (!name) {
+      return;
+    }
+    let formData = new FormData();
+    if (!image) return;
+    formData.append("file", image);
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("type", typeValue);
+    formData.append("description", description);
+
+    axios
+      .post(`${import.meta.env.VITE_API}/product`, formData)
       .then((res) => console.log(res.data))
       .catch((e) => console.log(e));
   }
@@ -87,16 +107,14 @@ function AdminProductsForm({ closeForm, formType }) {
   }
   function handleFileInput(e) {
     setImage(e.target.files[0]);
-    setImageServed(true);
   }
 
   function changeType(object: { value: string; display: string }) {
     setTypeValue(object.value);
     setTypeDisplay(object.display);
   }
-  console.log(imageServed, "imageServed");
   return (
-    <form className="bg-white p-5 font-outfit font-bold">
+    <form className="bg-white p-5 font-outfit font-bold w-[600px]">
       <div className="admin-form-inputs-c form-shadow">
         <label htmlFor="product-name" className="admin-form-label">
           Name
@@ -210,10 +228,10 @@ function AdminProductsForm({ closeForm, formType }) {
           htmlFor="product-image"
           className="file-input-label flex items-center justify-center"
         >
-          <div className={`${imageServed ? "noscale" : "fullscale"}`}>
+          <div className={`${image ? "noscale" : "fullscale"}`}>
             <MdAttachFile />
           </div>
-          <div className={`${imageServed ? "fullscale" : "noscale"}`}>
+          <div className={`${image ? "fullscale" : "noscale"}`}>
             <MdOutlineFileDownloadDone />
           </div>
         </label>

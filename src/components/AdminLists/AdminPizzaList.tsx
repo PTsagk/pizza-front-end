@@ -1,10 +1,10 @@
 import axios from "axios";
 import * as React from "react";
 import { Component } from "react";
-import { useProductContext } from "../../../Context/productsContext";
-import { styles } from "../../../statics/styles";
-import { FormatMoney } from "../../../utilities/Formatters";
-import "../AdminLists.css";
+import { useProductContext } from "../../Context/productsContext";
+import { styles } from "../../statics/styles";
+import { FormatMoney } from "../../utilities/Formatters";
+import "./AdminLists.css";
 
 function AdminPizzaList({ activateForm }) {
   const { pizzas } = useProductContext();

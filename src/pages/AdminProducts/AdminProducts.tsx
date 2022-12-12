@@ -2,8 +2,9 @@ import * as React from "react";
 import { Component } from "react";
 import AdminProductsForm from "../../components/AdminForm/AdminProductsForm";
 import { Link } from "react-router-dom";
-import AdminPizzaList from "../../components/AdminLists/AdminPizzaList/AdminPizzaList";
-import AdminDrinksList from "../../components/AdminLists/AdminDrinksList/AdminDrinksList";
+import AdminPizzaList from "../../components/AdminLists/AdminPizzaList";
+import AdminDrinksList from "../../components/AdminLists/AdminDrinksList";
+import AdminDessertsList from "../../components/AdminLists/AdminDessertsList";
 
 function AdminProducts() {
   const [formActive, setFormActive] = React.useState("");
@@ -33,8 +34,15 @@ function AdminProducts() {
         <div className="flex flex-col bg-black p-10">
           <AdminDrinksList activateForm={() => setFormActive("other")} />
         </div>
+        <div className="flex flex-col bg-black p-10">
+          <AdminDessertsList activateForm={() => setFormActive("other")} />
+        </div>
       </div>
-      <div className={`absolute ${!formActive && "hidden"}`}>
+      <div
+        className={`fixed z-40 top-0 auth-bg flex items-center justify-center w-[100%] h-[100%] ${
+          !formActive && "hidden"
+        }`}
+      >
         {formActive && (
           <AdminProductsForm
             closeForm={() => setFormActive("")}
