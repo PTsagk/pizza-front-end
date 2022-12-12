@@ -56,7 +56,7 @@ function Navbar() {
           {!user && (
             <button
               onClick={() => showLoginForm(true)}
-              className="profile-icon nav-login-button rounded-[5px] px-4 font-regular"
+              className="nav-login-button rounded-[5px] px-4 font-regular"
             >
               login
             </button>

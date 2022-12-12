@@ -36,15 +36,15 @@
   width: 60px;
   height: 60px;
   border-radius: 25%;
-  z-index: -1;
+  z-index: 1;
   transition: transform 0.3s ease-in;
 }
 
-.facebook-icon {
+.facebook-icon::before {
   background: #38529a;
 }
 
-.instagram-icon {
+.instagram-icon::before {
   background: linear-gradient(
     45deg,
     #f09433 0%,
@@ -54,11 +54,11 @@
     #bc1888 100%
   );
 }
-.twitter-icon {
+.twitter-icon::before {
   background: #1c96e9;
 }
 
-.youtube-icon {
+.youtube-icon::before {
   background: #f70000;
 }
 
@@ -66,13 +66,47 @@
   transform: scale(0);
 }
 
-.social-icons a .i {
+.social-icons a .social-icon {
   transition: transform 0.3s ease-in;
+  z-index: 1;
 }
 
-.facebook-icon:hover i {
-  background: #38529a;
-  -webkit-background-clip: text;
+.facebook-icon:hover .social-icon {
+  color: #38529a;
+  transform: scale(1.5);
+}
+
+.twitter-icon:hover .social-icon {
+  color: #1c96e9;
+  -webkit-color-clip: text;
   -webkit-text-fill-color: transparent;
+  transform: scale(1.5);
+}
+
+.instagram-icon:hover .social-icon {
+  color: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  transform: scale(1.5);
+}
+
+.instagram-icon:hover .social-icon {
+  color: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  transform: scale(1.5);
+}
+.youtube-icon:hover .social-icon {
+  color: #f70000;
   transform: scale(1.5);
 }
