@@ -12,8 +12,9 @@ import RegisterForm from "./components/RegisterForm/RegisterForm";
 import { useState } from "react";
 import UserProvider, { useUserContext } from "./Context/userContext";
 import UxProvider, { useUxContext } from "./Context/uxContext";
-import ProfileCard from "./components/ProfileCard/ProfileCard";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import Drinks from "./pages/Drinks/Drinks";
+import ProtectedRoute from "./ProtectedRoute";
 function App() {
   // const [closeShit, setCloseShit] = useState(false);
   return (
@@ -31,10 +32,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/pizzas" element={<Pizzas />}></Route>
-          <Route path="/admin/*" element={<Admin />}></Route>
+          <Route path="/drinks" element={<Drinks />}></Route>
+
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
-          {/* <Route path="/register" element={<Register />}></Route> */}
+          <Route path="/admin" element={<ProtectedRoute />}>
+            <Route path="/admin/*" element={<Admin />}></Route>
+          </Route>
           <Route path="/*" element={<MissingPage />}></Route>
         </Routes>
         <Footer></Footer>

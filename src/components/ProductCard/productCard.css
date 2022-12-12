@@ -1,5 +1,6 @@
 .border-bottom {
   border-bottom: 2px solid rgba(0, 0, 0, 0.695);
+  width: 90%;
 }
 .card-image {
   width: 100%;
@@ -11,19 +12,37 @@
   white-space: nowrap;
 }
 
+.product-card {
+  width: 240px;
+  height: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 1.25rem;
+  overflow: hidden;
+}
+.product-card:hover {
+  transition: all 0.1s ease;
+  transform: scale(1.02);
+}
+
 @keyframes infinite-slide {
   0% {
     transform: translateX(0%);
   }
-
+  50% {
+    transform: translateX(-90%);
+  }
   100% {
-    transform: translateX(-120%);
+    transform: translateX(0%);
   }
 }
 
-.pizza-card-header:hover {
+.product-card:hover .pizza-card-header {
   animation-name: infinite-slide;
-  animation-duration: 10s;
+  animation-duration: 30s;
   animation-timing-function: linear;
   animation-fill-mode: both;
   animation-iteration-count: infinite;

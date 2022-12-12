@@ -9,24 +9,7 @@ import "./pizzas.css";
 function Pizzas() {
   const { pizzas } = useProductContext();
   return (
-    <div
-      className="w-[100%] min-h-[100vh]  relative pizza-bg"
-      style={
-        {
-          // backgroundImage: "url(https://imgur.com/a/AcnWfJN)",
-        }
-      }
-    >
-      {/* <img
-        // src={MyVeggiesBG}
-        src="https://i.imgur.com/Fr0roHM.png"
-        alt=""
-        className="absolute top-0 left-0 object-cover"
-        style={{
-          objectFit: "cover",
-          zIndex: -1,
-        }}
-      /> */}
+    <div className="w-[100%] min-h-[100vh]  relative pizza-bg">
       <ul className="pt-[300px] flex flex-col items-center">
         {pizzaTypes.map((pizzaType) => (
           <li

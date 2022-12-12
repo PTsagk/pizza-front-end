@@ -20,7 +20,9 @@ interface IAddress {
 
 interface IUserContext {
   user: IUser | null;
+  isAdmin: boolean;
   isFetching: boolean;
+  isFetchingAdmin: boolean;
   currentAddress: IAddress | null;
   login: (userObj: IUser) => void;
 }
@@ -33,7 +35,9 @@ export function useUserContext() {
 
 function UserProvider({ children }: IUserProvider) {
   const [user, setUser] = React.useState<IUser | null>(null);
+  const [isAdmin, setIsAdmin] = React.useState(false);
   const [isFetching, setIsFetching] = React.useState(true);
+  const [isFetchingAdmin, setIsFetchingAdmin] = React.useState(true);
 
   const [addressArray, setAddressArray] = React.useState<IAddress[]>([]);
   const [currentAddress, setCurrentAddress] = React.useState<IAddress | null>(
@@ -44,7 +48,15 @@ function UserProvider({ children }: IUserProvider) {
   }
 
   useEffect(() => {
-    console.log(user);
+    if (user) {
+      axios
+        .get(`${import.meta.env.VITE_API}/users/admin`, {
+          withCredentials: true,
+        })
+        .then((res) => setIsAdmin(res.data.admin))
+        .catch((e) => console.log(e))
+        .finally(() => setIsFetchingAdmin(false));
+    }
   }, [user]);
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -55,11 +67,22 @@ function UserProvider({ children }: IUserProvider) {
         setUser(res.data);
       })
       .catch((e) => console.log(e))
-      .finally(() => setIsFetching(false));
+      .finally(() => {
+        setIsFetching(false);
+      });
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, isFetching, currentAddress, login }}>
+    <UserContext.Provider
+      value={{
+        user,
+        isAdmin,
+        isFetching,
+        isFetchingAdmin,
+        currentAddress,
+        login,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

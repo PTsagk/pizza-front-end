@@ -134,6 +134,7 @@ function AdminProductsForm({ closeForm }) {
           onChange={handleFileInput}
           type="file"
           id="product-price"
+          accept="image/*"
           className="text-black font-normal px-3 outline-none"
         />
       </div>
