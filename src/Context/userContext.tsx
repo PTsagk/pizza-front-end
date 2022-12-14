@@ -48,11 +48,10 @@ function UserProvider({ children }: IUserProvider) {
   }
 
   useEffect(() => {
+    axios.defaults.withCredentials = true;
     if (user) {
       axios
-        .get(`${import.meta.env.VITE_API}/users/admin`, {
-          withCredentials: true,
-        })
+        .get(`${import.meta.env.VITE_API}/users/admin`)
         .then((res) => setIsAdmin(res.data.admin))
         .catch((e) => console.log(e))
         .finally(() => setIsFetchingAdmin(false));
