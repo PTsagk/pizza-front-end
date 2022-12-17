@@ -1,6 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import axios from "axios";
-const AddressContext = createContext({});
 
 interface IAddress {
   address: string;
@@ -13,7 +18,10 @@ interface IAddress {
 
 interface IAddressContext {
   addresses: IAddress[];
+  setAddresses: React.Dispatch<SetStateAction<IAddress[]>>;
 }
+
+const AddressContext = createContext({} as IAddressContext);
 
 export function useAddressContext() {
   return useContext(AddressContext);
@@ -36,6 +44,7 @@ function AddressProvider({ children }: { children: React.ReactNode }) {
     <AddressContext.Provider
       value={{
         addresses,
+        setAddresses,
       }}
     >
       {children}

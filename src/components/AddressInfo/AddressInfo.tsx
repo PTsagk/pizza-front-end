@@ -13,11 +13,11 @@ function AddressInfo() {
   const [phoneNumberInput, setPhoneNumberInput] = useState(0);
 
   //get address info from context
-  const { address, setAddress } = useAddressContext();
+  const { addresses, setAddresses } = useAddressContext();
 
   async function refreshAddresses() {
     const { data } = await axios.get(`${import.meta.env.VITE_API}/address`);
-    setAddress(data);
+    setAddresses(data);
   }
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function AddressInfo() {
       <div className="address-info">
         {/*if the pannel to add address is closed display address*/}
         {!addPanel &&
-          address.map((add) => {
+          addresses?.map((add) => {
             return (
               <AddressComponent
                 town={add.city}
