@@ -21,14 +21,16 @@ function ProductCard({ name, img, desc }: IProductCard) {
         crossOrigin="anonymous"
         src={`${import.meta.env.VITE_API}/image/${img}`}
         alt={name}
-        className="my-4 card-image"
+        className={`my-4 card-image`}
       />
-      <p
-        className="h-[100%] w-[100%] text-start font-outfit
+      {desc && (
+        <p
+          className="h-[100%] w-[100%] text-start font-outfit
       text-[16px] font-light overflow-y-auto p-1 px-5"
-      >
-        {desc}
-      </p>
+        >
+          {desc}
+        </p>
+      )}
       <button className="button">Add to Cart</button>
     </li>
   );

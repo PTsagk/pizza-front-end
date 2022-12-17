@@ -125,3 +125,12 @@ html {
   animation-timing-function: ease;
   animation-fill-mode: both;
 }
+.products-page-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.number-input::-webkit-outer-spin-button,
+.number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

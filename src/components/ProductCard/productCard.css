@@ -1,7 +1,7 @@
 .card-image {
   width: 100%;
   object-fit: cover;
-  height: 45%;
+  height: 100%;
 }
 /* text-[24px] font-semibold font-outfit 
         w-[90%] text-center text-primary */

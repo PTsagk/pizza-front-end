@@ -99,8 +99,9 @@ function AdminProductsForm({ closeForm, formType }) {
     if (!regexTest.test(str)) setName(str);
   }
   function handlePriceChange(str: string) {
-    const regexTest = /[^0-9\.\,]/;
-    if (!regexTest.test(str)) setPrice(str);
+    const regexTest = /^-?\d+(?:[.,]\d{1,2}?)?$/;
+    // const regexTest = /[0-9]*(?=[.,][0-9]{1,2}?)?$/;
+    if (regexTest.test(str) || !str) setPrice(str);
   }
   function handleDescriptionChange(str: string) {
     setDescription(str);
@@ -172,11 +173,11 @@ function AdminProductsForm({ closeForm, formType }) {
           Price
         </label>
         <input
-          type="text"
+          type="number"
           id="product-price"
           value={price}
           onChange={(e) => handlePriceChange(e.target.value)}
-          className="admin-form-inputs"
+          className="admin-form-inputs number-input"
         />
       </div>
       <div className="admin-form-inputs-c form-shadow">

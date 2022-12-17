@@ -1,0 +1,27 @@
+.cart-notch {
+  position: absolute;
+  background-color: white;
+  right: 40px;
+  top: -15px;
+  width: 30px;
+  height: 30px;
+  transform: rotateZ(45deg);
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.cart-c {
+  border: 1px solid black;
+  border-radius: 5px;
+  animation-name: fade-in;
+  animation-timing-function: ease;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}

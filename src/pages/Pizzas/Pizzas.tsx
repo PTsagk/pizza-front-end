@@ -17,7 +17,7 @@ function Pizzas() {
           w-[75%] mb-[100px]"
           >
             <h2
-              className="bg-primary text-white text-[42px]
+              className="bg-primary text-white text-[32px]
             font-bold rounded-[10px] px-5 underline"
             >
               {pizzaType}
