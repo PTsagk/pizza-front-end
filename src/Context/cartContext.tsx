@@ -38,6 +38,7 @@ interface ICartContext {
   cartItems: Map<string, ICartItem>;
   addItemToCart: (item) => void;
   removeItemFromCart: (item) => void;
+  subtractItemFromCart: (_id: string) => void;
 }
 
 interface ICartItem {
@@ -60,7 +61,7 @@ function CartProvider({ children }: ICartProvider) {
     new Map<string, ICartItem>()
   );
 
-  function addItemToCart(item: IProduct | IPizza) {
+  function addItemToCart(item: ICartItem) {
     const tmp = new Map(cartItems);
     const { id } = item;
     if (tmp.has(id)) {
@@ -72,18 +73,41 @@ function CartProvider({ children }: ICartProvider) {
     setCartItems(tmp);
   }
 
-  function removeItemFromCart(item: IProduct | IProduct) {
+  function removeItemFromCart(_id: string) {
     const tmp = new Map(cartItems);
-    tmp.delete(item.id);
+    tmp.delete(_id);
     setCartItems(tmp);
   }
 
+  function subtractItemFromCart(_id: string) {
+    const tmp = new Map(cartItems);
+    if (tmp.has(_id)) {
+      const item = tmp.get(_id);
+      if (item) {
+        item.count -= 1;
+        if (item.count == 0) {
+          removeItemFromCart(item.id);
+          return;
+        } else {
+          tmp.set(_id, item);
+        }
+        setCartItems(tmp);
+      }
+    }
+  }
+
   useEffect(() => {
-    console.log(cartItems);
+    const arr = Array.from(cartItems.values());
+    console.log(arr);
   }, [cartItems]);
   return (
     <CartContext.Provider
-      value={{ cartItems, addItemToCart, removeItemFromCart }}
+      value={{
+        cartItems,
+        addItemToCart,
+        removeItemFromCart,
+        subtractItemFromCart,
+      }}
     >
       {children}
     </CartContext.Provider>
