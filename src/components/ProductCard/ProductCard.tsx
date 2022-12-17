@@ -1,13 +1,17 @@
 import * as React from "react";
 import { Component } from "react";
+import { useCartContext } from "../../Context/cartContext";
 import "./productCard.css";
 
 interface IProductCard {
   name: string;
   img: string;
   desc: string;
+  id: string;
+  price: number;
 }
-function ProductCard({ name, img, desc }: IProductCard) {
+function ProductCard({ name, img, desc, id, price }: IProductCard) {
+  const { addItemToCart } = useCartContext();
   return (
     <li className="product-card">
       <span
@@ -31,7 +35,12 @@ function ProductCard({ name, img, desc }: IProductCard) {
           {desc}
         </p>
       )}
-      <button className="button">Add to Cart</button>
+      <button
+        className="button"
+        onClick={() => addItemToCart({ name, img, desc, id, price })}
+      >
+        Add to Cart
+      </button>
     </li>
   );
 }

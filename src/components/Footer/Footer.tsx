@@ -33,12 +33,13 @@ function Footer() {
         </Link>
       </div>
       <div className="flex w-[100%] justify-evenly ">
-        {footerLinks.map((linkGroup) => (
-          <div className="flex flex-col justify-start">
+        {footerLinks.map((linkGroup, index) => (
+          <div key={index} className="flex flex-col justify-start">
             <h4 className="font-bold text-[30px] my-8">{linkGroup.header}</h4>
             <div className="flex flex-col">
               {linkGroup.links.map((link) => (
                 <Link
+                  key={link.split(" ")[0]}
                   to={"/"}
                   className="text-[24px] font-normal hover:text-primary"
                 >

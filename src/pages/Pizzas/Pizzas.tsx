@@ -11,8 +11,9 @@ function Pizzas() {
   return (
     <div className="w-[100%] min-h-[100vh]  relative pizza-bg">
       <ul className="pt-[300px] flex flex-col items-center">
-        {pizzaTypes.map((pizzaType) => (
+        {pizzaTypes.map((pizzaType, index) => (
           <li
+            key={index}
             className="flex flex-col items-start
           w-[75%] mb-[100px]"
           >
@@ -25,13 +26,15 @@ function Pizzas() {
             <ul className="flex">
               {pizzas
                 ?.filter((pizza) => pizza.category == pizzaType)
-                .map((pizza, index) => (
+                .map((pizza) => (
                   <ProductCard
                     key={pizza.id}
                     name={pizza.name}
                     // img={`${import.meta.env.VITE_API}/image/${pizza.image}`}
                     img={pizza.image}
                     desc={pizza.description}
+                    id={pizza.id}
+                    price={pizza.price}
                   />
                 ))}
             </ul>

@@ -15,13 +15,15 @@ import UxProvider, { useUxContext } from "./Context/uxContext";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Drinks from "./pages/Drinks/Drinks";
 import ProtectedRoute from "./ProtectedRoute";
+import CartProvider from "./Context/cartContext";
 function App() {
   // const [closeShit, setCloseShit] = useState(false);
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
       <ProductProvider>
-        <Navbar></Navbar>
-        {/* <div
+        <CartProvider>
+          <Navbar></Navbar>
+          {/* <div
           className={`fixed z-40 h-[100%] w-[100%] 
           flex justify-center items-center auth-bg ${
             !closeShit ? "" : "hidden"
@@ -29,19 +31,20 @@ function App() {
         >
           <ProfileCard close={() => setCloseShit(true)}></ProfileCard>
         </div> */}
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/pizzas" element={<Pizzas />}></Route>
-          <Route path="/drinks" element={<Drinks />}></Route>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/pizzas" element={<Pizzas />}></Route>
+            <Route path="/drinks" element={<Drinks />}></Route>
 
-          <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/profile" element={<ProfilePage />}></Route>
-          <Route path="/admin" element={<ProtectedRoute />}>
-            <Route path="/admin/*" element={<Admin />}></Route>
-          </Route>
-          <Route path="/*" element={<MissingPage />}></Route>
-        </Routes>
-        <Footer></Footer>
+            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/profile" element={<ProfilePage />}></Route>
+            <Route path="/admin" element={<ProtectedRoute />}>
+              <Route path="/admin/*" element={<Admin />}></Route>
+            </Route>
+            <Route path="/*" element={<MissingPage />}></Route>
+          </Routes>
+          <Footer></Footer>
+        </CartProvider>
       </ProductProvider>
     </div>
   );
