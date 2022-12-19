@@ -6,6 +6,7 @@ import { useAddressContext } from "../../Context/addressContext";
 import axios from "axios";
 
 function AddressComponent({
+  id,
   town,
   address,
   addressNumber,
@@ -15,9 +16,11 @@ function AddressComponent({
   setAddressInput,
   setAddressNumberInput,
   setPhoneNumberInput,
+  setIsUpdating,
+  setUpdatingAddressId,
 }) {
   //get the ability to refresh addresses
-  const { setAddress } = useAddressContext();
+  const { setAddresses } = useAddressContext();
 
   //delete address
   async function deleteAddress() {
@@ -26,22 +29,24 @@ function AddressComponent({
     //I will mergre this so that will be in one API call
     const response = await axios.delete(`${import.meta.env.VITE_API}/address`, {
       data: {
-        address: address,
-        addressNumber: addressNumber,
+        addressId: id,
       },
     });
     const { data } = await axios.get(`${import.meta.env.VITE_API}/address`);
-    setAddress(data);
+    setAddresses(data);
   }
 
   //udpate address
   function updateAddress() {
     setAddPanel(true);
+    setIsUpdating(true);
     setTownInput(town);
     setAddressInput(address);
     setAddressNumberInput(addressNumber);
     setPhoneNumberInput(phoneNumber);
+    setUpdatingAddressId(id);
   }
+
   return (
     <div className="address">
       <div className="location-info">

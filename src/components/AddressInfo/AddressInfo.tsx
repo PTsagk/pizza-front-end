@@ -7,6 +7,8 @@ import { useAddressContext } from "../../Context/addressContext";
 
 function AddressInfo() {
   const [addPanel, setAddPanel] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [updatingAddressId, setUpdatingAddressId] = useState(0);
   const [townInput, setTownInput] = useState("");
   const [addressInput, setAddressInput] = useState("");
   const [addressNumberInput, setAddressNumberInput] = useState(0);
@@ -37,6 +39,20 @@ function AddressInfo() {
       .catch((e) => console.log(e));
     setAddPanel(false);
   }
+
+  function updateAddress() {
+    if (updatingAddressId !== 0) {
+      console.log("update request");
+      axios.patch(`${import.meta.env.VITE_API}/address`, {
+        address: addressInput,
+        addressNumber: addressNumberInput,
+        city: townInput,
+        phoneNumber: phoneNumberInput,
+        addressId: updatingAddressId,
+      });
+    }
+    setAddPanel(false);
+  }
   return (
     <>
       <div className="add-address-button-container">
@@ -44,10 +60,11 @@ function AddressInfo() {
           className="add-address-button"
           onClick={() => {
             setAddPanel(!addPanel);
+            setIsUpdating(false);
             setTownInput("");
             setAddressInput("");
-            setAddressNumberInput(0);
-            setPhoneNumberInput(0);
+            setAddressNumberInput(null);
+            setPhoneNumberInput(null);
           }}
         >
           Add+
@@ -59,6 +76,7 @@ function AddressInfo() {
           addresses?.map((add) => {
             return (
               <AddressComponent
+                id={add.id}
                 town={add.city}
                 address={add.address}
                 addressNumber={add.addressNumber}
@@ -68,6 +86,8 @@ function AddressInfo() {
                 setAddressInput={setAddressInput}
                 setAddressNumberInput={setAddressNumberInput}
                 setPhoneNumberInput={setPhoneNumberInput}
+                setIsUpdating={setIsUpdating}
+                setUpdatingAddressId={setUpdatingAddressId}
               ></AddressComponent>
             );
           })}
@@ -119,7 +139,12 @@ function AddressInfo() {
                 />
               </div>
               <div className="address-buttons">
-                <button onClick={() => addAddress()}>Add</button>
+                {!isUpdating && (
+                  <button onClick={() => addAddress()}>Add</button>
+                )}
+                {isUpdating && (
+                  <button onClick={() => updateAddress()}>Save</button>
+                )}
                 <button onClick={() => setAddPanel(false)}>Cancel</button>
               </div>
             </div>
