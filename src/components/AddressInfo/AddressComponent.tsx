@@ -27,12 +27,12 @@ function AddressComponent({
     axios.defaults.withCredentials = true;
 
     //I will mergre this so that will be in one API call
-    const response = await axios.delete(`${import.meta.env.VITE_API}/address`, {
+    const { data } = await axios.delete(`${import.meta.env.VITE_API}/address`, {
       data: {
         addressId: id,
       },
     });
-    const { data } = await axios.get(`${import.meta.env.VITE_API}/address`);
+
     setAddresses(data);
   }
 

@@ -41,26 +41,41 @@ function Navbar() {
       <nav className="nav-bar z-50">
         <h1>LOGO</h1>
         <div className="nav-links">
-          <Link to={"/"}>Home</Link>
-          <Link to={"/pizzas"}>Pizzas</Link>
-          <Link to={"/drinks"}>Drinks</Link>
-          <Link to={"/desserts"}>Desserts</Link>
-          {isAdmin && <Link to={"/admin/products"}>Admin</Link>}
+          <Link to={"/"} className={"hover:text-white"}>
+            Home
+          </Link>
+          <Link to={"/pizzas"} className={"hover:text-white"}>
+            Pizzas
+          </Link>
+          <Link to={"/drinks"} className={"hover:text-white"}>
+            Drinks
+          </Link>
+          <Link to={"/desserts"} className={"hover:text-white"}>
+            Desserts
+          </Link>
+          {isAdmin && (
+            <Link to={"/admin/products"} className={"hover:text-white"}>
+              Admin
+            </Link>
+          )}
         </div>
         <div className="cart-and-profile">
           <div className="relative">
             <Link
               to={"/cart"}
               onMouseEnter={() => setToggleCart((prev) => !prev)}
-              className="cart"
+              className="cart hover:text-white"
             >
               <FaShoppingCart></FaShoppingCart>
             </Link>
             <Cart toggle={toggleCart} />
           </div>
           {user && (
-            <Link to={"/profile"} className="profile-icon">
-              <RiAccountCircleFill></RiAccountCircleFill>
+            <Link
+              to={"/profile"}
+              className="profile-icon hover:text-black hover:bg-white"
+            >
+              {user.fullname ? user.fullname.charAt(0).toUpperCase() : "A"}
             </Link>
           )}
           {!user && (

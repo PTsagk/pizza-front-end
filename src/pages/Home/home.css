@@ -46,24 +46,32 @@
   width: 30%;
   overflow: hidden;
 }
-
+/* 
 .paras {
   display: flex;
-  /* justify-content: center; */
-}
+} */
 
-.paras p {
+/* .paras p {
   width: 100%;
-}
+} */
 .red-body {
   background: linear-gradient(#ec1a37, black);
 }
 
-.pizza-carousel {
+.carousel {
   position: absolute;
+  z-index: 100;
+}
+
+.info-paras {
+  width: 100%;
+}
+
+.pizza-carousel {
+  /* position: absolute;
   display: flex;
   z-index: 10;
-  background-color: transparent;
+  background-color: transparent; */
   /* -webkit-transform: translate3d(0, 0, 0); */
 }
 .carousel-transition {

@@ -56,11 +56,16 @@
 .profile-icon {
   margin-left: 2rem;
   font-size: 2rem;
+  background-color: black;
+  width: 50px;
+  text-align: center;
+  height: 50px;
+  border-radius: 100%;
 }
 
 .profile-icon :hover {
   transition-duration: 0.3s;
-  color: #ec1a37;
+  color: #ec1a37 !important;
   cursor: pointer;
 }
 

@@ -1,6 +1,6 @@
 import "./home.css";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { homeOffers, pizzaOffers } from "../../statics/texts";
 import brocolliPizza from "../../assets/brocolliPizza.png";
 import cumpizza from "../../assets/cumpizza.png";
@@ -8,8 +8,12 @@ import hampizza from "../../assets/hampizza.png";
 import pizza3 from "../../assets/pizza3.png";
 import pepperoni from "../../assets/pepperoni.png";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import Carousel from "react-bootstrap/Carousel";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Home() {
+  const pizzaRef = useRef(null);
+  const infoRef = useRef(null);
   const carouselStep = 100 / (pizzaOffers.length + 2);
   const containerWidth = (pizzaOffers.length + 2) * 100;
   const temp1 = (pizzaOffers.length - 1) / 2;
@@ -23,46 +27,18 @@ function Home() {
 
   function moveRight() {
     if (!canClick) return;
-    if (position > -start) {
-      let pos = position;
-      let info = infoPosition;
-      info -= carouselStep;
-      pos -= carouselStep;
-      setInfoPosition(info);
-      setPosition(pos);
-    } else {
-      setPosition(start + carouselStep);
-      setInfoPosition(start + carouselStep);
-      setToStart(true);
-      setDebounce(true);
-    }
+    pizzaRef.current.next();
+    infoRef.current.next();
+
     setCanClick(false);
   }
   function moveLeft() {
     if (!canClick) return;
-    if (position < start) {
-      let pos = position;
-      let info = infoPosition;
-      pos += carouselStep;
-      info += carouselStep;
-      setPosition(pos);
-      setInfoPosition(info);
-    } else {
-      setPosition(-start - carouselStep);
-      setInfoPosition(-start - carouselStep);
-      setDebounce(true);
-    }
+    pizzaRef.current.prev();
+    infoRef.current.prev();
+
     setCanClick(false);
   }
-
-  useEffect(() => {
-    if (debounce) {
-      setPosition(toStart ? start : -start);
-      setInfoPosition(toStart ? start : -start);
-      setToStart(false);
-      setDebounce(false);
-    }
-  }, [debounce]);
 
   useEffect(() => {
     if (!canClick) {
@@ -76,25 +52,27 @@ function Home() {
     <div className="home-page">
       <div className="body home-bg">
         <div className="pizza-info">
-          <button className="arrow left-arrow" onClick={() => moveLeft()}>
+          <button className="arrow left-arrow " onClick={() => moveLeft()}>
             <MdArrowBackIosNew></MdArrowBackIosNew>
           </button>
           <div className="info">
             <h2>Pizza Special</h2>
-            <div
-              className={`paras ${!debounce && "carousel-transition"}`}
-              style={{
-                transform: `translateX(${infoPosition}%)`,
-                width: containerWidth + "%",
-              }}
+            <Carousel
+              ref={infoRef}
+              interval={null}
+              controls={false}
+              indicators={false}
+              className={"info-paras"}
             >
-              <p>{pizzaOffers[pizzaOffers.length - 1].desc}</p>
-              {/* all descriptions */}
               {pizzaOffers.map((offer) => {
-                return <p>{offer.desc}</p>;
+                return (
+                  <Carousel.Item>
+                    <p>{offer.desc}</p>
+                  </Carousel.Item>
+                );
               })}
-              <p>{pizzaOffers[0].desc}</p>;
-            </div>
+            </Carousel>
+
             <button className="add-to-cart">Add to cart</button>
           </div>
           <button className="arrow right-arrow" onClick={() => moveRight()}>
@@ -102,37 +80,30 @@ function Home() {
           </button>
         </div>
       </div>
-
-      <div
-        className={`pizza-carousel ${!debounce && "carousel-transition"}`}
-        style={{
-          transform: `translateX(${position}%)`,
-          width: containerWidth + "%",
-        }}
+      <Carousel
+        className="absolute"
+        interval={null}
+        ref={pizzaRef}
+        controls={false}
+        indicators={false}
       >
-        {/* all images */}
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={pepperoni} alt="pizza" className="w-[80%]" />
-        </div>
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={brocolliPizza} alt="pizza" className="w-[80%]" />
-        </div>
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={hampizza} alt="pizza" className="w-[80%]" />
-        </div>
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={pizza3} alt="pizza" className="w-[80%]" />
-        </div>
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={cumpizza} alt="pizza" className="w-[80%]" />
-        </div>
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={pepperoni} alt="pizza" className="w-[80%]" />
-        </div>
-        <div className="pizza-1-container w-[100vw] flex justify-center">
-          <img src={brocolliPizza} alt="pizza" className="w-[80%]" />
-        </div>
-      </div>
+        <Carousel.Item>
+          <div className="pizza-1-container w-[100vw] flex justify-center">
+            <img src={brocolliPizza} alt="pizza" className="w-[80%]" />
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div className="pizza-1-container w-[100vw] flex justify-center">
+            <img src={hampizza} alt="pizza" className="w-[80%]" />
+          </div>
+        </Carousel.Item>
+        <Carousel.Item>
+          <div className="pizza-1-container w-[100vw] flex justify-center">
+            <img src={pizza3} alt="pizza" className="w-[80%]" />
+          </div>
+        </Carousel.Item>
+      </Carousel>
+
       <div className="body red-body relative">
         <div
           className="w-[100%] h-[50%] absolute top-[50%]

@@ -17,15 +17,6 @@ function AddressInfo() {
   //get address info from context
   const { addresses, setAddresses } = useAddressContext();
 
-  async function refreshAddresses() {
-    const { data } = await axios.get(`${import.meta.env.VITE_API}/address`);
-    setAddresses(data);
-  }
-
-  useEffect(() => {
-    refreshAddresses();
-  }, [addPanel]);
-
   function addAddress() {
     axios.defaults.withCredentials = true;
     axios
@@ -35,7 +26,7 @@ function AddressInfo() {
         addressNumber: addressNumberInput,
         phoneNumber: phoneNumberInput,
       })
-      .then((resp) => console.log(resp))
+      .then((resp) => setAddresses(resp.data))
       .catch((e) => console.log(e));
     setAddPanel(false);
   }
@@ -43,13 +34,15 @@ function AddressInfo() {
   function updateAddress() {
     if (updatingAddressId !== 0) {
       console.log("update request");
-      axios.patch(`${import.meta.env.VITE_API}/address`, {
-        address: addressInput,
-        addressNumber: addressNumberInput,
-        city: townInput,
-        phoneNumber: phoneNumberInput,
-        addressId: updatingAddressId,
-      });
+      axios
+        .patch(`${import.meta.env.VITE_API}/address`, {
+          address: addressInput,
+          addressNumber: addressNumberInput,
+          city: townInput,
+          phoneNumber: phoneNumberInput,
+          addressId: updatingAddressId,
+        })
+        .then((resp) => setAddresses(resp.data));
     }
     setAddPanel(false);
   }
