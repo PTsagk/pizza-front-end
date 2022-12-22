@@ -17,12 +17,12 @@ function Pizzas() {
             className="flex flex-col items-start
           w-[75%] mb-[100px]"
           >
-            <h2
-              className="bg-primary text-white text-[32px]
-            font-bold rounded-[10px] px-5 underline"
+            <h3
+              className="category-header text-white text-[32px]
+            font-bold rounded-[10px] px-[25px] underline"
             >
               {pizzaType}
-            </h2>
+            </h3>
             <ul className="flex">
               {pizzas
                 ?.filter((pizza) => pizza.category == pizzaType)

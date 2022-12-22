@@ -17,8 +17,8 @@ function Cart({ toggle = false }) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (destroy) {
-        // setActive(false);
-        // setDestroy(false);
+        setActive(false);
+        setDestroy(false);
       }
     }, 2000);
     return () => clearTimeout(timeout);
@@ -28,7 +28,7 @@ function Cart({ toggle = false }) {
     if (!canClick) {
       setTimeout(() => {
         setCanClick(true);
-      }, 1000);
+      }, 800);
     }
   }, [canClick]);
 
@@ -61,7 +61,7 @@ function Cart({ toggle = false }) {
       onMouseLeave={() => destroyCart()}
       id="cart"
       className={`w-[450px] px-[10px] py-[20px] bg-white absolute 
-      top-[60px] -right-[40px] cart-c ${false && "hidden"}`}
+      top-[60px] -right-[40px] cart-c ${!active && "hidden"}`}
     >
       <div className="cart-notch"></div>
       <ul className="mt-3">
@@ -71,11 +71,11 @@ function Cart({ toggle = false }) {
             className="flex flex-col justify-between p-3 font-outfit cart-item-c"
           >
             <div className="flex justify-between items-center">
-              <div className="text-primary mb-3 text-[22px] font-semibold">
+              <div className="text-[#ec1a37] mb-3 text-[22px] font-semibold">
                 {cartItem.name}
               </div>
               <button
-                className="text-primary mb-3 text-[28px]"
+                className="text-[#ec1a37] mb-3 text-[28px]"
                 onClick={() =>
                   handleCartItemClick(() => removeItemFromCart(cartItem.id))
                 }
@@ -86,7 +86,7 @@ function Cart({ toggle = false }) {
             <div className="flex justify-between items-center">
               <div className="flex text-black items-start text-[22px]">
                 <button
-                  className="text-primary cart-add-btn"
+                  className="text-[#ec1a37] cart-add-btn"
                   onClick={() =>
                     handleCartItemClick(() => subtractItemFromCart(cartItem.id))
                   }
@@ -95,7 +95,7 @@ function Cart({ toggle = false }) {
                 </button>
                 <div className="">{cartItem.count}</div>
                 <button
-                  className="text-primary cart-add-btn"
+                  className="text-[#ec1a37] cart-add-btn"
                   onClick={() =>
                     handleCartItemClick(() => addItemToCart(cartItem))
                   }

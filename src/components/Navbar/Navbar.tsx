@@ -75,7 +75,7 @@ function Navbar() {
               to={"/profile"}
               className="profile-icon hover:text-black hover:bg-white"
             >
-              {user.fullname ? user.fullname.charAt(0).toUpperCase() : "A"}
+              {user.fullname.charAt(0).toUpperCase()}
             </Link>
           )}
           {!user && (

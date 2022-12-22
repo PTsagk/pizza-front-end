@@ -11,8 +11,8 @@ function AddressInfo() {
   const [updatingAddressId, setUpdatingAddressId] = useState(0);
   const [townInput, setTownInput] = useState("");
   const [addressInput, setAddressInput] = useState("");
-  const [addressNumberInput, setAddressNumberInput] = useState(0);
-  const [phoneNumberInput, setPhoneNumberInput] = useState(0);
+  const [addressNumberInput, setAddressNumberInput] = useState("");
+  const [phoneNumberInput, setPhoneNumberInput] = useState("");
 
   //get address info from context
   const { addresses, setAddresses } = useAddressContext();
@@ -56,8 +56,8 @@ function AddressInfo() {
             setIsUpdating(false);
             setTownInput("");
             setAddressInput("");
-            setAddressNumberInput(null);
-            setPhoneNumberInput(null);
+            setAddressNumberInput("");
+            setPhoneNumberInput("");
           }}
         >
           Add+
@@ -112,7 +112,7 @@ function AddressInfo() {
                 <input
                   onChange={(e) => {
                     const number = e.target.value;
-                    setAddressNumberInput(Number(number));
+                    setAddressNumberInput(number);
                   }}
                   type="number"
                   id="StreetNumber"
@@ -124,7 +124,7 @@ function AddressInfo() {
                 <input
                   onChange={(e) => {
                     const number = e.target.value;
-                    setPhoneNumberInput(Number(number));
+                    setPhoneNumberInput(number);
                   }}
                   type="number"
                   id="phoneNumber"

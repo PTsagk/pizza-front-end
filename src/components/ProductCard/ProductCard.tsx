@@ -30,7 +30,7 @@ function ProductCard({ name, img, desc, id, price }: IProductCard) {
       {desc && (
         <p
           className="h-[100%] w-[100%] text-start font-outfit
-      text-[16px] font-light overflow-y-auto p-1 px-5"
+      text-[16px] font-light overflow-y-auto px-4"
         >
           {desc}
         </p>

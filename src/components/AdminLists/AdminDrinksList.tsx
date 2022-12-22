@@ -22,15 +22,12 @@ function AdminDrinksList({ activateForm }) {
   }
   return (
     <div className={`${styles.flexCol}`}>
-      <div
-        className="text-center text-[42px] text-white 
-            bg-primary w-[100%] py-7 font-bold"
-      >
+      <div className="admin-list-heading">
         <h3>Drinks</h3>
       </div>
       <div className="w-[100%] flex justify-end items-center py-5">
         <button
-          className="text-white bg-primary text-[22px]
+          className="text-white bg-[#ec1a37] text-[22px]
           font-bold px-5 py-2 rounded-[10px]"
           onClick={() => activateForm()}
         >
@@ -54,8 +51,7 @@ function AdminDrinksList({ activateForm }) {
               <div>{FormatMoney(drink.price.toString())}</div>
             </div>
             <button
-              className="text-primary bg-white font-bold
-                px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"
+              className="admin-list-button"
               onClick={() => handleDelete(drink.id, drink.image)}
             >
               Delete

@@ -22,15 +22,12 @@ function AdminPizzaList({ activateForm }) {
   }
   return (
     <div className={`${styles.flexCol}`}>
-      <div
-        className="text-center text-[42px] text-white 
-          bg-primary w-[100%] py-7 font-bold"
-      >
+      <div className="admin-list-heading">
         <h3>Pizzas</h3>
       </div>
       <div className="w-[100%] flex justify-end items-center py-5">
         <button
-          className="text-white bg-primary text-[22px]
+          className="text-white bg-[#ec1a37] text-[22px]
         font-bold px-5 py-2 rounded-[10px]"
           onClick={() => activateForm()}
         >
@@ -44,7 +41,7 @@ function AdminPizzaList({ activateForm }) {
               crossOrigin="anonymous"
               src={`${import.meta.env.VITE_API}/image/${pizza.image}`}
               alt={pizza.name}
-              className="h-[100%] object-fit bg-primary"
+              className="h-[100%] object-fit"
             />
             <div className="flex flex-col justify-evenly h-[100%] ml-3">
               <div className="text-[18px] font-semibold">{pizza.name}</div>
@@ -55,8 +52,7 @@ function AdminPizzaList({ activateForm }) {
               <div>{FormatMoney(pizza.price.toString())}</div>
             </div>
             <button
-              className="text-primary bg-white font-bold
-              px-7 py-3 rounded-[10px] ml-7 hover:bg-black text-center text-[24px]"
+              className="admin-list-button"
               onClick={() => handleDelete(pizza.id, pizza.image)}
             >
               Delete
