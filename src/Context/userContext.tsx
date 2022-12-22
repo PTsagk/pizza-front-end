@@ -62,8 +62,8 @@ function UserProvider({ children }: IUserProvider) {
     axios
       .get(`${import.meta.env.VITE_API}/users/token`)
       .then((res) => {
-        console.log(res.data);
-        setUser(res.data);
+        console.log(res.data, "user!");
+        setUser(res.data.user);
       })
       .catch((e) => console.log(e))
       .finally(() => {

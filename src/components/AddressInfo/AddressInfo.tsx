@@ -23,8 +23,8 @@ function AddressInfo() {
       .post(`${import.meta.env.VITE_API}/address`, {
         city: townInput,
         address: addressInput,
-        addressNumber: addressNumberInput,
-        phoneNumber: phoneNumberInput,
+        addressNumber: addressNumberInput.toString(),
+        phoneNumber: phoneNumberInput.toString(),
       })
       .then((resp) => setAddresses(resp.data))
       .catch((e) => console.log(e));
@@ -37,9 +37,9 @@ function AddressInfo() {
       axios
         .patch(`${import.meta.env.VITE_API}/address`, {
           address: addressInput,
-          addressNumber: addressNumberInput,
+          addressNumber: addressNumberInput.toString(),
           city: townInput,
-          phoneNumber: phoneNumberInput,
+          phoneNumber: phoneNumberInput.toString(),
           addressId: updatingAddressId,
         })
         .then((resp) => setAddresses(resp.data));
@@ -112,7 +112,7 @@ function AddressInfo() {
                 <input
                   onChange={(e) => {
                     const number = e.target.value;
-                    setAddressNumberInput(number);
+                    setAddressNumberInput(number.toString());
                   }}
                   type="number"
                   id="StreetNumber"
@@ -124,7 +124,7 @@ function AddressInfo() {
                 <input
                   onChange={(e) => {
                     const number = e.target.value;
-                    setPhoneNumberInput(number);
+                    setPhoneNumberInput(number.toString());
                   }}
                   type="number"
                   id="phoneNumber"

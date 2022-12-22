@@ -62,7 +62,7 @@ function AddressComponent({
         <FaCity className="city-icon"></FaCity>
         <h3>{town}</h3>
       </div>
-      <div>
+      <div className="address-buttons-c">
         <button onClick={() => updateAddress()}>Update</button>
         <button onClick={() => deleteAddress()}>Delete</button>
       </div>

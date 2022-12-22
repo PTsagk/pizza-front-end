@@ -32,7 +32,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 2rem;
   border: 2px solid #ec1a37;
   border-radius: 1rem;
@@ -48,6 +48,7 @@
 
 .location-info {
   display: flex;
+  width: 20%;
 }
 
 .location-info span {
@@ -147,4 +148,11 @@
 .address-buttons button:hover {
   background-color: white;
   color: black;
+}
+
+.city-info {
+  width: 25%;
+}
+.contact-info {
+  width: 25%;
 }
