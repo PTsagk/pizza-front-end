@@ -79,6 +79,19 @@
   color: var(--primary);
 }
 
+.auth-form {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+/* z-50 h-[100%] w-[100%]
+      flex justify-center items-center */
+
 /* @media screen and (width <= 950px) {
   .cart-and-profile {
     width: max-content;

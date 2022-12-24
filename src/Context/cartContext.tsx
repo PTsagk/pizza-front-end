@@ -45,7 +45,7 @@ interface ICartItem {
   id: string;
   name: string;
   price: number;
-  image: string;
+  img: string;
   description: string;
   count: number;
 }

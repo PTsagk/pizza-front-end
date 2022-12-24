@@ -1,0 +1,21 @@
+.cart-page-count-button {
+  border: 2px solid #fff;
+  width: 24px;
+  height: 24px;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+
+.cart-page-count {
+  background-color: #fff;
+  color: var(--primary);
+  font-weight: bold;
+  width: 41px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 11px;
+}

@@ -6,10 +6,10 @@ import Footer from "./components/Footer/Footer";
 import Pizzas from "./pages/Pizzas/Pizzas";
 import MissingPage from "./pages/MissingPage/MissingPage";
 import Admin from "./pages/Admin/Admin";
-import Cart from "./pages/CartPage/Cart";
+import CartPage from "./pages/CartPage/CartPage";
 import ProductProvider from "./Context/productsContext";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserProvider, { useUserContext } from "./Context/userContext";
 import UxProvider, { useUxContext } from "./Context/uxContext";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -18,6 +18,13 @@ import ProtectedRoute from "./ProtectedRoute";
 import CartProvider from "./Context/cartContext";
 function App() {
   // const [closeShit, setCloseShit] = useState(false);
+  function popstate(e) {
+    console.log(e);
+  }
+  useEffect(() => {
+    window.addEventListener("popstate", (e) => popstate(e));
+    return () => window.removeEventListener("popstate", (e) => popstate(e));
+  }, []);
   return (
     <div className="overflow-x-hidden w-[100vw] h-[100vh] relative">
       <ProductProvider>
@@ -36,7 +43,7 @@ function App() {
             <Route path="/pizzas" element={<Pizzas />}></Route>
             <Route path="/drinks" element={<Drinks />}></Route>
 
-            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/cart" element={<CartPage />}></Route>
             <Route path="/profile" element={<ProfilePage />}></Route>
             <Route path="/admin" element={<ProtectedRoute />}>
               <Route path="/admin/*" element={<Admin />}></Route>

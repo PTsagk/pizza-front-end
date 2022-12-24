@@ -23,18 +23,16 @@ function Navbar() {
   return (
     <>
       <div
-        className={`fixed z-40 h-[100%] w-[100%]
-      flex justify-center items-center auth-bg ${
-        !user && isActiveRegisterForm ? "" : "hidden"
-      }`}
+        className={`auth-form auth-bg ${
+          !user && isActiveRegisterForm ? "" : "hidden"
+        }`}
       >
         <RegisterForm />
       </div>
       <div
-        className={`fixed z-40 h-[100%] w-[100%]
-      flex justify-center items-center auth-bg ${
-        !user && isActiveLogin ? "" : "hidden"
-      }`}
+        className={`auth-form auth-bg ${
+          !user && isActiveLogin ? "" : "hidden"
+        }`}
       >
         <LoginForm />
       </div>

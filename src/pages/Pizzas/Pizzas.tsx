@@ -32,7 +32,7 @@ function Pizzas() {
                     name={pizza.name}
                     // img={`${import.meta.env.VITE_API}/image/${pizza.image}`}
                     img={pizza.image}
-                    desc={pizza.description}
+                    description={pizza.description}
                     id={pizza.id}
                     price={pizza.price}
                   />

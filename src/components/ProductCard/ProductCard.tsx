@@ -6,11 +6,11 @@ import "./productCard.css";
 interface IProductCard {
   name: string;
   img: string;
-  desc: string;
+  description: string;
   id: string;
   price: number;
 }
-function ProductCard({ name, img, desc, id, price }: IProductCard) {
+function ProductCard({ name, img, description, id, price }: IProductCard) {
   const { addItemToCart } = useCartContext();
   return (
     <li className="product-card">
@@ -27,17 +27,17 @@ function ProductCard({ name, img, desc, id, price }: IProductCard) {
         alt={name}
         className={`my-4 card-image`}
       />
-      {desc && (
+      {description && (
         <p
           className="h-[100%] w-[100%] text-start font-outfit
       text-[16px] font-light overflow-y-auto px-4"
         >
-          {desc}
+          {description}
         </p>
       )}
       <button
         className="button"
-        onClick={() => addItemToCart({ name, img, desc, id, price })}
+        onClick={() => addItemToCart({ name, img, description, id, price })}
       >
         Add to Cart
       </button>

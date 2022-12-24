@@ -12,9 +12,11 @@ function Drinks() {
             <ProductCard
               key={drink.id}
               name={drink.name}
+              id={drink.id}
+              price={drink.price}
               // img={`${import.meta.env.VITE_API}/image/${drink.image}`}
               img={drink.image}
-              desc={drink.description}
+              description={drink.description}
             />
           ))}
         </ul>

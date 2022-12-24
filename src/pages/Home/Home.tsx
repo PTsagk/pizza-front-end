@@ -67,7 +67,7 @@ function Home() {
               {pizzaOffers.map((offer) => {
                 return (
                   <Carousel.Item>
-                    <p>{offer.desc}</p>
+                    <p className="w-[100%]">{offer.desc}</p>
                   </Carousel.Item>
                 );
               })}
