@@ -4,7 +4,33 @@ import { MdDeleteForever } from "react-icons/md";
 import { FormatMoney } from "../../utilities/Formatters";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import "./CartPageItem.css";
-function CartPageItem({ item }) {
+import { useCartContext } from "../../Context/cartContext";
+
+interface ICartItem {
+  id: string;
+  name: string;
+  price: number;
+  img: string;
+  description: string;
+  count: number;
+}
+
+interface ICartPageItemProps {
+  item: ICartItem;
+}
+
+function CartPageItem({ item }: ICartPageItemProps) {
+  const [canClick, setCanClick] = React.useState(true);
+  const { removeItemFromCart, addItemToCart, subtractItemFromCart } =
+    useCartContext();
+
+  React.useEffect(() => {
+    if (!canClick) {
+      setTimeout(() => {
+        setCanClick(true);
+      }, 800);
+    }
+  }, [canClick]);
   return (
     <li className="">
       <img
@@ -15,7 +41,13 @@ function CartPageItem({ item }) {
       <div className="flex flex-col w-[100%] h-[100%] justify-between p-[5px]">
         <div className="flex items-center justify-between w-[100%]">
           <div className="font-semibold text-[18px]">{item.name}</div>
-          <button className="text-[26px]">
+          <button
+            className="text-[26px]"
+            onClick={() => {
+              if (!canClick) return;
+              removeItemFromCart(item);
+            }}
+          >
             <MdDeleteForever />
           </button>
         </div>
@@ -27,11 +59,23 @@ function CartPageItem({ item }) {
           </p>
           <div className="flex w-[175px] justify-between">
             <div className="flex">
-              <button className="cart-page-count-button">
+              <button
+                className="cart-page-count-button"
+                onClick={() => {
+                  if (!canClick) return;
+                  subtractItemFromCart(item.id);
+                }}
+              >
                 <BiMinus />
               </button>
               <div className="cart-page-count ml-[5px]">{item.count}</div>
-              <button className="cart-page-count-button ml-[5px]">
+              <button
+                className="cart-page-count-button ml-[5px]"
+                onClick={() => {
+                  if (!canClick) return;
+                  addItemToCart(item);
+                }}
+              >
                 <BiPlus />
               </button>
             </div>
