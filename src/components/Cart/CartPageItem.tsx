@@ -31,6 +31,14 @@ function CartPageItem({ item }: ICartPageItemProps) {
       }, 800);
     }
   }, [canClick]);
+
+  function handleCountModify(fn) {
+    if (!canClick) return;
+
+    fn();
+    setCanClick(false);
+  }
+
   return (
     <li className="">
       <img
@@ -44,8 +52,7 @@ function CartPageItem({ item }: ICartPageItemProps) {
           <button
             className="text-[26px]"
             onClick={() => {
-              if (!canClick) return;
-              removeItemFromCart(item);
+              handleCountModify(() => removeItemFromCart(item.id));
             }}
           >
             <MdDeleteForever />
@@ -62,8 +69,7 @@ function CartPageItem({ item }: ICartPageItemProps) {
               <button
                 className="cart-page-count-button"
                 onClick={() => {
-                  if (!canClick) return;
-                  subtractItemFromCart(item.id);
+                  handleCountModify(() => subtractItemFromCart(item.id));
                 }}
               >
                 <BiMinus />
@@ -72,14 +78,13 @@ function CartPageItem({ item }: ICartPageItemProps) {
               <button
                 className="cart-page-count-button ml-[5px]"
                 onClick={() => {
-                  if (!canClick) return;
-                  addItemToCart(item);
+                  handleCountModify(() => addItemToCart(item));
                 }}
               >
                 <BiPlus />
               </button>
             </div>
-            <div>{FormatMoney(item.price)}</div>
+            <div>{FormatMoney(item.price * item.count)}</div>
           </div>
         </div>
       </div>

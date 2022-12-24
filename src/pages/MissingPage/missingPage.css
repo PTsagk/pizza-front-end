@@ -10,8 +10,21 @@
 .back-btn {
   z-index: 200;
   transition: all 0.3s ease;
+  position: absolute;
+  font-size: 2em;
+  color: var(--primary);
+  bottom: 15%;
+  text-align: center;
+  padding: 12px 10px;
+  background-color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
 }
 .back-btn:hover {
   background: #000;
   color: #fff;
 }
+
+/* text-primary text-[2em] absolute
+      bottom-10 text-center p-3 px-10 bg-white
+      font-semibold rounded-[10px] font-outfit */

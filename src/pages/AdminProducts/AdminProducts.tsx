@@ -16,7 +16,7 @@ function AdminProducts() {
       <div className="mt-[10%] bg-white rounded-[5px] overflow-hidden">
         <Link
           to={"./products"}
-          className="button bg-primary text-white px-4 text-[32px]"
+          className="button bg-[#ec1a37] text-white px-4 text-[32px]"
         >
           Products
         </Link>

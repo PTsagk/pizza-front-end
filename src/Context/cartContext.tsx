@@ -37,7 +37,7 @@ interface IProduct {
 interface ICartContext {
   cartItems: Map<string, ICartItem>;
   addItemToCart: (item) => void;
-  removeItemFromCart: (item) => void;
+  removeItemFromCart: (_id: string) => void;
   subtractItemFromCart: (_id: string) => void;
 }
 

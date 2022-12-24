@@ -28,9 +28,8 @@ function AdminProductsForm({ closeForm, formType }) {
   const [errors, setErrors] = React.useState({
     name: "",
     price: "",
-    description: "",
     ingredients: "",
-    image: null,
+    image: "",
     show: false,
   });
 
@@ -45,10 +44,37 @@ function AdminProductsForm({ closeForm, formType }) {
     else submitOthersProduct();
   }
 
-  function submitPizzaProduct() {
-    if (!name) {
-      return;
+  function verifyInputs(name, price, image, ingredients) {
+    const tmpErrors = {
+      name: "",
+      price: "",
+      ingredients: "",
+      image: "",
+      show: false,
+    };
+    if (!image) {
+      tmpErrors.image = "Please provide an image";
+      tmpErrors.show = true;
     }
+    if (ingredients && Array.from(ingredients.values()).length < 1) {
+      tmpErrors.ingredients = "Please provide atleast 1 ingredient";
+      tmpErrors.show = true;
+    }
+    if (!name) {
+      tmpErrors.name = "Please provide a name";
+      tmpErrors.show = true;
+    }
+    if (!price) {
+      tmpErrors.price = "Please provide a price";
+      tmpErrors.show = true;
+    }
+    setErrors(tmpErrors);
+    return tmpErrors.show;
+  }
+
+  function submitPizzaProduct() {
+    if (verifyInputs(name, price, image, ingredientsMap)) return;
+
     let formData = new FormData();
     if (!image) return;
     formData.append("file", image);
@@ -62,14 +88,12 @@ function AdminProductsForm({ closeForm, formType }) {
 
     axios
       .post(`${import.meta.env.VITE_API}/pizza`, formData)
-      .then((res) => console.log(res.data))
+      .then((res) => window.location.reload())
       .catch((e) => console.log(e));
   }
 
   function submitOthersProduct() {
-    if (!name) {
-      return;
-    }
+    if (verifyInputs(name, price, image, null)) return;
     let formData = new FormData();
     if (!image) return;
     formData.append("file", image);
@@ -80,7 +104,7 @@ function AdminProductsForm({ closeForm, formType }) {
 
     axios
       .post(`${import.meta.env.VITE_API}/product`, formData)
-      .then((res) => console.log(res.data))
+      .then((res) => window.location.reload())
       .catch((e) => console.log(e));
   }
 
@@ -95,7 +119,7 @@ function AdminProductsForm({ closeForm, formType }) {
   }
 
   function handleNameChange(str: string) {
-    const regexTest = /[^a-zA-Z0-9\s]/;
+    const regexTest = /[^a-zA-Z\s]/;
     if (!regexTest.test(str)) setName(str);
   }
   function handlePriceChange(str: string) {
@@ -116,17 +140,22 @@ function AdminProductsForm({ closeForm, formType }) {
   }
   return (
     <form className="bg-white p-5 font-outfit font-bold w-[600px]">
-      <div className="admin-form-inputs-c form-shadow">
-        <label htmlFor="product-name" className="admin-form-label">
-          Name
-        </label>
-        <input
-          type="text"
-          id="product-name"
-          value={name}
-          onChange={(e) => handleNameChange(e.target.value)}
-          className="admin-form-inputs"
-        />
+      <div className="flex flex-col mb-[20px]">
+        <div className="admin-form-inputs-c form-shadow">
+          <label htmlFor="product-name" className="admin-form-label">
+            Name
+          </label>
+          <input
+            type="text"
+            id="product-name"
+            value={name}
+            onChange={(e) => handleNameChange(e.target.value)}
+            className="admin-form-inputs"
+          />
+        </div>
+        {errors.name && (
+          <div className="error-input-message form-shadow">{errors.name}</div>
+        )}
       </div>
       {formType == "pizza" && (
         <div className="flex form-shadow rounded-[2px] mb-7">
@@ -168,19 +197,24 @@ function AdminProductsForm({ closeForm, formType }) {
           </MyDropdown>
         </div>
       )}
-      <div className="admin-form-inputs-c form-shadow">
-        <label htmlFor="product-price" className="admin-form-label">
-          Price
-        </label>
-        <input
-          type="number"
-          id="product-price"
-          value={price}
-          onChange={(e) => handlePriceChange(e.target.value)}
-          className="admin-form-inputs number-input"
-        />
+      <div className="flex flex-col mb-[20px]">
+        <div className="admin-form-inputs-c form-shadow">
+          <label htmlFor="product-price" className="admin-form-label">
+            Price
+          </label>
+          <input
+            type="number"
+            id="product-price"
+            value={price}
+            onChange={(e) => handlePriceChange(e.target.value)}
+            className="admin-form-inputs number-input"
+          />
+        </div>
+        {errors.price && (
+          <div className="error-input-message form-shadow">{errors.price}</div>
+        )}
       </div>
-      <div className="admin-form-inputs-c form-shadow">
+      <div className="admin-form-inputs-c form-shadow mb-[20px]">
         <label htmlFor="product-description" className="admin-form-label">
           Description
         </label>
@@ -195,7 +229,7 @@ function AdminProductsForm({ closeForm, formType }) {
         ></textarea>
       </div>
       {formType == "pizza" && (
-        <div className="admin-form-inputs-c form-shadow">
+        <div className="admin-form-inputs-c form-shadow mb-[20px]">
           <label htmlFor="product-price" className="admin-form-label">
             Ingredients
           </label>
@@ -224,25 +258,30 @@ function AdminProductsForm({ closeForm, formType }) {
           </div>
         </div>
       )}
-      <div className="form-shadow overflow-hidden w-[100%] mb-5 flex">
-        <label
-          htmlFor="product-image"
-          className="file-input-label flex items-center justify-center"
-        >
-          <div className={`${image ? "noscale" : "fullscale"}`}>
-            <MdAttachFile />
-          </div>
-          <div className={`${image ? "fullscale" : "noscale"}`}>
-            <MdOutlineFileDownloadDone />
-          </div>
-        </label>
-        <input
-          onChange={(e) => handleFileInput(e)}
-          type="file"
-          id="product-image"
-          accept="image/*"
-          className="admin-form-file-input"
-        />
+      <div className="flex flex-col mb-[20px]">
+        <div className="form-shadow overflow-hidden w-[100%] flex">
+          <label
+            htmlFor="product-image"
+            className="file-input-label flex items-center justify-center"
+          >
+            <div className={`${image ? "noscale" : "fullscale"}`}>
+              <MdAttachFile />
+            </div>
+            <div className={`${image ? "fullscale" : "noscale"}`}>
+              <MdOutlineFileDownloadDone />
+            </div>
+          </label>
+          <input
+            onChange={(e) => handleFileInput(e)}
+            type="file"
+            id="product-image"
+            accept="image/*"
+            className="admin-form-file-input"
+          />
+        </div>
+        {errors.image && (
+          <div className="error-input-message form-shadow">{errors.image}</div>
+        )}
       </div>
       <div className={`${styles.flexRow} w[100%]`}>
         <button

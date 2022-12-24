@@ -16,12 +16,7 @@ function MissingPage() {
         missing-bg"
       />
       <div className="w-[100%] flex justify-center items-center">
-        <Link
-          to={"/"}
-          className="button back-btn text-primary text-[2em] absolute
-      bottom-10 text-center p-3 px-10 bg-white
-      font-semibold rounded-[10px] font-outfit "
-        >
+        <Link to={"/"} className="button back-btn font-outfit">
           I still want pizza
         </Link>
       </div>

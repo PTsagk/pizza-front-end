@@ -21,7 +21,6 @@
   display: flex;
   overflow: hidden;
   border-radius: 2px;
-  margin-bottom: 20px;
 }
 .admin-form-file-input {
   /* color: black;
@@ -60,4 +59,14 @@
   transform: scale(0);
   position: absolute;
   opacity: 0;
+}
+.error-input-message {
+  width: 100%;
+  /* background-color: var(--primary); */
+  background-color: #fff;
+  text-decoration: var(--primary-light) underline 2px;
+  color: var(--primary-light);
+  border-top: none;
+  padding: 5px;
+  text-align: center;
 }
