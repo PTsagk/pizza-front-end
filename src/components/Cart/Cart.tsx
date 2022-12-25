@@ -6,18 +6,18 @@ import "./Cart.css";
 import { useLocation } from "react-router";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
-function Cart({ toggle = false }) {
+function Cart() {
   const location = useLocation();
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
   const [destroy, setDestroy] = useState(false);
   const [canClick, setCanClick] = useState(true);
 
-  const { cartItems } = useCartContext();
+  const { cartItems, isActive, setIsActive } = useCartContext();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (destroy) {
-        setActive(false);
+        setIsActive(false);
         setDestroy(false);
       }
     }, 2000);
@@ -37,24 +37,13 @@ function Cart({ toggle = false }) {
   }
 
   function showCart() {
-    setActive(true);
+    setIsActive(true);
     setDestroy(false);
   }
 
-  // When toggled from navbar's icon , enable the cart
-  useEffect(() => {
-    setActive(true);
-  }, [toggle]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setActive(false);
-    }, 100);
-  }, []);
-
   // Disable cart when route/url changes
   useEffect(() => {
-    setActive(false);
+    setIsActive(false);
   }, [location]);
 
   return (
@@ -63,7 +52,7 @@ function Cart({ toggle = false }) {
       onMouseLeave={() => destroyCart()}
       id="cart"
       className={` bg-white absolute py-[10px]
-      top-[60px] -right-[40px] cart-c ${!active && "hidden"}`}
+      top-[60px] -right-[40px] cart-c ${!isActive && "hidden"}`}
     >
       <div className="w-[475px] max-h-[400px] px-[10px] pb-[20px] overflow-y-auto">
         <div className="cart-notch"></div>

@@ -36,6 +36,8 @@ interface IProduct {
 
 interface ICartContext {
   cartItems: Map<string, ICartItem>;
+  isActive: boolean;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   addItemToCart: (item) => void;
   removeItemFromCart: (_id: string) => void;
   subtractItemFromCart: (_id: string) => void;
@@ -57,6 +59,7 @@ export function useCartContext() {
 }
 
 function CartProvider({ children }: ICartProvider) {
+  const [isActive, setIsActive] = useState(false);
   const [cartItems, setCartItems] = useState<Map<string, ICartItem>>(
     new Map<string, ICartItem>()
   );
@@ -71,6 +74,9 @@ function CartProvider({ children }: ICartProvider) {
       tmp.set(id, { ...item, count });
     } else tmp.set(id, { ...item, count: 1 });
     setCartItems(tmp);
+    setTimeout(() => {
+      setIsActive(true);
+    }, 10);
   }
 
   function removeItemFromCart(_id: string) {
@@ -96,14 +102,27 @@ function CartProvider({ children }: ICartProvider) {
     }
   }
 
+  // Test for logging
   useEffect(() => {
     const arr = Array.from(cartItems.values());
     console.log(arr);
   }, [cartItems]);
+
+  function handleWindowClick(e) {
+    if (!e.path.some((x) => x.id == "cart")) setIsActive(false);
+  }
+
+  useEffect(() => {
+    window.addEventListener("click", handleWindowClick);
+    return () => window.removeEventListener("click", handleWindowClick);
+  }, []);
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
+        isActive,
+        setIsActive,
         addItemToCart,
         removeItemFromCart,
         subtractItemFromCart,

@@ -10,12 +10,13 @@ import { useUserContext } from "../../Context/userContext";
 import Untitled from "../../assets/Untitled.svg";
 import { useUxContext } from "../../Context/uxContext";
 import Cart from "../Cart/Cart";
+import { useCartContext } from "../../Context/cartContext";
 
 function Navbar() {
   axios.defaults.withCredentials = true;
 
   const [profile, setProfile] = React.useState(true);
-  const [toggleCart, setToggleCart] = React.useState(false);
+  const { setIsActive } = useCartContext();
   const { user, isAdmin } = useUserContext();
   const { isActiveLogin, isActiveRegisterForm, showLoginForm } = useUxContext();
   //if current user enable profile
@@ -61,12 +62,12 @@ function Navbar() {
           <div className="relative">
             <Link
               to={"/cart"}
-              onMouseEnter={() => setToggleCart((prev) => !prev)}
+              onMouseEnter={() => setIsActive(true)}
               className="cart hover:text-white"
             >
               <FaShoppingCart></FaShoppingCart>
             </Link>
-            <Cart toggle={toggleCart} />
+            <Cart />
           </div>
           {user && (
             <Link
