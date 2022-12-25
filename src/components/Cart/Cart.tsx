@@ -12,8 +12,7 @@ function Cart({ toggle = false }) {
   const [destroy, setDestroy] = useState(false);
   const [canClick, setCanClick] = useState(true);
 
-  const { cartItems, addItemToCart, removeItemFromCart, subtractItemFromCart } =
-    useCartContext();
+  const { cartItems } = useCartContext();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -63,29 +62,31 @@ function Cart({ toggle = false }) {
       onMouseEnter={() => showCart()}
       onMouseLeave={() => destroyCart()}
       id="cart"
-      className={`w-[450px] px-[10px] py-[20px] bg-white absolute 
+      className={` bg-white absolute py-[10px]
       top-[60px] -right-[40px] cart-c ${!active && "hidden"}`}
     >
-      <div className="cart-notch"></div>
-      {cartItems.size == 0 && (
-        <div className="empty-cart-c">
-          {/* <IoIosPizza /> */}
-          No pizzas in here!
+      <div className="w-[475px] max-h-[400px] px-[10px] pb-[20px] overflow-y-auto">
+        <div className="cart-notch"></div>
+        {cartItems.size == 0 && (
+          <div className="empty-cart-c">
+            {/* <IoIosPizza /> */}
+            No pizzas in here!
+          </div>
+        )}
+        <ul className="mt-3">
+          {Array.from(cartItems.values()).map((cartItem) => (
+            <CartItem
+              cartItem={cartItem}
+              canClick={canClick}
+              updateClick={(bool: boolean) => setCanClick(bool)}
+            />
+          ))}
+        </ul>
+        <div className="flex justify-end pt-[20px]">
+          <Link to={"/cart"} className="checkout-button">
+            Checkout
+          </Link>
         </div>
-      )}
-      <ul className="mt-3">
-        {Array.from(cartItems.values()).map((cartItem) => (
-          <CartItem
-            cartItem={cartItem}
-            canClick={canClick}
-            updateClick={(bool: boolean) => setCanClick(bool)}
-          />
-        ))}
-      </ul>
-      <div className="flex justify-end pt-[20px]">
-        <Link to={"/cart"} className="checkout-button">
-          Checkout
-        </Link>
       </div>
     </div>
   );

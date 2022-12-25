@@ -1,13 +1,15 @@
 .cart-notch {
   position: absolute;
-  background-color: white;
+  /* background-color: white; */
   right: 40px;
   top: -15px;
-  width: 30px;
-  height: 30px;
-  transform: rotateZ(45deg);
-  border-top: 1px solid rgba(0, 0, 0, 0.17);
-  border-left: 1px solid rgba(0, 0, 0, 0.17);
+  width: 0;
+  height: 0;
+  /* transform: rotateZ(45deg); */
+  border: none;
+  border-bottom: 15px solid #fff;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
 }
 @keyframes fade-in {
   0% {
