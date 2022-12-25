@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Component } from "react";
+import DummyProduct from "../../components/ProductCard/DummyProduct";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { useProductContext } from "../../Context/productsContext";
 function Drinks() {
@@ -19,6 +20,9 @@ function Drinks() {
               description={drink.description}
             />
           ))}
+          {/* If products are loading , show dummy results */}
+          {drinks.length == 0 &&
+            new Array(6).fill(0).map((x) => <DummyProduct />)}
         </ul>
       </div>
     </div>

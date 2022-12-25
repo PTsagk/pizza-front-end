@@ -1,0 +1,38 @@
+@keyframes loading-dummy {
+  0% {
+    transform: translateY(-100%) rotateZ(45deg);
+  }
+  100% {
+    transform: translateY(100%) rotateZ(45deg);
+  }
+}
+
+.dummy-product {
+  width: 240px;
+  height: 370px;
+  background: linear-gradient(35deg, rgb(135, 135, 135), rgb(189, 189, 189));
+  border-radius: 10px;
+  margin: 1.25rem;
+  overflow: hidden;
+  position: relative;
+}
+.dummy-product:hover {
+  transition: all 0.1s ease;
+  transform: scale(1.02);
+}
+.moving-dummy-bar {
+  width: 20px;
+  height: 200%;
+  background: linear-gradient(0, rgb(111, 111, 111), rgb(176, 176, 176));
+  position: absolute;
+  top: 0;
+  left: 100px;
+  box-shadow: inset 0px 0px 20px 10px rgba(212, 212, 212, 0.365),
+    0px 0px 20px 10px rgb(212, 212, 212);
+
+  animation-name: loading-dummy;
+  animation-timing-function: ease;
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}

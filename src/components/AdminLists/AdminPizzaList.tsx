@@ -17,7 +17,7 @@ function AdminPizzaList({ activateForm }) {
           image,
         },
       })
-      .then((res) => console.log(res.data))
+      .then((res) => window.location.reload())
       .catch((e) => console.log(e));
   }
   return (

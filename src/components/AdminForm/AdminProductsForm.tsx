@@ -119,7 +119,7 @@ function AdminProductsForm({ closeForm, formType }) {
   }
 
   function handleNameChange(str: string) {
-    const regexTest = /[^a-zA-Z\s]/;
+    const regexTest = /[^a-zA-Z\s0-9]/;
     if (!regexTest.test(str)) setName(str);
   }
   function handlePriceChange(str: string) {
