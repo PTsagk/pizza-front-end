@@ -16,6 +16,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Drinks from "./pages/Drinks/Drinks";
 import ProtectedRoute from "./ProtectedRoute";
 import CartProvider from "./Context/cartContext";
+import TokenPage from "./pages/TokenPage/TokenPage";
 function App() {
   // const [closeShit, setCloseShit] = useState(false);
   function popstate(e) {
@@ -48,6 +49,7 @@ function App() {
             <Route path="/admin" element={<ProtectedRoute />}>
               <Route path="/admin/*" element={<Admin />}></Route>
             </Route>
+            <Route path="/token/verify/:token" element={<TokenPage />}></Route>
             <Route path="/*" element={<MissingPage />}></Route>
           </Routes>
           <Footer></Footer>

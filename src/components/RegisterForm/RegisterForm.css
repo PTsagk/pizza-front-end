@@ -14,9 +14,9 @@
 .register-form {
   width: 50%;
   max-width: 600px;
-  height: 550px;
+  /* height: 550px; */
   background-color: white;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,7 +55,7 @@
 }
 
 .auth-form-button:hover {
-  background-color: white;
+  background-color: #fff;
   color: #ec1a37;
   border: 1px solid #ec1a37;
 }

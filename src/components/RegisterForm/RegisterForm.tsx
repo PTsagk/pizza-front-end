@@ -38,7 +38,8 @@ function RegisterForm() {
         { withCredentials: true }
       )
       .then((res) => {
-        login(res.data);
+        console.log(res.data);
+        showRegisterForm(false);
       })
       .catch((e) => console.log(e));
   }
@@ -71,7 +72,7 @@ function RegisterForm() {
           onChangeInput={(str) => setPassword(str)}
         />
         <button
-          className="auth-form-button bg-primary"
+          className="auth-form-button bg-[#ec1a37]"
           type="submit"
           onClick={(e) => register(e)}
         >

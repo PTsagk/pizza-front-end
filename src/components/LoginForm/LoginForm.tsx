@@ -54,7 +54,7 @@ function LoginForm() {
         </div>
 
         <button
-          className="auth-form-button bg-primary"
+          className="auth-form-button bg-[#ec1a37]"
           type="submit"
           onClick={(e) => handleLogin(e)}
         >
