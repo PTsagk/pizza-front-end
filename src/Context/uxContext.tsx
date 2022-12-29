@@ -5,11 +5,19 @@ interface IUxProvider {
   children: React.ReactNode;
 }
 
+interface IErrorMessage {
+  message: string;
+  show: boolean;
+  isError: boolean;
+}
+
 interface IUxContext {
   isActiveRegisterForm: boolean;
   isActiveLogin: boolean;
+  errorMessage: IErrorMessage;
   showLoginForm: (show: boolean) => void;
   showRegisterForm: (show: boolean) => void;
+  setErrorMessage: React.Dispatch<React.SetStateAction<IErrorMessage>>;
 }
 
 const UxContext = React.createContext({} as IUxContext);
@@ -21,6 +29,13 @@ export function useUxContext() {
 function UxProvider({ children }: IUxProvider) {
   const [isActiveLogin, setIsActiveLogin] = useState(false);
   const [isActiveRegisterForm, setIsActiveRegisterForm] = useState(false);
+
+  // Error messages
+  const [errorMessage, setErrorMessage] = useState({
+    message: "",
+    show: false,
+    isError: false,
+  });
 
   function showLoginForm(show: boolean) {
     setIsActiveLogin(show);
@@ -34,8 +49,10 @@ function UxProvider({ children }: IUxProvider) {
       value={{
         isActiveLogin,
         isActiveRegisterForm,
+        errorMessage,
         showLoginForm,
         showRegisterForm,
+        setErrorMessage,
       }}
     >
       {children}

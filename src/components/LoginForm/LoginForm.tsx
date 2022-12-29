@@ -14,6 +14,8 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { errorMessage, setErrorMessage } = useUxContext();
+
   function handleLogin(e) {
     e.preventDefault();
     axios.defaults.withCredentials = true;
@@ -25,7 +27,14 @@ function LoginForm() {
         },
       })
       .then((res) => login(res.data))
-      .catch((e) => console.log(e));
+      .catch((e) =>
+        setErrorMessage((prev) => {
+          const tmp = { ...prev };
+          tmp.show = true;
+          tmp.message = e.response.data;
+          return tmp;
+        })
+      );
   }
 
   return (

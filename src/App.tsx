@@ -17,8 +17,8 @@ import Drinks from "./pages/Drinks/Drinks";
 import ProtectedRoute from "./ProtectedRoute";
 import CartProvider from "./Context/cartContext";
 import TokenPage from "./pages/TokenPage/TokenPage";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 function App() {
-  // const [closeShit, setCloseShit] = useState(false);
   function popstate(e) {
     console.log(e);
   }
@@ -31,14 +31,8 @@ function App() {
       <ProductProvider>
         <CartProvider>
           <Navbar></Navbar>
-          {/* <div
-          className={`fixed z-40 h-[100%] w-[100%] 
-          flex justify-center items-center auth-bg ${
-            !closeShit ? "" : "hidden"
-          }`}
-        >
-          <ProfileCard close={() => setCloseShit(true)}></ProfileCard>
-        </div> */}
+          <ErrorMessage />
+
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/pizzas" element={<Pizzas />}></Route>

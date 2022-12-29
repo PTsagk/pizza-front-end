@@ -6,20 +6,16 @@ import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import { useState } from "react";
-import { useUserContext } from "../../Context/userContext";
+
 import { useUxContext } from "../../Context/uxContext";
 
 function RegisterForm() {
-  const { login } = useUserContext();
-  const { showLoginForm, showRegisterForm } = useUxContext();
+  const { showLoginForm, showRegisterForm, errorMessage, setErrorMessage } =
+    useUxContext();
 
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressNumber, setAddressNumber] = useState("");
-  const [city, setCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
 
   function register(e) {
     e.preventDefault();
@@ -38,10 +34,24 @@ function RegisterForm() {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res.data);
+        setErrorMessage((prev) => {
+          const tmp = { ...prev };
+          tmp.isError = true;
+          tmp.show = true;
+          tmp.message = res.data;
+          return tmp;
+        });
         showRegisterForm(false);
       })
-      .catch((e) => console.log(e));
+      .catch((e) =>
+        setErrorMessage((prev) => {
+          const tmp = { ...prev };
+          tmp.isError = true;
+          tmp.show = true;
+          tmp.message = e.response.data;
+          return tmp;
+        })
+      );
   }
 
   return (
