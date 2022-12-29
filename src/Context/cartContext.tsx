@@ -63,6 +63,7 @@ function CartProvider({ children }: ICartProvider) {
   const [cartItems, setCartItems] = useState<Map<string, ICartItem>>(
     new Map<string, ICartItem>()
   );
+  const [fetchingLs, setFetchingLs] = useState(true);
 
   function addItemToCart(item: ICartItem) {
     const tmp = new Map(cartItems);
@@ -104,9 +105,34 @@ function CartProvider({ children }: ICartProvider) {
 
   // Test for logging
   useEffect(() => {
+    if (fetchingLs) return;
     const arr = Array.from(cartItems.values());
     console.log(arr);
+    const expiresInDate = Date.now() + 1000 * 60 * 60 * 2; // Time until cart expires => 2 hours
+    localStorage.setItem("cart-items", JSON.stringify(arr));
+    localStorage.setItem("cart-session", JSON.stringify(expiresInDate));
   }, [cartItems]);
+
+  useEffect(() => {
+    let lsCartItems = localStorage.getItem("cart-items");
+    if (lsCartItems) {
+      const cartSession = localStorage.getItem("cart-session");
+      if (cartSession && Number(JSON.parse(cartSession)) > Date.now()) {
+        const expiresInDate = Date.now() + 1000 * 60 * 60 * 2; // Time until cart expires => 2 hours
+        const parsedCartItems: ICartItem[] = JSON.parse(lsCartItems);
+        const tmpMap = new Map();
+        for (const index in parsedCartItems) {
+          const item = parsedCartItems[index];
+          tmpMap.set(item.id, item);
+        }
+        setCartItems(tmpMap);
+      } else {
+        localStorage.removeItem("cart-items");
+        localStorage.removeItem("cart-session");
+      }
+    }
+    setFetchingLs(false);
+  }, []);
 
   function handleWindowClick(e) {
     if (!e.path.some((x) => x.id == "cart")) setIsActive(false);
