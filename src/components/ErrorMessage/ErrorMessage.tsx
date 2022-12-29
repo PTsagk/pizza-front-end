@@ -13,7 +13,9 @@ function ErrorMessage() {
   if (!errorMessage.show) return <></>;
   return (
     <button
-      className="error-message font-outfit"
+      className={`error-message font-outfit ${
+        errorMessage.isError ? "type-error" : "type-success"
+      }`}
       onClick={() => removeMessage()}
     >
       {errorMessage.message}

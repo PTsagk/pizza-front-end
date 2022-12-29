@@ -75,9 +75,10 @@ function CartProvider({ children }: ICartProvider) {
       tmp.set(id, { ...item, count });
     } else tmp.set(id, { ...item, count: 1 });
     setCartItems(tmp);
-    setTimeout(() => {
-      setIsActive(true);
-    }, 10);
+    // setTimeout(() => {
+    //   setIsActive(true);
+    // }, 10);
+    setIsActive(true);
   }
 
   function removeItemFromCart(_id: string) {
@@ -134,8 +135,10 @@ function CartProvider({ children }: ICartProvider) {
     setFetchingLs(false);
   }, []);
 
+  // Checks if user clicked outside of cart
   function handleWindowClick(e) {
-    if (!e.path.some((x) => x.id == "cart")) setIsActive(false);
+    if (!e.path.some((x) => x.id == "cart" || x.id == "product-card"))
+      setIsActive(false);
   }
 
   useEffect(() => {

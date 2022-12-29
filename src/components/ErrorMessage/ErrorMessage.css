@@ -11,23 +11,35 @@
   position: absolute;
   top: 10%;
   right: 5%;
-  width: 200px;
-  padding: 30px 0;
+  min-width: 200px;
+  max-width: 250px;
+  padding: 25px 5px;
   border-radius: 10px;
-  background-color: var(--primary);
   z-index: 200;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.184);
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.224);
   animation-name: drop-down;
   animation-timing-function: ease;
   animation-duration: 1s;
   animation-fill-mode: both;
   outline: none;
   border: none;
+  font-size: 16px;
+  font-weight: 600;
 }
-.error-message:hover {
+
+.type-error {
+  background-color: var(--primary);
+}
+.type-error:hover {
   background-color: var(--primary-light);
+}
+.type-success {
+  background-color: var(--success);
+}
+.type-success:hover {
+  background-color: var(--success-light);
 }

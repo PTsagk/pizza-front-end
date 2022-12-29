@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Component } from "react";
 import { useCartContext } from "../../Context/cartContext";
+import { useUserContext } from "../../Context/userContext";
+import { useUxContext } from "../../Context/uxContext";
 import "./productCard.css";
 
 interface IProductCard {
@@ -12,8 +14,29 @@ interface IProductCard {
 }
 function ProductCard({ name, img, description, id, price }: IProductCard) {
   const { addItemToCart } = useCartContext();
+  const { user } = useUserContext();
+  const { showLoginForm } = useUxContext();
+  const [canClick, setCanClick] = React.useState(true);
+
+  function handleAddItem() {
+    if (!canClick) return;
+    if (!user) {
+      showLoginForm(true);
+      return;
+    }
+    addItemToCart({ name, img, description, id, price });
+    setCanClick(false);
+  }
+
+  React.useEffect(() => {
+    if (!canClick) {
+      setTimeout(() => {
+        setCanClick(true);
+      }, 800);
+    }
+  }, [canClick]);
   return (
-    <li className="product-card">
+    <li className="product-card" id="product-card">
       <span
         className={`pizza-card-header text-center font-outfit 
       ${name.length >= 18 && "product-card-header-animation"}`}
@@ -35,10 +58,7 @@ function ProductCard({ name, img, description, id, price }: IProductCard) {
           {description}
         </p>
       )}
-      <button
-        className="button"
-        onClick={() => addItemToCart({ name, img, description, id, price })}
-      >
+      <button className="button" onClick={() => handleAddItem()}>
         Add to Cart
       </button>
     </li>

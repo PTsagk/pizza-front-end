@@ -71,11 +71,13 @@ function Cart() {
             />
           ))}
         </ul>
-        <div className="flex justify-end pt-[20px]">
-          <Link to={"/cart"} className="checkout-button">
-            Checkout
-          </Link>
-        </div>
+        {cartItems.size > 0 && (
+          <div className="flex justify-end pt-[20px]">
+            <Link to={"/cart"} className="checkout-button">
+              Checkout
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
