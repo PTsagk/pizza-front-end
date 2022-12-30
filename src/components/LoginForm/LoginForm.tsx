@@ -14,7 +14,9 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { errorMessage, setErrorMessage } = useUxContext();
+  const { setErrorMessage } = useUxContext();
+
+  const [showResend, setShowResend] = useState(false);
 
   function handleLogin(e) {
     e.preventDefault();
@@ -27,14 +29,41 @@ function LoginForm() {
         },
       })
       .then((res) => login(res.data))
-      .catch((e) =>
+      .catch((e) => {
         setErrorMessage((prev) => {
           const tmp = { ...prev };
           tmp.show = true;
           tmp.message = e.response.data;
+          tmp.isError = true;
+          return tmp;
+        });
+        setShowResend(true);
+      });
+  }
+
+  function handleResendEmail() {
+    axios
+      .post(`${import.meta.env.VITE_API}/users/token`, {
+        email,
+      })
+      .then((res) =>
+        setErrorMessage((prev) => {
+          const tmp = { ...prev };
+          tmp.isError = false;
+          tmp.show = true;
+          tmp.message = res.data;
           return tmp;
         })
-      );
+      )
+      .catch((e) => {
+        setErrorMessage((prev) => {
+          const tmp = { ...prev };
+          tmp.isError = true;
+          tmp.show = true;
+          tmp.message = e.response.data;
+          return tmp;
+        });
+      });
   }
 
   return (
@@ -82,6 +111,17 @@ function LoginForm() {
             Register
           </button>
         </p>
+        {showResend && (
+          <p>
+            <button
+              type="button"
+              className="register-button"
+              onClick={() => handleResendEmail()}
+            >
+              Resend Email
+            </button>
+          </p>
+        )}
       </form>
     </div>
   );
