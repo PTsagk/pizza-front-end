@@ -7,6 +7,7 @@ interface IUserProvider {
 }
 
 interface IUser {
+  id: string;
   fullname: string;
   email: string;
   created: string;

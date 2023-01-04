@@ -7,6 +7,10 @@ import {
 } from "react";
 import axios from "axios";
 
+interface IAddressProvider {
+  children: React.ReactNode;
+}
+
 interface IAddress {
   address: string;
   addressNumber: string;
@@ -27,7 +31,7 @@ export function useAddressContext() {
   return useContext(AddressContext);
 }
 
-function AddressProvider({ children }: { children: React.ReactNode }) {
+function AddressProvider({ children }: IAddressProvider) {
   const [addresses, setAddresses] = useState<IAddress[]>([]);
 
   useEffect(() => {
@@ -36,7 +40,8 @@ function AddressProvider({ children }: { children: React.ReactNode }) {
     axios
       .get(`${import.meta.env.VITE_API}/address`)
       .then((res) => {
-        setAddresses([...res.data]);
+        console.log(res.data);
+        setAddresses(res.data);
       })
       .catch((e) => console.log(e));
   }, []);

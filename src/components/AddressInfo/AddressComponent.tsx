@@ -26,14 +26,13 @@ function AddressComponent({
   async function deleteAddress() {
     axios.defaults.withCredentials = true;
 
-    //I will mergre this so that will be in one API call
-    const { data } = await axios.delete(`${import.meta.env.VITE_API}/address`, {
-      data: {
-        addressId: id,
-      },
-    });
-
-    setAddresses(data);
+    axios
+      .delete(`${import.meta.env.VITE_API}/address`, {
+        data: {
+          addressId: id,
+        },
+      })
+      .then((res) => setAddresses(res.data));
   }
 
   //udpate address

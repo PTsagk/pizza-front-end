@@ -63,8 +63,9 @@ function Cart() {
           </div>
         )}
         <ul className="mt-3">
-          {Array.from(cartItems.values()).map((cartItem) => (
+          {Array.from(cartItems.values()).map((cartItem, index) => (
             <CartItem
+              key={index}
               cartItem={cartItem}
               canClick={canClick}
               updateClick={(bool: boolean) => setCanClick(bool)}

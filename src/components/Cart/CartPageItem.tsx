@@ -48,7 +48,9 @@ function CartPageItem({ item }: ICartPageItemProps) {
       />
       <div className="flex flex-col w-[100%] h-[100%] justify-between p-[5px]">
         <div className="flex items-center justify-between w-[100%]">
-          <div className="font-semibold text-[18px]">{item.name}</div>
+          <div className="font-semibold text-[18px] text-black">
+            {item.name}
+          </div>
           <button
             className="text-[26px]"
             onClick={() => {
@@ -59,7 +61,7 @@ function CartPageItem({ item }: ICartPageItemProps) {
           </button>
         </div>
         <div className="flex items-center justify-between">
-          <p className="max-w-[200px]">
+          <p className="max-w-[200px] text-black">
             {item.description.length > 50
               ? item.description.slice(0, 45) + "..."
               : item.description}
@@ -84,7 +86,9 @@ function CartPageItem({ item }: ICartPageItemProps) {
                 <BiPlus />
               </button>
             </div>
-            <div>{FormatMoney(item.price * item.count)}</div>
+            <div className="text-black font-regular">
+              {FormatMoney(item.price * item.count)}
+            </div>
           </div>
         </div>
       </div>

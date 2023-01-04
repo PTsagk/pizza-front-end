@@ -4,6 +4,7 @@ import "./AddressInfo.css";
 import axios from "axios";
 import AddressComponent from "./AddressComponent";
 import { useAddressContext } from "../../Context/addressContext";
+import { useUserContext } from "../../Context/userContext";
 
 function AddressInfo() {
   const [addPanel, setAddPanel] = useState(false);
@@ -16,8 +17,10 @@ function AddressInfo() {
 
   //get address info from context
   const { addresses, setAddresses } = useAddressContext();
+  const { user } = useUserContext();
 
   function addAddress() {
+    if (!user) return;
     axios.defaults.withCredentials = true;
     axios
       .post(`${import.meta.env.VITE_API}/address`, {
@@ -25,8 +28,11 @@ function AddressInfo() {
         address: addressInput,
         addressNumber: addressNumberInput.toString(),
         phoneNumber: phoneNumberInput.toString(),
+        id: user.id,
       })
-      .then((resp) => setAddresses(resp.data))
+      .then((resp) => {
+        setAddresses(resp.data);
+      })
       .catch((e) => console.log(e));
     setAddPanel(false);
   }
@@ -69,6 +75,7 @@ function AddressInfo() {
           addresses?.map((add) => {
             return (
               <AddressComponent
+                key={add.id}
                 id={add.id}
                 town={add.city}
                 address={add.address}
