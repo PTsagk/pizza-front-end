@@ -136,3 +136,12 @@
 .payment-button-c:hover .payment-fill-bar {
   background-color: #fff;
 }
+
+.cart-address-info-input {
+  outline: none;
+  padding: 5px 0px;
+  padding-left: 10px;
+  padding-right: 30px;
+  border-radius: 5px;
+  width: 100%;
+}

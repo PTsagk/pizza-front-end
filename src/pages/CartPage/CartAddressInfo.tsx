@@ -9,7 +9,12 @@ import { useCartContext } from "../../Context/cartContext";
 import { useUserContext } from "../../Context/userContext";
 import { useAddressContext } from "../../Context/addressContext";
 import "./CartPage.css";
-import { HiLocationMarker } from "react-icons/hi";
+import {
+  HiLocationMarker,
+  AiFillPhone,
+  GiStairs,
+  MdDoorbell,
+} from "react-icons/all";
 import CartOrderInfo from "./CartOrderInfo";
 
 interface IAddress {
@@ -67,6 +72,49 @@ function CartAddressInfo() {
           ))}
         </ul>
       </div>
+      <label
+        className="cart-address-field-header mt-[10px]"
+        htmlFor="order-contact-number"
+      >
+        Contact Number:
+      </label>
+      <div className="relative flex items-center">
+        <input
+          className="cart-address-info-input"
+          type="text"
+          id="order-contact-number"
+        />
+        <AiFillPhone className="absolute right-[5px] text-[20px]" />
+      </div>
+      <label
+        className="cart-address-field-header mt-[10px]"
+        htmlFor="order-appartment-floor"
+      >
+        Appt Floor:
+      </label>
+      <div className="relative flex items-center">
+        <input
+          className="cart-address-info-input"
+          type="text"
+          id="order-appartment-floor"
+        />
+        <GiStairs className="absolute right-[5px] text-[20px]" />
+      </div>
+      <label
+        className="cart-address-field-header mt-[10px]"
+        htmlFor="order-doorbell"
+      >
+        Doorbell:
+      </label>
+      <div className="relative flex items-center">
+        <input
+          className="cart-address-info-input"
+          type="text"
+          id="order-doorbell"
+        />
+        <MdDoorbell className="absolute right-[5px] text-[20px]" />
+      </div>
+
       <div className="cart-address-field-header mt-[50px]">Comments:</div>
       <div className="relative">
         <textarea
