@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { RiAccountCircleFill } from "react-icons/ri";
@@ -24,7 +24,7 @@ function Navbar() {
 
   const [profile, setProfile] = React.useState(true);
   const [navSelected, setNavSelected] = useState(0);
-  const { setIsActive } = useCartContext();
+  const { cartItems,setIsActive } = useCartContext();
   const { user, isAdmin } = useUserContext();
   const { isActiveLogin, isActiveRegisterForm, showLoginForm } = useUxContext();
   //if current user enable profile
@@ -103,7 +103,8 @@ function Navbar() {
           )}
         </div>
         <div className="cart-and-profile">
-          <div className="relative">
+          <div className="relative cart">
+            {cartItems.size>0 && <div className="item-count-dot">{cartItems.size}</div>}
             <Link
               to={"/cart"}
               onMouseEnter={() => setIsActive(true)}
