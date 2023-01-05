@@ -71,3 +71,68 @@
   color: black;
   font-weight: 500;
 }
+.payment-button-c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  width: 240px;
+  position: relative;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.payment-button-c:hover {
+  background-color: var(--primary);
+  color: #fff;
+  cursor: pointer;
+}
+.payment-button-c input {
+  opacity: 0;
+  position: absolute;
+}
+.payment-fill-bar {
+  width: 20%;
+  height: 2px;
+  background-color: var(--primary);
+}
+.payment-button-c input:checked ~ .payment-fill-bar {
+  transition: all 0.5s ease;
+  width: 100%;
+}
+
+.radio-button-mock {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: 2px solid var(--primary);
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.radio-button-mock::after {
+  content: "";
+  width: 75%;
+  height: 75%;
+  background-color: var(--primary);
+  border-radius: 100%;
+  transform: scale(0);
+}
+.payment-button-c input:checked ~ .radio-button-mock::after {
+  transition: all 0.5s ease;
+  transform: scale(1);
+}
+.payment-button-c:hover .radio-button-mock {
+  border-color: #fff;
+}
+.payment-button-c:hover .radio-button-mock::after {
+  background-color: #fff;
+}
+.payment-button-c:hover .payment-fill-bar {
+  background-color: #fff;
+}
