@@ -18,6 +18,7 @@ function Drinks() {
               // img={`${import.meta.env.VITE_API}/image/${drink.image}`}
               img={drink.image}
               description={drink.description}
+              isPizza={false}
             />
           ))}
           {/* If products are loading , show dummy results */}

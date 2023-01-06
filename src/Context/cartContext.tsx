@@ -50,6 +50,7 @@ interface ICartItem {
   img: string;
   description: string;
   count: number;
+  isPizza: boolean;
 }
 
 const CartContext = createContext({} as ICartContext);

@@ -11,8 +11,16 @@ interface IProductCard {
   description: string;
   id: string;
   price: number;
+  isPizza: boolean;
 }
-function ProductCard({ name, img, description, id, price }: IProductCard) {
+function ProductCard({
+  name,
+  img,
+  description,
+  id,
+  price,
+  isPizza,
+}: IProductCard) {
   const { addItemToCart } = useCartContext();
   const { user } = useUserContext();
   const { showLoginForm } = useUxContext();
@@ -24,7 +32,7 @@ function ProductCard({ name, img, description, id, price }: IProductCard) {
       showLoginForm(true);
       return;
     }
-    addItemToCart({ name, img, description, id, price });
+    addItemToCart({ name, img, description, id, price, isPizza });
     setCanClick(false);
   }
 

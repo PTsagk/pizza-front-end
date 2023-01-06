@@ -31,6 +31,7 @@ function CartPage() {
         return {
           id: item.id,
           count: item.count,
+          isPizza: item.isPizza,
         };
       })
     );

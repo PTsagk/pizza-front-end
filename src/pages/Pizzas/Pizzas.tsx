@@ -36,6 +36,7 @@ function Pizzas() {
                     description={pizza.description}
                     id={pizza.id}
                     price={pizza.price}
+                    isPizza={true}
                   />
                 ))}
 
