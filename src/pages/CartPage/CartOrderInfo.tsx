@@ -9,7 +9,7 @@ function CartOrderInfo() {
       <div className="cart-page-header">Order Info</div>
       <ul className="cart-page-product-list">
         {Array.from(cartItems.values()).map((item) => (
-          <CartPageItem item={item} />
+          <CartPageItem item={item} key={item.id} />
         ))}
       </ul>
     </div>

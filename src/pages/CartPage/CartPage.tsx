@@ -5,6 +5,7 @@ import "./CartPage.css";
 import CartOrderInfo from "./CartOrderInfo";
 import CartAddressInfo from "./CartAddressInfo";
 import CartPaymentInfo from "./CartPaymentInfo";
+import { useCartContext } from "../../Context/cartContext";
 
 interface IAddress {
   address: string;
@@ -16,15 +17,36 @@ interface IAddress {
 }
 
 function CartPage() {
+  const { cartItems } = useCartContext();
+  function handleCheckoutConfirm(e: React.FormEvent) {
+    // console.log(e);
+    console.log(e.target["order-doorbell"].value);
+    console.log(e.target["order-contact-number"].value);
+    console.log(e.target["order-appartment-floor"].value);
+    console.log(e.target["order-comments"].value);
+    console.log(e.target["payment-method"].value);
+
+    console.log(
+      Array.from(cartItems.values()).map((item) => {
+        return {
+          id: item.id,
+          count: item.count,
+        };
+      })
+    );
+    e.preventDefault();
+  }
+
   return (
-    <div
+    <form
+      onSubmit={(e) => handleCheckoutConfirm(e)}
       className="w-[100%] min-h-[100vh] flex justify-center items-center  
     relative pizza-bg font-outfit"
     >
       <CartOrderInfo />
       <CartAddressInfo />
       <CartPaymentInfo />
-    </div>
+    </form>
   );
 }
 

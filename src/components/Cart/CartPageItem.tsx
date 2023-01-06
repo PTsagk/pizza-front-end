@@ -52,6 +52,7 @@ function CartPageItem({ item }: ICartPageItemProps) {
             {item.name}
           </div>
           <button
+            type="button"
             className="text-[26px]"
             onClick={() => {
               handleCountModify(() => removeItemFromCart(item.id));
@@ -69,6 +70,7 @@ function CartPageItem({ item }: ICartPageItemProps) {
           <div className="flex w-[175px] justify-between">
             <div className="flex">
               <button
+                type="button"
                 className="cart-page-count-button"
                 onClick={() => {
                   handleCountModify(() => subtractItemFromCart(item.id));
@@ -78,6 +80,7 @@ function CartPageItem({ item }: ICartPageItemProps) {
               </button>
               <div className="cart-page-count ml-[5px]">{item.count}</div>
               <button
+                type="button"
                 className="cart-page-count-button ml-[5px]"
                 onClick={() => {
                   handleCountModify(() => addItemToCart(item));

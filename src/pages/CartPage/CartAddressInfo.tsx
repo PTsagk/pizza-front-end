@@ -32,6 +32,7 @@ function CartAddressInfo() {
   const { addresses } = useAddressContext();
 
   const [comments, setComments] = useState("");
+  const [phone, setPhone] = useState(addresses[0]?.phoneNumber);
 
   React.useEffect(() => {
     if (!addresses) return;
@@ -65,7 +66,7 @@ function CartAddressInfo() {
           ${!isActive && "hidden"} dropdown-list`}
         >
           {addresses?.map((add) => (
-            <li className="cart-address-option">
+            <li className="cart-address-option" key={add.id}>
               <HiLocationMarker className="mr-[10px] text-[22px]" />{" "}
               {`${add.address} ${add.addressNumber}`}
             </li>
@@ -80,9 +81,12 @@ function CartAddressInfo() {
       </label>
       <div className="relative flex items-center">
         <input
+          name="order-contact-number"
           className="cart-address-info-input"
-          type="text"
+          type="number"
           id="order-contact-number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
         />
         <AiFillPhone className="absolute right-[5px] text-[20px]" />
       </div>
@@ -94,8 +98,9 @@ function CartAddressInfo() {
       </label>
       <div className="relative flex items-center">
         <input
+          name="order-appartment-floor"
           className="cart-address-info-input"
-          type="text"
+          type="number"
           id="order-appartment-floor"
         />
         <GiStairs className="absolute right-[5px] text-[20px]" />
@@ -111,6 +116,7 @@ function CartAddressInfo() {
           className="cart-address-info-input"
           type="text"
           id="order-doorbell"
+          name="order-doorbell"
         />
         <MdDoorbell className="absolute right-[5px] text-[20px]" />
       </div>
@@ -121,6 +127,7 @@ function CartAddressInfo() {
           className="cart-comments"
           onChange={(e) => handleCommentsChange(e.target.value)}
           value={comments}
+          name="order-comments"
         ></textarea>
         <div className="cart-comments-counter">{100 - comments.length}/100</div>
       </div>
