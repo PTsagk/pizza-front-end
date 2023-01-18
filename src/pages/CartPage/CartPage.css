@@ -35,14 +35,25 @@
 .cart-address-select-button {
   width: 100%;
   background-color: #fff;
+  z-index: 10000;
+}
+.cart-address-list {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 1;
 }
 .cart-address-option {
+  width: 100%;
+  height: 100%;
+}
+.cart-address-option button {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
   padding: 8px 0;
+  padding-left: 15%;
 }
 .cart-address-option:hover {
   background-color: rgb(226, 226, 226);
@@ -144,6 +155,7 @@
   padding-right: 30px;
   border-radius: 5px;
   width: 100%;
+  /* z-index: 0; */
 }
 .proceed-button {
   background-color: #fff;

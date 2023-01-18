@@ -25,7 +25,7 @@ interface IAddress {
   phoneNumber: string;
   user_id: string;
 }
-function CartAddressInfo() {
+function CartAddressInfo({ changeSelectedAddress }) {
   const [isActive, setIsActive] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<IAddress>();
 
@@ -42,6 +42,11 @@ function CartAddressInfo() {
   function handleCommentsChange(str: string) {
     if (str.length > 100) return;
     setComments(str);
+  }
+
+  function handleChangeAddress(address: IAddress) {
+    setSelectedAddress(address);
+    changeSelectedAddress(address);
   }
 
   return (
@@ -61,14 +66,16 @@ function CartAddressInfo() {
           {`${selectedAddress?.address} ${selectedAddress?.addressNumber}`}
         </button>
         <ul
-          className={`flex flex-col justify-center absolute
+          className={`cart-address-list flex flex-col justify-center absolute
             items-center top-[100%] bg-white w-[100%] border p-0
-          ${!isActive && "hidden"} dropdown-list`}
+          ${!isActive && "hidden"}`}
         >
           {addresses?.map((add) => (
             <li className="cart-address-option" key={add.id}>
-              <HiLocationMarker className="mr-[10px] text-[22px]" />{" "}
-              {`${add.address} ${add.addressNumber}`}
+              <button type="button" onClick={() => handleChangeAddress(add)}>
+                <HiLocationMarker className="mr-[10px] text-[22px]" />{" "}
+                {`${add.address} ${add.addressNumber}`}
+              </button>
             </li>
           ))}
         </ul>
