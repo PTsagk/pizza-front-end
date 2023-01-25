@@ -14,6 +14,10 @@ function AddressInfo() {
   const [addressInput, setAddressInput] = useState("");
   const [addressNumberInput, setAddressNumberInput] = useState("");
   const [phoneNumberInput, setPhoneNumberInput] = useState("");
+  const noneEncodedAddress =
+    addressNumberInput + " " + addressInput + " " + townInput;
+  const encodedAddress = encodeURIComponent(noneEncodedAddress.trim());
+  const mapAddress = `https://maps.google.com/maps?q=${encodedAddress}k&t=&z=13&ie=UTF8&iwloc=&output=embed`;
 
   //get address info from context
   const { addresses, setAddresses } = useAddressContext();
@@ -148,12 +152,32 @@ function AddressInfo() {
                 <button onClick={() => setAddPanel(false)}>Cancel</button>
               </div>
             </div>
-            <img
+            {/* <img
               crossOrigin="anonymous"
               src="http://localhost:5000/image/devil.jpg"
               alt=""
               className="image"
-            />
+            /> */}
+            <div className="mapouter">
+              <div className="gmap_canvas">
+                <iframe
+                  width="600"
+                  height="500"
+                  id="gmap_canvas"
+                  src={mapAddress}
+                ></iframe>
+                <a href="https://www.whatismyip-address.com/divi-discount/">
+                  divi discount
+                </a>
+                <style>
+                  .mapouter
+                  {
+                    "position:relative;text-align:right;height:500px;width:600px;"
+                  }
+                </style>
+                <a href="https://www.embedgooglemap.net"></a>
+              </div>
+            </div>
           </div>
         )}
       </div>
