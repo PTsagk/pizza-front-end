@@ -14,6 +14,8 @@ function AddressInfo() {
   const [addressInput, setAddressInput] = useState("");
   const [addressNumberInput, setAddressNumberInput] = useState("");
   const [phoneNumberInput, setPhoneNumberInput] = useState("");
+
+  //formating the addres inputs to use in the google map
   const noneEncodedAddress =
     addressNumberInput + " " + addressInput + " " + townInput;
   const encodedAddress = encodeURIComponent(noneEncodedAddress.trim());
