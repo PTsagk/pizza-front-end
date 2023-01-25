@@ -168,9 +168,6 @@ function AddressInfo() {
                   id="gmap_canvas"
                   src={mapAddress}
                 ></iframe>
-                <a href="https://www.whatismyip-address.com/divi-discount/">
-                  divi discount
-                </a>
                 <style>
                   .mapouter
                   {
