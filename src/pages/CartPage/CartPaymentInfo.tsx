@@ -71,7 +71,11 @@ import {
   ImArrowUp2,
 } from "react-icons/all";
 
-function CartPaymentInfo({ activeSelection, setActiveSelection }) {
+function CartPaymentInfo({
+  activeSelection,
+  setActiveSelection,
+  changePaymentMethod,
+}) {
   return (
     <div
       className={
@@ -85,14 +89,23 @@ function CartPaymentInfo({ activeSelection, setActiveSelection }) {
       </h1>
       <div className="payment-and-next-step">
         <div className="payment-options">
-          <button className="payment-option">
+          <button
+            className="payment-option"
+            onClick={() => changePaymentMethod("Paypal")}
+          >
             <TbBrandPaypal className="payment-icon"></TbBrandPaypal>Paypal
           </button>
-          <button className="payment-option">
+          <button
+            className="payment-option"
+            onClick={() => changePaymentMethod("Credit Card")}
+          >
             <MdOutlinePayment className="payment-icon"></MdOutlinePayment>Credit
             Card
           </button>
-          <button className="payment-option">
+          <button
+            className="payment-option"
+            onClick={() => changePaymentMethod("Cash")}
+          >
             <BsCashStack className="payment-icon"></BsCashStack>Cash
           </button>
         </div>

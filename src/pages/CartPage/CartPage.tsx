@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Component, useState } from "react";
+import { Component, useState, useEffect } from "react";
 import { Dropdown } from "react-bootstrap";
 import "./CartPage.css";
 import CartOrderInfo from "./CartOrderInfo";
@@ -8,6 +8,7 @@ import CartPaymentInfo from "./CartPaymentInfo";
 import CartOrderCompleteInfo from "./CartOrderCompleteInfo";
 import { useCartContext } from "../../Context/cartContext";
 import axios from "axios";
+import { useAddressContext } from "../../Context/addressContext";
 
 interface IAddress {
   address: string;
@@ -20,8 +21,22 @@ interface IAddress {
 
 function CartPage() {
   const { cartItems } = useCartContext();
-  const [selectedAddress, setSelectedAddress] = useState<IAddress>();
+  const { addresses } = useAddressContext();
   const [activeSelection, setActiveSelection] = useState("addressInfo");
+  const [paymentMethod, setPaymentMethod] = useState("Cash");
+  const [selectedAddress, setSelectedAddress] = useState<IAddress>();
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
+
+  useEffect(() => {
+    if (addresses.length === 0) return;
+    setSelectedAddress(addresses[0]);
+  }, [addresses]);
+
+  useEffect(() => {
+    if (addresses.length === 0) return;
+    setSelectedAddress(addresses[selectedAddressIndex]);
+  }, [selectedAddressIndex]);
+
   function handleCheckoutConfirm(e: React.FormEvent) {
     e.preventDefault();
     console.log(e.target["order-doorbell"].value);
@@ -63,22 +78,26 @@ function CartPage() {
   return (
     <form
       onSubmit={(e) => handleCheckoutConfirm(e)}
-      className="w-[100%] min-h-[100vh] flex justify-center items-center  
+      className="w-[100%] min-h-[120vh] flex justify-center items-center  
     relative pizza-bg font-outfit"
     >
       <div className="address-payment-complete-container">
         <CartAddressInfo
-          changeSelectedAddress={(address) => setSelectedAddress(address)}
+          // changeSelectedAddress={(address) => setSelectedAddress(address)}
           activeSelection={activeSelection}
           setActiveSelection={setActiveSelection}
+          changeSelectedAddress={(index) => setSelectedAddressIndex(index)}
         />
         <CartPaymentInfo
           activeSelection={activeSelection}
           setActiveSelection={setActiveSelection}
+          changePaymentMethod={(method) => setPaymentMethod(method)}
         />
         <CartOrderCompleteInfo
           activeSelection={activeSelection}
           setActiveSelection={setActiveSelection}
+          paymentMethod={paymentMethod}
+          selectedAddress={selectedAddress}
         />
       </div>
 

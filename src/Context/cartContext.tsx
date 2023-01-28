@@ -106,14 +106,14 @@ function CartProvider({ children }: ICartProvider) {
   }
 
   // Test for logging
-  useEffect(() => {
-    if (fetchingLs) return;
-    const arr = Array.from(cartItems.values());
-    console.log(arr);
-    const expiresInDate = Date.now() + 1000 * 60 * 60 * 2; // Time until cart expires => 2 hours
-    localStorage.setItem("cart-items", JSON.stringify(arr));
-    localStorage.setItem("cart-session", JSON.stringify(expiresInDate));
-  }, [cartItems]);
+  // useEffect(() => {
+  //   if (fetchingLs) return;
+  //   const arr = Array.from(cartItems.values());
+  //   console.log(arr);
+  //   const expiresInDate = Date.now() + 1000 * 60 * 60 * 2; // Time until cart expires => 2 hours
+  //   localStorage.setItem("cart-items", JSON.stringify(arr));
+  //   localStorage.setItem("cart-session", JSON.stringify(expiresInDate));
+  // }, [cartItems]);
 
   useEffect(() => {
     let lsCartItems = localStorage.getItem("cart-items");
@@ -137,13 +137,20 @@ function CartProvider({ children }: ICartProvider) {
   }, []);
 
   // Checks if user clicked outside of cart
-  function handleWindowClick(e) {
-    if (!e.path.some((x) => x.id == "cart" || x.id == "product-card"))
+  function handleWindowClick(e: MouseEvent) {
+    // Shows Error but works, don't change
+    if (
+      !e.composedPath().some((x) => x.id == "cart" || x.id == "product-card")
+    ) {
       setIsActive(false);
+    }
+    // Doesn't work anymore, don't know why
+    // if (!e.path.some((x) => x.id == "cart" || x.id == "product-card"))
+    //   setIsActive(false);
   }
 
   useEffect(() => {
-    window.addEventListener("click", handleWindowClick);
+    window.addEventListener("click", (e) => handleWindowClick(e));
     return () => window.removeEventListener("click", handleWindowClick);
   }, []);
 

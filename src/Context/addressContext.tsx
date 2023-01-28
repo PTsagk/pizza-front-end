@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import axios from "axios";
+import { useUserContext } from "./userContext";
 
 interface IAddressProvider {
   children: React.ReactNode;
@@ -33,8 +34,10 @@ export function useAddressContext() {
 
 function AddressProvider({ children }: IAddressProvider) {
   const [addresses, setAddresses] = useState<IAddress[]>([]);
+  const { user } = useUserContext();
 
   useEffect(() => {
+    if (!user) return;
     axios.defaults.withCredentials = true;
 
     axios
@@ -44,7 +47,7 @@ function AddressProvider({ children }: IAddressProvider) {
         setAddresses(res.data);
       })
       .catch((e) => console.log(e));
-  }, []);
+  }, [user]);
   return (
     <AddressContext.Provider
       value={{

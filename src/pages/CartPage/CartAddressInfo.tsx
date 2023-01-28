@@ -144,10 +144,32 @@
 
 // export default CartAddressInfo;
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ImArrowDown2 } from "react-icons/all";
+import { useAddressContext } from "../../Context/addressContext";
+import { useUserContext } from "../../Context/userContext";
 
-function CartAddressInfo({ activeSelection, setActiveSelection }) {
+function CartAddressInfo({
+  activeSelection,
+  setActiveSelection,
+  changeSelectedAddress,
+}) {
+  const { addresses } = useAddressContext();
+  const { user } = useUserContext();
+  const [phonenumber, setPhonenumber] = useState(addresses[0]?.phoneNumber);
+  const [address, setAddress] = useState(addresses[0]?.address);
+  const [addressNumber, setAddressNumber] = useState(
+    addresses[0]?.addressNumber
+  );
+  const [showAddressList, setShowAddressList] = useState(false);
+  // if (!address) return;
+
+  useEffect(() => {
+    if (addresses.length == 0) return;
+    setPhonenumber(addresses[0].phoneNumber);
+    setAddress(addresses[0].address);
+    setAddressNumber(addresses[0].addressNumber);
+  }, [addresses]);
   return (
     <div
       className={
@@ -161,19 +183,44 @@ function CartAddressInfo({ activeSelection, setActiveSelection }) {
       </h1>
       <div className="select-address-buttons">
         <div className="address-info-buttons">
-          <button className="address-buttons">Karaoli kai Dimitriou 99</button>
-          <button className="address-buttons">6975634562</button>
-          <button className="address-buttons">1st floor</button>
-          <button className="address-buttons">John Doe</button>
+          <button
+            className="address-buttons"
+            onClick={() => setShowAddressList(true)}
+          >{`${address} ${addressNumber}`}</button>
+          <input className="address-buttons" value={phonenumber} />
+          <input className="address-buttons" value={"1st floor"} />
+          <input className="address-buttons" value={user?.fullname} />
         </div>
-        <button
-          className="next-step-button"
-          onClick={() => {
-            setActiveSelection("paymentInfo");
-          }}
-        >
-          <ImArrowDown2 className="icon"></ImArrowDown2> Next Step
-        </button>
+
+        <div className="cart-address-info-flexCol">
+          {
+            <ul
+              className={`cart-address-info-address-list ${
+                !showAddressList ? "invisible" : "visible"
+              }`}
+            >
+              {addresses.map((addr, index) => (
+                <li>
+                  <button
+                    onClick={() => {
+                      setAddress(addr.address);
+                      setAddressNumber(addr.addressNumber);
+                      changeSelectedAddress(index);
+                    }}
+                  >{`${addr.address} ${addr.addressNumber}`}</button>
+                </li>
+              ))}
+            </ul>
+          }
+          <button
+            className="next-step-button"
+            onClick={() => {
+              setActiveSelection("paymentInfo");
+            }}
+          >
+            <ImArrowDown2 className="icon"></ImArrowDown2> Next Step
+          </button>
+        </div>
       </div>
     </div>
   );

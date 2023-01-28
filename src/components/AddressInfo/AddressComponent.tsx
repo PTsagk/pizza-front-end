@@ -33,7 +33,10 @@ function AddressComponent({
           addressId: id,
         },
       })
-      .then((res) => setAddresses(res.data));
+      .then((res) => {
+        console.log(res);
+        // setAddresses(res.data)
+      });
   }
 
   //udpate address
