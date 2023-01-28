@@ -5,6 +5,7 @@ import "./CartPage.css";
 import CartOrderInfo from "./CartOrderInfo";
 import CartAddressInfo from "./CartAddressInfo";
 import CartPaymentInfo from "./CartPaymentInfo";
+import CartOrderCompleteInfo from "./CartOrderCompleteInfo";
 import { useCartContext } from "../../Context/cartContext";
 import axios from "axios";
 
@@ -20,6 +21,7 @@ interface IAddress {
 function CartPage() {
   const { cartItems } = useCartContext();
   const [selectedAddress, setSelectedAddress] = useState<IAddress>();
+  const [activeSelection, setActiveSelection] = useState("addressInfo");
   function handleCheckoutConfirm(e: React.FormEvent) {
     e.preventDefault();
     console.log(e.target["order-doorbell"].value);
@@ -64,11 +66,23 @@ function CartPage() {
       className="w-[100%] min-h-[100vh] flex justify-center items-center  
     relative pizza-bg font-outfit"
     >
+      <div className="address-payment-complete-container">
+        <CartAddressInfo
+          changeSelectedAddress={(address) => setSelectedAddress(address)}
+          activeSelection={activeSelection}
+          setActiveSelection={setActiveSelection}
+        />
+        <CartPaymentInfo
+          activeSelection={activeSelection}
+          setActiveSelection={setActiveSelection}
+        />
+        <CartOrderCompleteInfo
+          activeSelection={activeSelection}
+          setActiveSelection={setActiveSelection}
+        />
+      </div>
+
       <CartOrderInfo />
-      <CartAddressInfo
-        changeSelectedAddress={(address) => setSelectedAddress(address)}
-      />
-      <CartPaymentInfo />
     </form>
   );
 }

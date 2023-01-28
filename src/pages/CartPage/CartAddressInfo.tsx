@@ -1,142 +1,179 @@
-import * as React from "react";
-import { Component, useState } from "react";
-import { Dropdown } from "react-bootstrap";
-import DropdownButton from "react-bootstrap/esm/DropdownButton";
-import CartPageItem from "../../components/Cart/CartPageItem";
-import MyDropdown from "../../components/Dropdown/MyDropdown";
-import MyDropdownOption from "../../components/Dropdown/MyDropdownOption";
-import { useCartContext } from "../../Context/cartContext";
-import { useUserContext } from "../../Context/userContext";
-import { useAddressContext } from "../../Context/addressContext";
-import "./CartPage.css";
-import {
-  HiLocationMarker,
-  AiFillPhone,
-  GiStairs,
-  MdDoorbell,
-} from "react-icons/all";
-import CartOrderInfo from "./CartOrderInfo";
+// import * as React from "react";
+// import { Component, useState } from "react";
+// import { Dropdown } from "react-bootstrap";
+// import DropdownButton from "react-bootstrap/esm/DropdownButton";
+// import CartPageItem from "../../components/Cart/CartPageItem";
+// import MyDropdown from "../../components/Dropdown/MyDropdown";
+// import MyDropdownOption from "../../components/Dropdown/MyDropdownOption";
+// import { useCartContext } from "../../Context/cartContext";
+// import { useUserContext } from "../../Context/userContext";
+// import { useAddressContext } from "../../Context/addressContext";
+// import "./CartPage.css";
+// import {
+//   HiLocationMarker,
+//   AiFillPhone,
+//   GiStairs,
+//   MdDoorbell,
+// } from "react-icons/all";
+// import CartOrderInfo from "./CartOrderInfo";
 
-interface IAddress {
-  address: string;
-  addressNumber: string;
-  city: string;
-  id: string;
-  phoneNumber: string;
-  user_id: string;
-}
-function CartAddressInfo({ changeSelectedAddress }) {
-  const [isActive, setIsActive] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState<IAddress>();
+// interface IAddress {
+//   address: string;
+//   addressNumber: string;
+//   city: string;
+//   id: string;
+//   phoneNumber: string;
+//   user_id: string;
+// }
+// function CartAddressInfo({ changeSelectedAddress }) {
+//   const [isActive, setIsActive] = useState(false);
+//   const [selectedAddress, setSelectedAddress] = useState<IAddress>();
 
-  const { addresses } = useAddressContext();
+//   const { addresses } = useAddressContext();
 
-  const [comments, setComments] = useState("");
-  const [phone, setPhone] = useState(addresses[0]?.phoneNumber);
+//   const [comments, setComments] = useState("");
+//   const [phone, setPhone] = useState(addresses[0]?.phoneNumber);
 
-  React.useEffect(() => {
-    if (!addresses) return;
-    setSelectedAddress(addresses[0]);
-  }, [addresses]);
+//   React.useEffect(() => {
+//     if (!addresses) return;
+//     setSelectedAddress(addresses[0]);
+//   }, [addresses]);
 
-  function handleCommentsChange(str: string) {
-    if (str.length > 100) return;
-    setComments(str);
-  }
+//   function handleCommentsChange(str: string) {
+//     if (str.length > 100) return;
+//     setComments(str);
+//   }
 
-  function handleChangeAddress(address: IAddress) {
-    setSelectedAddress(address);
-    changeSelectedAddress(address);
-  }
+//   function handleChangeAddress(address: IAddress) {
+//     setSelectedAddress(address);
+//     changeSelectedAddress(address);
+//   }
 
+//   return (
+//     <div className="cart-page-step">
+//       <div className="cart-page-header">Address Info</div>
+//       <div className="cart-address-field-header">Address:</div>
+//       <div
+//         className="flex flex-col relative
+//         justify-center overflow-visible items-center w-[250px]"
+//       >
+//         <button
+//           type="button"
+//           className="w-[100%] bg-white rounded-top p-2 flex justify-center items-center"
+//           onClick={() => setIsActive((prev) => !prev)}
+//         >
+//           <HiLocationMarker className="mr-[10px] text-[22px]" />{" "}
+//           {`${selectedAddress?.address} ${selectedAddress?.addressNumber}`}
+//         </button>
+//         <ul
+//           className={`cart-address-list flex flex-col justify-center absolute
+//             items-center top-[100%] bg-white w-[100%] border p-0
+//           ${!isActive && "hidden"}`}
+//         >
+//           {addresses?.map((add) => (
+//             <li className="cart-address-option" key={add.id}>
+//               <button type="button" onClick={() => handleChangeAddress(add)}>
+//                 <HiLocationMarker className="mr-[10px] text-[22px]" />{" "}
+//                 {`${add.address} ${add.addressNumber}`}
+//               </button>
+//             </li>
+//           ))}
+//         </ul>
+//       </div>
+//       <label
+//         className="cart-address-field-header mt-[10px]"
+//         htmlFor="order-contact-number"
+//       >
+//         Contact Number:
+//       </label>
+//       <div className="relative flex items-center">
+//         <input
+//           name="order-contact-number"
+//           className="cart-address-info-input"
+//           type="number"
+//           id="order-contact-number"
+//           value={phone}
+//           onChange={(e) => setPhone(e.target.value)}
+//         />
+//         <AiFillPhone className="absolute right-[5px] text-[20px]" />
+//       </div>
+//       <label
+//         className="cart-address-field-header mt-[10px]"
+//         htmlFor="order-appartment-floor"
+//       >
+//         Appt Floor:
+//       </label>
+//       <div className="relative flex items-center">
+//         <input
+//           name="order-appartment-floor"
+//           className="cart-address-info-input"
+//           type="number"
+//           id="order-appartment-floor"
+//         />
+//         <GiStairs className="absolute right-[5px] text-[20px]" />
+//       </div>
+//       <label
+//         className="cart-address-field-header mt-[10px]"
+//         htmlFor="order-doorbell"
+//       >
+//         Doorbell:
+//       </label>
+//       <div className="relative flex items-center">
+//         <input
+//           className="cart-address-info-input"
+//           type="text"
+//           id="order-doorbell"
+//           name="order-doorbell"
+//         />
+//         <MdDoorbell className="absolute right-[5px] text-[20px]" />
+//       </div>
+
+//       <div className="cart-address-field-header mt-[50px]">Comments:</div>
+//       <div className="relative">
+//         <textarea
+//           className="cart-comments"
+//           onChange={(e) => handleCommentsChange(e.target.value)}
+//           value={comments}
+//           name="order-comments"
+//         ></textarea>
+//         <div className="cart-comments-counter">{100 - comments.length}/100</div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default CartAddressInfo;
+
+import React from "react";
+import { ImArrowDown2 } from "react-icons/all";
+
+function CartAddressInfo({ activeSelection, setActiveSelection }) {
   return (
-    <div className="cart-page-step">
-      <div className="cart-page-header">Address Info</div>
-      <div className="cart-address-field-header">Address:</div>
-      <div
-        className="flex flex-col relative 
-        justify-center overflow-visible items-center w-[250px]"
-      >
+    <div
+      className={
+        activeSelection === "addressInfo"
+          ? "cart-address-info-container-active"
+          : "cart-address-info-container"
+      }
+    >
+      <h1>
+        <div className="number">1</div>Select Address
+      </h1>
+      <div className="select-address-buttons">
+        <div className="address-info-buttons">
+          <button className="address-buttons">Karaoli kai Dimitriou 99</button>
+          <button className="address-buttons">6975634562</button>
+          <button className="address-buttons">1st floor</button>
+          <button className="address-buttons">John Doe</button>
+        </div>
         <button
-          type="button"
-          className="w-[100%] bg-white rounded-top p-2 flex justify-center items-center"
-          onClick={() => setIsActive((prev) => !prev)}
+          className="next-step-button"
+          onClick={() => {
+            setActiveSelection("paymentInfo");
+          }}
         >
-          <HiLocationMarker className="mr-[10px] text-[22px]" />{" "}
-          {`${selectedAddress?.address} ${selectedAddress?.addressNumber}`}
+          <ImArrowDown2 className="icon"></ImArrowDown2> Next Step
         </button>
-        <ul
-          className={`cart-address-list flex flex-col justify-center absolute
-            items-center top-[100%] bg-white w-[100%] border p-0
-          ${!isActive && "hidden"}`}
-        >
-          {addresses?.map((add) => (
-            <li className="cart-address-option" key={add.id}>
-              <button type="button" onClick={() => handleChangeAddress(add)}>
-                <HiLocationMarker className="mr-[10px] text-[22px]" />{" "}
-                {`${add.address} ${add.addressNumber}`}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <label
-        className="cart-address-field-header mt-[10px]"
-        htmlFor="order-contact-number"
-      >
-        Contact Number:
-      </label>
-      <div className="relative flex items-center">
-        <input
-          name="order-contact-number"
-          className="cart-address-info-input"
-          type="number"
-          id="order-contact-number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <AiFillPhone className="absolute right-[5px] text-[20px]" />
-      </div>
-      <label
-        className="cart-address-field-header mt-[10px]"
-        htmlFor="order-appartment-floor"
-      >
-        Appt Floor:
-      </label>
-      <div className="relative flex items-center">
-        <input
-          name="order-appartment-floor"
-          className="cart-address-info-input"
-          type="number"
-          id="order-appartment-floor"
-        />
-        <GiStairs className="absolute right-[5px] text-[20px]" />
-      </div>
-      <label
-        className="cart-address-field-header mt-[10px]"
-        htmlFor="order-doorbell"
-      >
-        Doorbell:
-      </label>
-      <div className="relative flex items-center">
-        <input
-          className="cart-address-info-input"
-          type="text"
-          id="order-doorbell"
-          name="order-doorbell"
-        />
-        <MdDoorbell className="absolute right-[5px] text-[20px]" />
-      </div>
-
-      <div className="cart-address-field-header mt-[50px]">Comments:</div>
-      <div className="relative">
-        <textarea
-          className="cart-comments"
-          onChange={(e) => handleCommentsChange(e.target.value)}
-          value={comments}
-          name="order-comments"
-        ></textarea>
-        <div className="cart-comments-counter">{100 - comments.length}/100</div>
       </div>
     </div>
   );

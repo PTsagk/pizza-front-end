@@ -4,6 +4,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaCity } from "react-icons/fa";
 import { useAddressContext } from "../../Context/addressContext";
 import axios from "axios";
+import "./AddressInfo.css";
 
 function AddressComponent({
   id,

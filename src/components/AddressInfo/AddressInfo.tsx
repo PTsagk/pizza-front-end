@@ -144,7 +144,7 @@ function AddressInfo() {
                   value={phoneNumberInput}
                 />
               </div>
-              <div className="address-buttons">
+              <div className="address-buttons-container">
                 {!isUpdating && (
                   <button onClick={() => addAddress()}>Add</button>
                 )}
@@ -154,12 +154,7 @@ function AddressInfo() {
                 <button onClick={() => setAddPanel(false)}>Cancel</button>
               </div>
             </div>
-            {/* <img
-              crossOrigin="anonymous"
-              src="http://localhost:5000/image/devil.jpg"
-              alt=""
-              className="image"
-            /> */}
+
             <div className="mapouter">
               <div className="gmap_canvas">
                 <iframe
