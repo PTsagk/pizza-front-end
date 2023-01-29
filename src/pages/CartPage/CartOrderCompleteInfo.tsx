@@ -15,7 +15,14 @@ function CartOrderCompleteInfo({
   setActiveSelection,
   paymentMethod,
   selectedAddress,
+  comments,
+  setComments,
 }) {
+  function handleCommentsChange(str: string) {
+    if (str.length <= 80) {
+      setComments(str);
+    }
+  }
   const noneEncodedAddress =
     selectedAddress?.addressNumber +
     " " +
@@ -54,7 +61,16 @@ function CartOrderCompleteInfo({
           </div>
         </div>
         <div className="order-moving-buttons">
+          <textarea
+            placeholder="Add comments"
+            className="comments"
+            cols="30"
+            rows="5"
+            value={comments}
+            onChange={(e) => handleCommentsChange(e.target.value)}
+          ></textarea>
           <button
+            type="button"
             className="next-step-button"
             onClick={() => {
               setActiveSelection("paymentInfo");
@@ -62,7 +78,9 @@ function CartOrderCompleteInfo({
           >
             <ImArrowUp2 className="icon"></ImArrowUp2> Previous Step
           </button>
-          <button className="next-step-button">Send the pizza</button>
+          <button className="complete-order-button" type="submit">
+            Send the pizza
+          </button>
         </div>
       </div>
     </div>

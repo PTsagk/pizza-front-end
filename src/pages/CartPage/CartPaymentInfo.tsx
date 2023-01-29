@@ -90,12 +90,14 @@ function CartPaymentInfo({
       <div className="payment-and-next-step">
         <div className="payment-options">
           <button
+            type="button"
             className="payment-option"
             onClick={() => changePaymentMethod("Paypal")}
           >
             <TbBrandPaypal className="payment-icon"></TbBrandPaypal>Paypal
           </button>
           <button
+            type="button"
             className="payment-option"
             onClick={() => changePaymentMethod("Credit Card")}
           >
@@ -103,6 +105,7 @@ function CartPaymentInfo({
             Card
           </button>
           <button
+            type="button"
             className="payment-option"
             onClick={() => changePaymentMethod("Cash")}
           >
@@ -111,6 +114,7 @@ function CartPaymentInfo({
         </div>
         <div className="order-moving-buttons">
           <button
+            type="button"
             className="next-step-button"
             onClick={() => {
               setActiveSelection("addressInfo");
@@ -119,6 +123,7 @@ function CartPaymentInfo({
             <ImArrowUp2 className="icon"></ImArrowUp2> Previous Step
           </button>
           <button
+            type="button"
             className="next-step-button"
             onClick={() => {
               setActiveSelection("completeInfo");

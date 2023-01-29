@@ -9,6 +9,7 @@ import CartOrderCompleteInfo from "./CartOrderCompleteInfo";
 import { useCartContext } from "../../Context/cartContext";
 import axios from "axios";
 import { useAddressContext } from "../../Context/addressContext";
+import { useUserContext } from "../../Context/userContext";
 
 interface IAddress {
   address: string;
@@ -24,13 +25,27 @@ function CartPage() {
   const { addresses } = useAddressContext();
   const [activeSelection, setActiveSelection] = useState("addressInfo");
   const [paymentMethod, setPaymentMethod] = useState("Cash");
+  const [comments, setComments] = useState("Cash");
   const [selectedAddress, setSelectedAddress] = useState<IAddress>();
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
+  const { user } = useUserContext();
+  const [addressFormInfo, setAddressFormInfo] = useState({
+    bellname: user?.fullname,
+    floor: "1st floor",
+  });
 
   useEffect(() => {
     if (addresses.length === 0) return;
     setSelectedAddress(addresses[0]);
   }, [addresses]);
+
+  useEffect(() => {
+    if (user)
+      setAddressFormInfo((prev) => {
+        prev.bellname = user.fullname;
+        return prev;
+      });
+  }, [user]);
 
   useEffect(() => {
     if (addresses.length === 0) return;
@@ -39,13 +54,9 @@ function CartPage() {
 
   function handleCheckoutConfirm(e: React.FormEvent) {
     e.preventDefault();
-    console.log(e.target["order-doorbell"].value);
-    console.log(e.target["order-contact-number"].value);
-    console.log(e.target["order-appartment-floor"].value);
-    console.log(e.target["order-comments"].value);
-    console.log(e.target["payment-method"].value);
-    if (!selectedAddress) return;
-    console.log(selectedAddress.id);
+    console.log(comments);
+    console.log(paymentMethod);
+    console.log(addressFormInfo);
     console.log(
       Array.from(cartItems.values()).map((item) => {
         return {
@@ -55,13 +66,15 @@ function CartPage() {
         };
       })
     );
+    if (!selectedAddress) return;
+    console.log(selectedAddress.id);
     axios
       .post(`${import.meta.env.VITE_API}/order`, {
-        doorbell: e.target["order-doorbell"].value,
-        phone: e.target["order-contact-number"].value,
-        floor: e.target["order-appartment-floor"].value,
-        comments: e.target["order-comments"].value,
-        payment: e.target["payment-method"].value,
+        doorbell: addressFormInfo.bellname,
+        phone: selectedAddress.phoneNumber,
+        floor: addressFormInfo.floor,
+        comments: comments,
+        payment: paymentMethod,
         address: selectedAddress.id,
         cartItems: Array.from(cartItems.values()).map((item) => {
           return {
@@ -85,8 +98,11 @@ function CartPage() {
         <CartAddressInfo
           // changeSelectedAddress={(address) => setSelectedAddress(address)}
           activeSelection={activeSelection}
-          setActiveSelection={setActiveSelection}
+          setActiveSelection={(str) => setActiveSelection(str)}
           changeSelectedAddress={(index) => setSelectedAddressIndex(index)}
+          formInfo={addressFormInfo}
+          selectedAddress={selectedAddress || null}
+          changeAddressFormInfo={(obj) => setAddressFormInfo(obj)}
         />
         <CartPaymentInfo
           activeSelection={activeSelection}
@@ -98,6 +114,8 @@ function CartPage() {
           setActiveSelection={setActiveSelection}
           paymentMethod={paymentMethod}
           selectedAddress={selectedAddress}
+          comments={comments}
+          setComments={(comments) => setComments(comments)}
         />
       </div>
 

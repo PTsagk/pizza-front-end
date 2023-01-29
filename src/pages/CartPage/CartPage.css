@@ -115,7 +115,7 @@
   margin-bottom: 0.25rem;
 }
 .cart-address-info-container-active .next-step-button {
-  background-color: white;
+  background-color: white !important;
   color: #ec1a37;
   font-weight: bold;
   width: 100%;
@@ -237,7 +237,7 @@
   width: 100%;
 }
 .next-step-button {
-  background-color: white;
+  background-color: white !important;
   color: #ec1a37;
   width: 50%;
   padding: 1rem 2rem;
@@ -249,7 +249,7 @@
   transition: all 0.3s ease-in-out;
 }
 .next-step-button:hover {
-  background-color: black;
+  background-color: black !important;
 }
 
 .order-complete-info-active {
@@ -260,7 +260,7 @@
   border: 2px solid white;
   padding: 3rem;
   transition: all 0.3s ease;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .order-complete-info {
@@ -356,6 +356,11 @@
   justify-content: center;
   margin-left: 2rem;
 }
+.complete-info .order-moving-buttons .comments {
+  padding: 10px;
+  width: 100%;
+  resize: none;
+}
 
 .complete-info .order-moving-buttons button {
   width: 100%;
@@ -372,4 +377,14 @@
 .next-step-button .icon {
   margin-right: 0.5rem;
   font-weight: bold;
+}
+.complete-order-button {
+  color: #ec1a37;
+  font-weight: bold;
+  width: 100%;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  color: #fff;
+  background-color: black !important;
+  margin-top: 0.5rem;
 }
