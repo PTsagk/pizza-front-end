@@ -1,17 +1,16 @@
-import * as React from "react";
-import { Component } from "react";
 import AuthInput from "../AuthInput/AuthInput";
 import "./RegisterForm.css";
-import { Link } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import { useState } from "react";
+import { useUserContext } from "../../Context/userContext";
 
 import { useUxContext } from "../../Context/uxContext";
 
 function RegisterForm() {
   const { showLoginForm, showRegisterForm, errorMessage, setErrorMessage } =
     useUxContext();
+  const { login } = useUserContext();
 
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
@@ -34,13 +33,7 @@ function RegisterForm() {
         { withCredentials: true }
       )
       .then((res) => {
-        setErrorMessage((prev) => {
-          const tmp = { ...prev };
-          tmp.isError = true;
-          tmp.show = true;
-          tmp.message = res.data;
-          return tmp;
-        });
+        login(res.data);
         showRegisterForm(false);
       })
       .catch((e) =>
@@ -93,7 +86,6 @@ function RegisterForm() {
           <button
             onClick={() => {
               showRegisterForm(false);
-              showLoginForm(true);
             }}
             className="login-button"
             type="button"

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import AddressInfo from "../../components/AddressInfo/AddressInfo";
 import OrdersInfo from "../../components/OrdersInfo/OrdersInfo";
 import SettingsInfo from "../../components/SettingsInfo/SettingsInfo";
-import TrackerInfo from "../../components/TrackerInfo/TrackerInfo";
 import "./ProfilePage.css";
 
 function ProfilePage() {
@@ -22,30 +21,21 @@ function ProfilePage() {
         </button>
         <button
           onClick={() => {
-            setMove(25);
+            setMove(33);
             setActivePage("orders");
           }}
-          style={{ color: move === 25 ? "white" : "#ec1a37" }}
+          style={{ color: move === 33 ? "white" : "#ec1a37" }}
         >
           Orders
         </button>
         <button
           onClick={() => {
-            setMove(50);
+            setMove(67);
             setActivePage("settings");
           }}
-          style={{ color: move === 50 ? "white" : "#ec1a37" }}
+          style={{ color: move === 67 ? "white" : "#ec1a37" }}
         >
           Settings
-        </button>
-        <button
-          onClick={() => {
-            setMove(75);
-            setActivePage("tracker");
-          }}
-          style={{ color: move === 75 ? "white" : "#ec1a37" }}
-        >
-          Tracker
         </button>
         <div className="animation" style={{ left: move + "%" }}></div>
       </nav>
@@ -53,7 +43,6 @@ function ProfilePage() {
         {acitivePage === "address" && <AddressInfo></AddressInfo>}
         {acitivePage === "orders" && <OrdersInfo></OrdersInfo>}
         {acitivePage === "settings" && <SettingsInfo></SettingsInfo>}
-        {acitivePage === "tracker" && <TrackerInfo></TrackerInfo>}
       </div>
     </div>
   );

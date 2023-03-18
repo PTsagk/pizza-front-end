@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "./AddressInfo.css";
 
 import axios from "axios";
 import AddressComponent from "./AddressComponent";
 import { useAddressContext } from "../../Context/addressContext";
 import { useUserContext } from "../../Context/userContext";
+import { useUxContext } from "../../Context/uxContext";
 
 function AddressInfo() {
   const [addPanel, setAddPanel] = useState(false);
@@ -24,9 +25,20 @@ function AddressInfo() {
   //get address info from context
   const { addresses, setAddresses } = useAddressContext();
   const { user } = useUserContext();
+  const { setErrorMessage } = useUxContext();
 
   function addAddress() {
     if (!user) return;
+    if (!townInput) {
+      setErrorMessage((prev) => {
+        const tmp = { ...prev };
+        tmp.isError = true;
+        tmp.show = true;
+        tmp.message = "All fields are required";
+        return tmp;
+      });
+      return;
+    }
     axios.defaults.withCredentials = true;
     axios
       .post(`${import.meta.env.VITE_API}/address`, {
@@ -39,7 +51,15 @@ function AddressInfo() {
       .then((resp) => {
         setAddresses(resp.data);
       })
-      .catch((e) => console.log(e));
+      .catch((e) =>
+        setErrorMessage((prev) => {
+          const tmp = { ...prev };
+          tmp.isError = true;
+          tmp.show = true;
+          tmp.message = e.message;
+          return tmp;
+        })
+      );
     setAddPanel(false);
   }
 
@@ -54,9 +74,20 @@ function AddressInfo() {
           phoneNumber: phoneNumberInput.toString(),
           addressId: updatingAddressId,
         })
-        .then((resp) => setAddresses(resp.data));
+        .then((resp) => {
+          setAddresses(resp.data);
+          setAddPanel(false);
+        })
+        .catch((e) =>
+          setErrorMessage((prev) => {
+            const tmp = { ...prev };
+            tmp.isError = true;
+            tmp.show = true;
+            tmp.message = "Fields are required";
+            return tmp;
+          })
+        );
     }
-    setAddPanel(false);
   }
   return (
     <>
@@ -97,7 +128,9 @@ function AddressInfo() {
               ></AddressComponent>
             );
           })}
-
+        {!addPanel && addresses.length == 0 && (
+          <div className="no-addresses-message">No addresses found!</div>
+        )}
         {/* else if the pannel is open show inputs*/}
         {addPanel && (
           <div className="add-address">

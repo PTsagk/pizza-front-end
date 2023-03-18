@@ -34,8 +34,7 @@ function AddressComponent({
         },
       })
       .then((res) => {
-        console.log(res);
-        // setAddresses(res.data)
+        setAddresses(res.data);
       });
   }
 

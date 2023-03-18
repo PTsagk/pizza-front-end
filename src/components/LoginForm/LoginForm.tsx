@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import AuthInput from "../AuthInput/AuthInput";
 import { useState } from "react";
@@ -8,7 +7,7 @@ import { useUserContext } from "../../Context/userContext";
 import { useUxContext } from "../../Context/uxContext";
 
 function LoginForm() {
-  const { user, login } = useUserContext();
+  const { login } = useUserContext();
   const { showLoginForm, showRegisterForm } = useUxContext();
 
   const [email, setEmail] = useState("");
