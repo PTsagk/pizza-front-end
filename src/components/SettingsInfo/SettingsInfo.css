@@ -1,0 +1,46 @@
+.input-container {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.settings-page {
+  height: 100%;
+  width: 100%;
+}
+.settings-page input {
+  background-color: white;
+  outline: none;
+  border: 1px solid #ec1a37;
+  width: 80%;
+  padding: 0.5rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.settings-page label {
+  width: 20%;
+  background-color: #ec1a37;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  padding: 0.5rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.settings-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.change-button {
+  margin-left: 1rem;
+  background-color: #ec1a37;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+}

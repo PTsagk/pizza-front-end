@@ -99,7 +99,7 @@ function CartPaymentInfo({
           <button
             type="button"
             className="payment-option"
-            onClick={() => changePaymentMethod("Credit Card")}
+            onClick={() => changePaymentMethod("Credit")}
           >
             <MdOutlinePayment className="payment-icon"></MdOutlinePayment>Credit
             Card

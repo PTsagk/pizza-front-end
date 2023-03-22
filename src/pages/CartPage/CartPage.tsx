@@ -25,7 +25,7 @@ function CartPage() {
   const { addresses } = useAddressContext();
   const [activeSelection, setActiveSelection] = useState("addressInfo");
   const [paymentMethod, setPaymentMethod] = useState("Cash");
-  const [comments, setComments] = useState("Cash");
+  const [comments, setComments] = useState("No comments");
   const [selectedAddress, setSelectedAddress] = useState<IAddress>();
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
   const { user } = useUserContext();
@@ -96,7 +96,6 @@ function CartPage() {
     >
       <div className="address-payment-complete-container">
         <CartAddressInfo
-          // changeSelectedAddress={(address) => setSelectedAddress(address)}
           activeSelection={activeSelection}
           setActiveSelection={(str) => setActiveSelection(str)}
           changeSelectedAddress={(index) => setSelectedAddressIndex(index)}

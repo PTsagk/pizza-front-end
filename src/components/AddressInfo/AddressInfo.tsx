@@ -91,6 +91,7 @@ function AddressInfo() {
   }
   return (
     <>
+      <h1 className="page-title">Addresses</h1>
       <div className="add-address-button-container">
         <button
           className="add-address-button"

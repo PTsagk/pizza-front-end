@@ -1,12 +1,6 @@
 import axios from "axios";
 import * as React from "react";
-import {
-  Component,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 interface IProductProvider {
   children: React.ReactNode;
@@ -38,6 +32,12 @@ interface IProductContext {
   ingredients: IIngredients[];
   pizzas: IPizza[];
   drinks: IProduct[];
+  pizzaInfo: IProductInfo[];
+  otherInfo: IProductInfo[];
+}
+interface IProductInfo {
+  id: number;
+  name: string;
 }
 
 const ProductsContext = createContext({} as IProductContext);
@@ -50,6 +50,8 @@ function ProductProvider({ children }: IProductProvider) {
   const [ingredients, setIngredients] = useState<IIngredients[]>([]);
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
   const [drinks, setDrinks] = useState<IProduct[]>([]);
+  const [pizzaInfo, setPizzaInfo] = useState<IProductInfo[]>([]);
+  const [otherInfo, setOtherInfo] = useState<IProductInfo[]>([]);
 
   useEffect(() => {
     axios
@@ -74,8 +76,23 @@ function ProductProvider({ children }: IProductProvider) {
       .then((res) => setDrinks(res.data))
       .catch((e) => console.log(e));
   }, []);
+
+  useEffect(() => {
+    axios
+      .post(`${import.meta.env.VITE_API}/product/type`, {
+        type: "Pizza",
+      })
+      .then((resp) => setPizzaInfo(resp.data));
+    axios
+      .post(`${import.meta.env.VITE_API}/product/type`, {
+        type: "Other",
+      })
+      .then((resp) => setOtherInfo(resp.data));
+  }, []);
   return (
-    <ProductsContext.Provider value={{ ingredients, pizzas, drinks }}>
+    <ProductsContext.Provider
+      value={{ ingredients, pizzas, drinks, pizzaInfo, otherInfo }}
+    >
       {children}
     </ProductsContext.Provider>
   );
