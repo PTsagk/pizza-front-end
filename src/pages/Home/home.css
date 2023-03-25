@@ -100,3 +100,39 @@
   background-color: white;
   color: #ec1a37;
 }
+
+.pizza-container{
+  max-width: 1200px;
+  min-width: 800px;
+}
+.offers{
+  background: linear-gradient(#ec1a37,black);
+
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  justify-content: space-evenly;
+}
+
+.offer{
+  margin: 0 1rem 7rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25%;
+}
+.offer-header{
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.offer-header span{
+  margin-left: 1rem;
+}
+
+.offer-description{
+  width: 80%;
+}
