@@ -57,7 +57,7 @@
 
 .carousel {
   position: absolute;
-  z-index: 100;
+  z-index: 10;
 }
 
 .info-paras {
@@ -103,7 +103,7 @@
 
 .pizza-container{
   max-width: 1200px;
-  min-width: 800px;
+  min-width: 700px;
 }
 .offers{
   background: linear-gradient(#ec1a37,black);
@@ -135,4 +135,27 @@
 
 .offer-description{
   width: 80%;
+}
+@media screen and (max-width: 600px){
+  .pizza-info h2 {
+    font-size: 1rem;
+  }
+  .add-to-cart{
+    font-size: 0.5rem;
+  }
+  .home-page{
+    height: 120vh;
+  }
+  .body{
+    height: 60vh;
+  }
+  .offer-desc{
+    font-size: 0.5rem;
+  }
+  .offer-header{
+    font-size: 1.5rem;
+  }
+  .offer-description{
+    font-size: 0.5rem;
+  }
 }

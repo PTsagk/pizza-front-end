@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-import { RiAccountCircleFill } from "react-icons/ri";
+import { GiHamburgerMenu } from "react-icons/gi";
 import "./Navbar.css";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import LoginForm from "../LoginForm/LoginForm";
@@ -11,6 +11,7 @@ import Untitled from "../../assets/Untitled.svg";
 import { useUxContext } from "../../Context/uxContext";
 import Cart from "../Cart/Cart";
 import { useCartContext } from "../../Context/cartContext";
+import { AiOutlineClose } from "react-icons/ai";
 
 enum NavsEnum {
   home,
@@ -46,8 +47,10 @@ function Navbar() {
         <LoginForm />
       </div>
       <nav className="nav-bar z-50">
+        <button className="mobile-menu"><GiHamburgerMenu></GiHamburgerMenu></button>
         <h1>LOGO</h1>
         <div className="nav-links">
+        <button className="close-mobile-menu">  <AiOutlineClose /></button>
           <Link
             to={"/"}
             className={"hover:text-white"}
@@ -125,7 +128,7 @@ function Navbar() {
           {!user && (
             <button
               onClick={() => showLoginForm(true)}
-              className="nav-login-button rounded-[5px] px-4 ml-[2rem] font-regular"
+              className="nav-login-button"
             >
               login
             </button>

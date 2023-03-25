@@ -14,10 +14,9 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer
-      className="flex flex-col w-100 bg-black text-white
-    justify-center items-center py-7 px-5 footer"
+      className="footer-container"
     >
-      <div className="flex w-[420px] text-[60px] justify-evenly social-icons">
+      <div className="footer-icons social-icons">
         <Link to={"/"} className="facebook-icon">
           <FaFacebookF className="social-icon"></FaFacebookF>
         </Link>
@@ -32,16 +31,16 @@ function Footer() {
           <FaYoutube className="social-icon"></FaYoutube>
         </Link>
       </div>
-      <div className="flex w-[100%] justify-evenly ">
+      <div className="footer-info-container">
         {footerLinks.map((linkGroup, index) => (
-          <div key={index} className="flex flex-col justify-start">
-            <h4 className="font-bold text-[30px] my-8">{linkGroup.header}</h4>
-            <div className="flex flex-col">
+          <div key={index} className="footer-info">
+            <h4 className="footer-info-header">{linkGroup.header}</h4>
+            <div className="footer-links-container">
               {linkGroup.links.map((link) => (
                 <Link
                   key={link.split(" ")[0]}
                   to={"/"}
-                  className="text-[24px] font-normal hover:text-primary"
+                  className="footer-link"
                 >
                   {link}
                 </Link>
