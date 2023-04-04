@@ -57,7 +57,7 @@
 
 .carousel {
   position: absolute;
-  z-index: 100;
+  z-index: 10;
 }
 
 .info-paras {
@@ -99,4 +99,63 @@
 .add-to-cart:hover {
   background-color: white;
   color: #ec1a37;
+}
+
+.pizza-container{
+  max-width: 1200px;
+  min-width: 700px;
+}
+.offers{
+  background: linear-gradient(#ec1a37,black);
+
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  justify-content: space-evenly;
+}
+
+.offer{
+  margin: 0 1rem 7rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25%;
+}
+.offer-header{
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.offer-header span{
+  margin-left: 1rem;
+}
+
+.offer-description{
+  width: 80%;
+}
+@media screen and (max-width: 600px){
+  .pizza-info h2 {
+    font-size: 1rem;
+  }
+  .add-to-cart{
+    font-size: 0.5rem;
+  }
+  .home-page{
+    height: 120vh;
+  }
+  .body{
+    height: 60vh;
+  }
+  .offer-desc{
+    font-size: 0.5rem;
+  }
+  .offer-header{
+    font-size: 1.5rem;
+  }
+  .offer-description{
+    font-size: 0.5rem;
+  }
 }

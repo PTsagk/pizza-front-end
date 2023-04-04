@@ -56,7 +56,7 @@ function Home() {
             <MdArrowBackIosNew></MdArrowBackIosNew>
           </button>
           <div className="info">
-            <h2>Pizza Special</h2>
+            <h2>Pizza Offers</h2>
             <Carousel
               ref={infoRef}
               interval={null}
@@ -67,7 +67,7 @@ function Home() {
               {pizzaOffers.map((offer) => {
                 return (
                   <Carousel.Item>
-                    <p className="w-[100%]">{offer.desc}</p>
+                    <p className="offer-desc">{offer.desc}</p>
                   </Carousel.Item>
                 );
               })}
@@ -88,45 +88,40 @@ function Home() {
         indicators={false}
       >
         <Carousel.Item>
-          <div className="pizza-1-container w-[100vw] flex justify-center">
+          <div className="pizza-1-container w-[100%] flex justify-center pizza-container">
             <img src={brocolliPizza} alt="pizza" className="w-[80%]" />
           </div>
         </Carousel.Item>
         <Carousel.Item>
-          <div className="pizza-1-container w-[100vw] flex justify-center">
+          <div className="pizza-1-container w-[100%] flex justify-center pizza-container">
             <img src={hampizza} alt="pizza" className="w-[80%]" />
           </div>
         </Carousel.Item>
         <Carousel.Item>
-          <div className="pizza-1-container w-[100vw] flex justify-center">
+          <div className="pizza-1-container w-[100%] flex justify-center pizza-container">
             <img src={pizza3} alt="pizza" className="w-[80%]" />
           </div>
         </Carousel.Item>
       </Carousel>
 
-      <div className="body red-body relative">
-        <div
-          className="w-[100%] h-[50%] absolute top-[50%]
-        flex justify-evenly  items-center lg:flex-row flex-col"
-        >
+      <div className="body offers">
+      
           {homeOffers.map((offer) => (
-            <div className="flex flex-col items-start text-white">
+            <div className="offer">
               <div
-                className="flex justify-start items-center
-              xxl:text-[54px] font-bold text-[42px]"
+                className="offer-header"
               >
                 <h3>{offer.header}</h3>
-                <span className="ml-2">{offer.headerIcon}</span>
+                <span className="">{offer.headerIcon}</span>
               </div>
-              <div className="xxl:text-[32px] text-[22px] font-semibold mt-10 mb-5">
+              <div className="offer-timerange">
                 {offer.timeRange}
               </div>
-              <div className="xxl:text-[24px] text-[18px] font-normal">
+              <div className="offer-description">
                 {offer.description}
               </div>
             </div>
           ))}
-        </div>
       </div>
     </div>
   );

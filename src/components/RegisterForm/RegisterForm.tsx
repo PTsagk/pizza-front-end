@@ -11,7 +11,9 @@ function RegisterForm() {
   const { showLoginForm, showRegisterForm, errorMessage, setErrorMessage } =
     useUxContext();
   const { login } = useUserContext();
-
+  const [emailInputActive,setEmailInputActive]=useState(false)
+  const [nameInputActive,setNameInputActive]=useState(false)
+  const [passwordInputActive,setPasswordInputActive]=useState(false)
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,48 +51,68 @@ function RegisterForm() {
 
   return (
     <div className="register-form">
-      <form className="register-info relative">
-        <h2 className="text-center my-5 text-[32px] font-semibold">Register</h2>
-        <button
+      <form className="register-info">
+      <button
           type="button"
-          className="absolute right-[2%] top-[3%] text-[32px] spin-button"
+          className="close-login-button"
           onClick={() => showRegisterForm(false)}
         >
           <AiOutlineClose />
         </button>
+        <h2 className="page-title">Register</h2>
+        <div className="login-input-container">
+          <label className={nameInputActive?"login-label-focused":"login-label"}>Full name</label>
+          <input type="email" className="login-input" onChange={(e)=>{
+            setFullname(e.target.value)
+              if(!e.target.value){
+                setNameInputActive(false)
+              }else{
+                setNameInputActive(true)
+              }
+          }}/>
 
-        <AuthInput
-          labelDisplay="Full Name"
-          type="text"
-          onChangeInput={(str) => setFullname(str)}
-        />
-        <AuthInput
-          labelDisplay="Email"
-          type="email"
-          onChangeInput={(str) => setEmail(str)}
-        />
-        <AuthInput
-          labelDisplay="Password"
-          type="password"
-          onChangeInput={(str) => setPassword(str)}
-        />
+        </div>
+        <div className="login-input-container">
+          <label className={emailInputActive?"login-label-focused":"login-label"}>Email</label>
+          <input type="email" className="login-input" onChange={(e)=>{
+            setEmail(e.target.value)
+              if(!e.target.value){
+                setEmailInputActive(false)
+              }else{
+                setEmailInputActive(true)
+              }
+          }}/>
+
+        </div>
+        <div className="login-input-container">
+          <label className={passwordInputActive?"login-label-focused":"login-label"}>Password</label>
+          <input type="password" className="login-input" onChange={(e)=>{
+            console.log(password)
+            setPassword(e.target.value)
+              if(!e.target.value){
+                setPasswordInputActive(false)
+              }else{
+                setPasswordInputActive(true)
+              }
+          }}/>
+        </div>
         <button
-          className="auth-form-button bg-[#ec1a37]"
+          className="login-button"
           type="submit"
           onClick={(e) => register(e)}
         >
-          Register
+          Register  
         </button>
         <p>
           Already have an account?{" "}
           <button
             onClick={() => {
               showRegisterForm(false);
+              showLoginForm(true)
             }}
-            className="login-button"
             type="button"
           >
-            Login
+            <span>Login</span>
           </button>
         </p>
       </form>
