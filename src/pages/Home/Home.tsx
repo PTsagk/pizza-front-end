@@ -88,40 +88,33 @@ function Home() {
         indicators={false}
       >
         <Carousel.Item>
-          <div className="pizza-1-container w-[100%] flex justify-center pizza-container">
-            <img src={brocolliPizza} alt="pizza" className="w-[80%]" />
+          <div className="carousel-pizza">
+            <img src={brocolliPizza} alt="pizza" />
           </div>
         </Carousel.Item>
         <Carousel.Item>
-          <div className="pizza-1-container w-[100%] flex justify-center pizza-container">
-            <img src={hampizza} alt="pizza" className="w-[80%]" />
+          <div className="carousel-pizza">
+            <img src={hampizza} alt="pizza" />
           </div>
         </Carousel.Item>
         <Carousel.Item>
-          <div className="pizza-1-container w-[100%] flex justify-center pizza-container">
-            <img src={pizza3} alt="pizza" className="w-[80%]" />
+          <div className="carousel-pizza">
+            <img src={pizza3} alt="pizza" />
           </div>
         </Carousel.Item>
       </Carousel>
 
       <div className="body offers">
-      
-          {homeOffers.map((offer) => (
-            <div className="offer">
-              <div
-                className="offer-header"
-              >
-                <h3>{offer.header}</h3>
-                <span className="">{offer.headerIcon}</span>
-              </div>
-              <div className="offer-timerange">
-                {offer.timeRange}
-              </div>
-              <div className="offer-description">
-                {offer.description}
-              </div>
+        {homeOffers.map((offer) => (
+          <div className="offer">
+            <div className="offer-header">
+              <h3>{offer.header}</h3>
+              <span>{offer.headerIcon}</span>
             </div>
-          ))}
+            <div className="offer-timerange">{offer.timeRange}</div>
+            <div className="offer-description">{offer.description}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

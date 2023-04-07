@@ -67,6 +67,12 @@
   margin: 1rem 0;
 }
 
-.register-form span{
+.register-form span {
   color: #ec1a37;
+}
+
+@media screen and (max-width: 600px) {
+  .register-form {
+    width: 70%;
+  }
 }

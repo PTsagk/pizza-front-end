@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -25,11 +25,22 @@ function Navbar() {
 
   const [profile, setProfile] = React.useState(true);
   const [navSelected, setNavSelected] = useState(0);
-  const { cartItems,setIsActive } = useCartContext();
+  const { cartItems, setIsActive } = useCartContext();
   const { user, isAdmin } = useUserContext();
   const { isActiveLogin, isActiveRegisterForm, showLoginForm } = useUxContext();
+  const [showMobileMenu, setShowMobileMenu] = useState(true);
   //if current user enable profile
   //else show login
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 600) {
+        setShowMobileMenu(false);
+      } else {
+        setShowMobileMenu(true);
+      }
+    });
+  }, []);
+
   return (
     <>
       <div
@@ -47,67 +58,81 @@ function Navbar() {
         <LoginForm />
       </div>
       <nav className="nav-bar z-50">
-        <button className="mobile-menu"><GiHamburgerMenu></GiHamburgerMenu></button>
+        <button className="mobile-menu" onClick={() => setShowMobileMenu(true)}>
+          <GiHamburgerMenu></GiHamburgerMenu>
+        </button>
         <h1>LOGO</h1>
-        <div className="nav-links">
-        <button className="close-mobile-menu">  <AiOutlineClose /></button>
-          <Link
-            to={"/"}
-            className={"hover:text-white"}
-            onClick={() => {
-              setNavSelected(NavsEnum.home);
-            }}
-          >
-            {navSelected == NavsEnum.home && (
-              <div className="thingie-test"></div>
-            )}
-            Home
-          </Link>
-          <Link
-            to={"/pizzas"}
-            className={"hover:text-white"}
-            onClick={() => {
-              setNavSelected(NavsEnum.pizzas);
-            }}
-          >
-            {navSelected == NavsEnum.pizzas && (
-              <div className="thingie-test"></div>
-            )}
-            Pizzas
-          </Link>
-          <Link
-            to={"/drinks"}
-            className={"hover:text-white"}
-            onClick={() => {
-              setNavSelected(NavsEnum.drinks);
-            }}
-          >
-            {navSelected == NavsEnum.drinks && (
-              <div className="thingie-test"></div>
-            )}
-            Drinks
-          </Link>
-          <Link
-            to={"/desserts"}
-            className={"hover:text-white"}
-            onClick={() => {
-              setNavSelected(NavsEnum.desserts);
-            }}
-          >
-            {navSelected == NavsEnum.desserts && (
-              <div className="thingie-test"></div>
-            )}
-            Desserts
-          </Link>
-          {isAdmin && (
-            <Link to={"/admin/products"} className={"hover:text-white"}>
-              Admin
+        {showMobileMenu && (
+          <div className="nav-links">
+            <button
+              className="close-mobile-menu"
+              onClick={() => {
+                setShowMobileMenu(false);
+              }}
+            >
+              {" "}
+              <AiOutlineClose />
+            </button>
+            <Link
+              to={"/"}
+              className={"hover:text-white"}
+              onClick={() => {
+                setNavSelected(NavsEnum.home);
+              }}
+            >
+              {navSelected == NavsEnum.home && (
+                <div className="thingie-test"></div>
+              )}
+              Home
             </Link>
-          )}
-        </div>
+            <Link
+              to={"/pizzas"}
+              className={"hover:text-white"}
+              onClick={() => {
+                setNavSelected(NavsEnum.pizzas);
+              }}
+            >
+              {navSelected == NavsEnum.pizzas && (
+                <div className="thingie-test"></div>
+              )}
+              Pizzas
+            </Link>
+            <Link
+              to={"/drinks"}
+              className={"hover:text-white"}
+              onClick={() => {
+                setNavSelected(NavsEnum.drinks);
+              }}
+            >
+              {navSelected == NavsEnum.drinks && (
+                <div className="thingie-test"></div>
+              )}
+              Drinks
+            </Link>
+            <Link
+              to={"/desserts"}
+              className={"hover:text-white"}
+              onClick={() => {
+                setNavSelected(NavsEnum.desserts);
+              }}
+            >
+              {navSelected == NavsEnum.desserts && (
+                <div className="thingie-test"></div>
+              )}
+              Desserts
+            </Link>
+            {isAdmin && (
+              <Link to={"/admin/products"} className={"hover:text-white"}>
+                Admin
+              </Link>
+            )}
+          </div>
+        )}
         <div className="cart-and-profile">
           <div className="relative cart">
-            {cartItems.size>0 && <div className="item-count-dot">{cartItems.size}</div>}
+            {cartItems.size > 0 && (
+              <div className="item-count-dot">{cartItems.size}</div>
+            )}
             <Link
               to={"/cart"}
               onMouseEnter={() => setIsActive(true)}
